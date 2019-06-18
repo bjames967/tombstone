@@ -7,7 +7,7 @@ import { map } from 'rxjs/operators'
   providedIn: 'root'
 })
 export class SearchService {
-  url = 'https://api.themoviedb.org/'
+  url = 'https://api.themoviedb.org/3/'
   apikey = '2b6607a1821d69c9f939c776b3cdea08'
 
 
@@ -15,8 +15,10 @@ export class SearchService {
 
 
   searchData(title: string): Observable<any> {
-    return this.http.get(`https://api.themoviedb.org/3/movie/550?api_key=2b6607a1821d69c9f939c776b3cdea08`).pipe(
+    return this.http.get(`${url}/3/movie/550?api_key=${apikey}&query=${title}').pipe(
       map(results => results['Search'])
     );
   }
+  getDetails(id){
+      return this.http.get(`${url}/3/
 }
