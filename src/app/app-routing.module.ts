@@ -16,9 +16,8 @@ const routes: Routes = [
     loadChildren: './list/list.module#ListPageModule'
   },
   { path: 'library', loadChildren: './library/library.module#LibraryPageModule' },
-  { path: 'search', loadChildren: './search/search.module#SearchPageModule' },
   { path: 'about', loadChildren: './about/about.module#AboutPageModule' },
-  { path: 'search-details/:id', loadChildren: './search-details/search-details.module#SearchDetailsPageModule' }
+  { path: 'search', loadChildren: './search/search.module#SearchPageModule'}
 ];
 
 @NgModule({

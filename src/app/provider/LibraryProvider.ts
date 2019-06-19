@@ -19,6 +19,7 @@ export class LibraryProvider {
   addToLibrary(imdbId){
     return this.getAll().then(result => {
       if(result) {
+        console.log('added to library with ID:', imdbId)
         result.push(imdbId);
         return this.storage.set(STORAGE_KEY, result);
       }else{
@@ -29,12 +30,14 @@ export class LibraryProvider {
   
   //check to see if we have saved the imdb ID
   inLibrary(imdbId){
+    console.log('in library method running...')
     return this.getAll().then(result => {
       return result && result.indexOf(imdbId) !== -1;
     });
   }
   //remove movie from library
   removeFromLibrary(imdbId){
+    console.log('Removing movie from library', imdbId)
     return this.getAll().then( result => {
       if(result){
         var position = result.indexOf(imdbId);
