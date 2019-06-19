@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { Movie } from './../models/Movie'
 import {  } from 'q';
+//used this link to help add more functionality https://github.com/okode/movies-app
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +23,7 @@ private readonly params = {
     return this.http.get(`${this.baseUrl}/search/movie${this.getParams({ query: query })}`)
       .pipe(map((res: any) => <Movie[]>res.results));
   }
-
+  //for uri-encoding of serach
   private getParams(params?: any) {
     const obj = { ...this.params, ...params };
     const str = [];
