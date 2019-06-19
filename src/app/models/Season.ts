@@ -1,4 +1,11 @@
-export interface Episode {
+export interface Season {
+  name: string;
+  overview: string;
+  id: number;
+  poster_path: string;
+  season_number: number;
+  air_date: string;
+  
   episodes: {
     id: number;
     air_date: string;
