@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MoviesService } from './../service/movies.service'
 import { Movie } from './../models/Movie'
+import { Router } from '@angular/router'
 @Component({
   selector: 'app-search',
   templateUrl: './search.page.html',
@@ -15,11 +16,12 @@ export class SearchPage implements OnInit {
   searchInput = '';
   results: Movie[];
   
-  constructor(private movieservice: MoviesService ) { }
+  constructor(private movieservice: MoviesService, private router: Router ) { }
 
   ngOnInit() {}
 
   onInput(event: any) {
+    console.log(this.searchInput)
     this.performSearch(this.searchInput);
   }
 
@@ -30,6 +32,10 @@ export class SearchPage implements OnInit {
 
   onClear(event: any) {
     this.results = null;
+  }
+
+  getMovieDetail(id: number){
+    this.router.navigate(['search-detail', id])
   }
 
   private performSearch(query: string) {

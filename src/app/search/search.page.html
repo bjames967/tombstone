@@ -8,8 +8,11 @@
 </ion-header>
 <ion-content>
   <ion-searchbar [(ngModel)]="searchInput" placeholder="" [showCancelButton]="false" (ionInput)="onInput($event)" (ionClear)="onClear($event)"></ion-searchbar>  
-  <ion-item *ngFor="let movie of results">
+  <ion-item button *ngFor="let movie of results" [routerLink]="['/', 'search', movie.id]">
     <ion-title>{{movie.title}}</ion-title>
+    <ion-thumbnail slot="start">
+    <img [src]="'https://image.tmdb.org/t/p/w185' + movie.poster_path">
+    </ion-thumbnail>
     </ion-item>
 
 </ion-content>

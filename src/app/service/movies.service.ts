@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map, delay } from 'rxjs/operators';
 import { Movie } from './../models/Movie';
-import { TvShow } from './../models/Tvshow';
+import { TVshow } from './../models/TVshow';
 import { Season } from './../models/Season';
 import {  } from 'q';
 //used this link to help add more functionality https://github.com/okode/movies-app
@@ -40,8 +40,8 @@ getMovieDetails(id: number) {
      map((result: any) => <Movie[]>result.results));
  }
   //find theatre by location
- findInTheatres(region: string){
-      return this.http.get(`${this.baseUrl}/movie/now_playing${this.getParams(region: region)}`).pipe(
+ findInTheatres(){
+      return this.http.get(`${this.baseUrl}/movie/now_playing${this.getParams()}`).pipe(
      map((result: any) => <Movie[]>result.results));
  }
 
@@ -51,17 +51,17 @@ getMovieDetails(id: number) {
   
  searchTv(query: string) {
    return this.http.get(`${this.baseUrl}/search/tv{this.getParams({ query: query })}`)
-      .pipe(map((result: any) => <TvShow[]>result.results));
+      .pipe(map((result: any) => <TVshow[]>result.results));
   }
   
   getTvDetails(id: number){
     return this.http.get(`${this.baseUrl}/tv/${id}${this.getParams()}`).pipe(
-       map((result: any) => <TvShow[]>result.results));
+       map((result: any) => <TVshow[]>result.results));
   }
   
   getSimilarTvShows(id: number){
     return this.http.get(`${this.baseUrl}/tv/${id}/similar${this.getParams()}`).pipe(
-       map((result: any) => <TvShow[]>result.results));
+       map((result: any) => <TVshow[]>result.results));
   }
   
   getSeason(id: number, season_number: number) {

@@ -28,7 +28,7 @@ export interface TVshow {
     }[];
     networks: {
         name?: string;
-        logog_path?: strinng';
+        logos_path?: string;
     }[];
     number_of_epsiodes?: number;
     number_of_seasons?: number;

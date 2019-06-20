@@ -17,7 +17,8 @@ const routes: Routes = [
   },
   { path: 'library', loadChildren: './library/library.module#LibraryPageModule' },
   { path: 'about', loadChildren: './about/about.module#AboutPageModule' },
-  { path: 'search', loadChildren: './search/search.module#SearchPageModule'}
+  { path: 'search', loadChildren: './search/search.module#SearchPageModule'},
+  { path: 'search/:id', loadChildren: './moviedetails/moviedetails.module#MoviedetailsPageModule' },
 ];
 
 @NgModule({
