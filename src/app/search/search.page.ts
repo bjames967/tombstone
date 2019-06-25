@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MoviesService } from './../service/movies.service'
 import { Movie } from './../models/Movie'
+import { TVshow } from './../models/TVshow'
 import { Router } from '@angular/router'
 @Component({
   selector: 'app-search',
@@ -12,9 +13,9 @@ import { Router } from '@angular/router'
 
 export class SearchPage implements OnInit {
   
-  searchType: 'movies';
+  searchType: 'movies' | 'tv' | 'person';
   searchInput = '';
-  results: Movie[];
+  results: Movie[] | TVshow[];
   
   constructor(private movieservice: MoviesService, private router: Router ) { }
 
@@ -40,7 +41,14 @@ export class SearchPage implements OnInit {
 
   private performSearch(query: string) {
     if (!query || query.trim().length <= 0) { return; }
-        this.performSearchMovies(query);
+        switch (this.searchType) {
+
+        case 'movies':
+            this.performSearchMovies(query); break;   
+        case 'tv':
+          this.performSearchTv(query); break;
+        default:
+        }
     }
 
     private performSearchMovies(query: string) {
@@ -48,8 +56,14 @@ export class SearchPage implements OnInit {
         this.results = res;
         console.log(this.results)
       });
-  
+    }
 
-  }
+    private performSearchTv(query: string) {
+      this.movieservice.searchTv(query).subscribe(res => {
+        this.results = res;
+        console.log(this.results)
+      })
+    }
+
 }
 

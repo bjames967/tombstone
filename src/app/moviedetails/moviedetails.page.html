@@ -9,12 +9,19 @@
 </ion-header>
 
 <ion-content>
-    <div *ngIf="movie">
+    <div *ngIf="movie.backdrop_path">
         <img *ngIf="movie.backdrop_path" [src]="'https://image.tmdb.org/t/p/original' + movie.backdrop_path">
     </div>
   <h1>{{movie.title}}</h1>
+  <ion-button [routerLink]="['/', 'list']">add to watchlist</ion-button>
+  <ion-button [routerLink]="['/', 'library']">Collect Tombstone</ion-button>
   <h2>{{movie.runtime}}</h2>
   <p>{{movie.overview}}</p>
-
-  
+  <h1>similar movies</h1>
+  <ion-item *ngFor="let item of similar">
+      <ion-label>{{item.title}}</ion-label>
+  </ion-item>
 </ion-content>
+
+
+

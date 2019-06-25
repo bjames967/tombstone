@@ -1,0 +1,24 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="/"></ion-back-button>
+          </ion-buttons>
+       <ion-title>{{tv.title}}</ion-title>
+     
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content>
+      <div *ngIf="movie.backdrop_path">
+          <img *ngIf="movie.backdrop_path" [src]="'https://image.tmdb.org/t/p/original' + tv.backdrop_path">
+      </div>
+    <h1>{{tv.title}}</h1>
+    <ion-button [routerLink]="['/', 'list']">add to watchlist</ion-button>
+    <ion-button [routerLink]="['/', 'library']">Collect Tombstone</ion-button>
+    <h2>{{tv.runtime}}</h2>
+    <p>{{tv.overview}}</p>
+    <h1>similar shows</h1>
+    <ion-item *ngFor="let item of similar">
+        <ion-label>{{tv.title}}</ion-label>
+    </ion-item>
+  </ion-content>

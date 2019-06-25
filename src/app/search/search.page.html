@@ -6,13 +6,30 @@
     <ion-title>search</ion-title>
   </ion-toolbar>
 </ion-header>
+<ion-searchbar [(ngModel)]="searchInput" placeholder="" [showCancelButton]="false" (ionInput)="onInput($event)" (ionClear)="onClear($event)"></ion-searchbar> 
+<ion-segment [(ngModel)]="searchType" (ionChange)="onSearchTypeChange()" color="dark">
+    <ion-segment-button value="movies">Movies</ion-segment-button>
+    <ion-segment-button value="tv">TV</ion-segment-button>
+    <ion-segment-button value="person">Actor</ion-segment-button>
+</ion-segment>
 <ion-content>
-  <ion-searchbar [(ngModel)]="searchInput" placeholder="" [showCancelButton]="false" (ionInput)="onInput($event)" (ionClear)="onClear($event)"></ion-searchbar>  
-  <ion-item button *ngFor="let movie of results" [routerLink]="['/', 'search', movie.id]">
-    <ion-title>{{movie.title}}</ion-title>
-    <ion-thumbnail slot="start">
-    <img [src]="'https://image.tmdb.org/t/p/w185' + movie.poster_path">
-    </ion-thumbnail>
+  <div class="results-flex" *ngIf="searchType === 'movies'">
+    <ion-item button *ngFor="let movie of results" [routerLink]="['/', 'search','movie', movie.id]">
+      <ion-title>{{movie.title}}</ion-title>
+      <ion-thumbnail slot="start">
+        <img [src]="'https://image.tmdb.org/t/p/w185' + movie.poster_path">
+      </ion-thumbnail>
     </ion-item>
+  </div>
+  <div class="results-flex" *ngIf="searchType === 'tv'"></div>
+  <ion-item button *ngFor="let show of results" [routerLink]="['/', 'search','tv', show.id]">
+    <ion-title>{{show.name}}</ion-title>
+    <ion-thumbnail slot="start">
+        <img [src]="'https://image.tmdb.org/t/p/w185' + show.poster_path">
+    </ion-thumbnail>
+    
+  </ion-item>
 
+
+  
 </ion-content>

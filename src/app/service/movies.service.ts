@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { map, delay } from 'rxjs/operators';
 import { Movie } from './../models/Movie';
 import { TVshow } from './../models/TVshow';
+import { TVdetails } from './../models/TVdetails'
 import { Season } from './../models/Season';
 import {  } from 'q';
 //used this link to help add more functionality https://github.com/okode/movies-app
@@ -12,6 +13,7 @@ import {  } from 'q';
 })
 export class MoviesService {
 //https://image.tmdb.org/t/p/w185' + movie.poster_path for search movies
+private readonly proxyBaseUrl = 'https://cors-anywhere.herokuapp.com/https://api.themoviedb.org/3';
 private readonly baseUrl = 'https://api.themoviedb.org/3';
 private readonly params = {
   api_key: '2b6607a1821d69c9f939c776b3cdea08',
@@ -22,7 +24,7 @@ private readonly params = {
 
 //--------------------------------------------Movie Queries--------------------------------------------------
 searchMovies(query: string) {
-    return this.http.get(`${this.baseUrl}/search/movie${this.getParams({ query: query })}`)
+    return this.http.get(`${this.proxyBaseUrl}/search/movie${this.getParams({ query: query })}`)
       .pipe(map((result: any) => <Movie[]>result.results));
   }
 getMovieDetails(id: number) {
@@ -50,13 +52,13 @@ getMovieDetails(id: number) {
   //---------------------------------------------TV Queries---------------------------------------------------------------
   
  searchTv(query: string) {
-   return this.http.get(`${this.baseUrl}/search/tv{this.getParams({ query: query })}`)
+   return this.http.get(`${this.proxyBaseUrl}/search/tv${this.getParams({ query: query })}`)
       .pipe(map((result: any) => <TVshow[]>result.results));
+
   }
   
   getTvDetails(id: number){
-    return this.http.get(`${this.baseUrl}/tv/${id}${this.getParams()}`).pipe(
-       map((result: any) => <TVshow[]>result.results));
+    return this.http.get<TVdetails>(`${this.baseUrl}/tv/${id}${this.getParams()}`);
   }
   
   getSimilarTvShows(id: number){

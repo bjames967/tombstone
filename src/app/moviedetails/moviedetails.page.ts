@@ -9,7 +9,7 @@ import { Movie } from 'src/app/models/Movie'
 })
 export class MoviedetailsPage implements OnInit {
     movie: Movie;
-    similiar: Movie[];
+    similar: Movie[];
   
 
 
@@ -20,10 +20,12 @@ export class MoviedetailsPage implements OnInit {
   ngOnInit() {
     let id = this.activateRoute.snapshot.params['id']
     this.movieService.getMovieDetails(id).subscribe(result => {
-        this.movie = result;
+        this.movie = result; console.log(this.movie);
+    });    
+    this.movieService.findSimliarMovies(id).subscribe(res => {
+        this.similar = res; console.log(this.similar)
     });
-    this.movieService.findSimliarMovies(id).subscribe(res =>
-        this.similiar = res);
+    
   }
 
 
