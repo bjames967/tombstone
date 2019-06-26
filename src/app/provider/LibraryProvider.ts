@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 //import { IonicStorageModule } from '@ionic/storage'; and in the providers array below
 //image path to get images------
 
-const STORAGE_KEY = 'savedFilms';
+const STORAGE_KEY = 'savedID';
 @Injectable()
 export class LibraryProvider {
   

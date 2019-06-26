@@ -22,4 +22,12 @@ export class ShowdetailsPage implements OnInit {
     });
   }
 
+  addToWatchList(id){
+    //TODO 
+  }
+
+  collectTombstone(id){
+    //TODO
+  }
+
 }

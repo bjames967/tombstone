@@ -5,6 +5,44 @@
 // file can hold Sass mixins, functions, and placeholder classes to be imported 
 // and used throughout the application.
 ion-content{
-    --ion-background-color: white;
+    --ion-background-color: #22282A;
+    --ion-text-color: #F8FCEE;
 }
+
+ion-toolbar{
+    --ion-background-color: #22282A;
+    --ion-text-color: #F8FCEE;
+    --ion-tab-bar-color-activated: grey;
+}
+
+ion-menu{
+    --ion-item-border-color: grey;
+}
+
+ion-searchbar{
+    --ion-background-color: #9A9D9E;
+    --ion-border-color: #363B3D;
+}
+ion-segment{
+    --ion-background-color: #363B3D;
+}
+ion-header{
+    --ion-background-color: #363B3D;
+}
+ion-menu-button{
+    --ion-background-color: #363B3D;
+    --ion-text-color: #F8FCEE;
+}
+
+ion-card{
+    --ion-text-color: #F8FCEE;
+}
+
+ion-grid{
+    vertical-align: middle;
+    text-align: center;
+}
+
+
+
 

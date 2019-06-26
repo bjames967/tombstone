@@ -18,9 +18,18 @@
   <h2>{{movie.runtime}}</h2>
   <p>{{movie.overview}}</p>
   <h1>similar movies</h1>
-  <ion-item *ngFor="let item of similar">
-      <ion-label>{{item.title}}</ion-label>
-  </ion-item>
+  
+  <ion-grid *ngFor="let item of similar; let i = index; let even = even;">
+   <ion-row>
+    <ion-col>
+      <ion-card>
+        <img [src]="'https://image.tmdb.org/t/p/original' + item.poster_path">
+        <ion-card-subtitle>{{item.title}}</ion-card-subtitle>
+      </ion-card>
+    </ion-col>
+    <ion-col>{{item.title}}</ion-col>
+  </ion-row>
+  </ion-grid>
 </ion-content>
 
 
