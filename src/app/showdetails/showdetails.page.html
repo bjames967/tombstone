@@ -18,4 +18,17 @@
     <h2>{{tv.runtime}}</h2>
     <p>{{tv.overview}}</p>
     <h1>similar shows</h1>
+      
+     
+      <div class="movies-flex">
+      <div class="movie" *ngFor="let item of similar">
+        <div class="poster">
+          <img *ngIf="item.poster_path" class="poster" [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path">
+          <img *ngIf="item.poster_path" class="poster-effect" [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path">
+        </div>
+        <div class="title">{{ item.name }}</div>
+        <div class="First Aired">{{ item.first_air_date | date:'yyyy' }}</div>
+        <div class="vote"><ion-icon name="star"></ion-icon>{{ item.vote_average }}/10</div>
+      </div>
+    </div>
   </ion-content>
