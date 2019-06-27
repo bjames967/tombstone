@@ -9,7 +9,8 @@ import { TVdetails } from '../models/TVdetails';
   styleUrls: ['./showdetails.page.scss'],
 })
 export class ShowdetailsPage implements OnInit {
-    tv: TVdetails
+    tv: TVdetails;
+    similar: TVshow[];
 
 
   constructor(private movieService: MoviesService,
@@ -20,8 +21,12 @@ export class ShowdetailsPage implements OnInit {
     this.movieService.getTvDetails(id).subscribe(result => {
       this.tv = result; console.log(this.tv);
     });
+    this.movieService.getSimilarTvShows(id).subscribe(result => {
+      this.similar = result; console.log(this.similar);
+    });
   }
 
+  
   addToWatchList(id){
     //TODO 
   }
