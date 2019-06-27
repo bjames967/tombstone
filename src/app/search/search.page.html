@@ -9,7 +9,7 @@
 <ion-segment [(ngModel)]="searchType" (ionChange)="onSearchTypeChange()" color="dark">
     <ion-segment-button value="movies">Movies</ion-segment-button>
     <ion-segment-button value="tv">TV</ion-segment-button>
-    <ion-segment-button value="person">Actor</ion-segment-button>
+    <ion-segment-button value="person">Actors</ion-segment-button>
 </ion-segment>
 <ion-content>
   <div class="results-flex" *ngIf="searchType === 'movies'">
