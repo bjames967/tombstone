@@ -27,10 +27,24 @@ export class MoviedetailsPage implements OnInit {
     });
     
   }
-
-
-
-
+  
+  addToWatchList(id){
+    //TODO 
+  }
+  
+  removeFromEatchList(id){
+    //TODO add "Help us understand why you no longer want to watch this anymore? Options(I saw it->library, Doesn't interest me anymore)
+    //use above data to help preference movies for that user
+  }
+  collectTombstone(id){
+    //TODO
+  }
+  
+  removieTombstone(id){
+    //TODO
+  }
+  
+  
 
 
 }
