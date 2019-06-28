@@ -7,24 +7,18 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
-  constructor() {}
-
-  
-  
+  constructor(private movieService: MovieService) {}
+  //We don't want to make an API call everytime we jump between tabs...might need soem work here
   ngOnInit(){
-    Movies = getTrendingMovies();
-    Shows  = getTrendingShows();
+    Movies = findTrendingMovies();
+    Shows  = findTrendingShows();
   }
   
-  
-  
-  getTrendingMovies(){
-   
+  findTrendingMovies(){
+    this.movieService.getTrendingMovies();
   }
   
-  
-  
-  getTrendingShows(){\
-    
+  findTrendingShows(){
+    this.movieService.getTrendingShows();
   }
 }
