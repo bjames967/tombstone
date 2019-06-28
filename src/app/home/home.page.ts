@@ -7,6 +7,16 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
-  constructor() {}
+  constructor(private movieService: MovieService,
+              private storageService: StorageService) {}
 
+  ngOnInit(){
+    if(this.storageService.length() == 0){
+      displayNoRecommendations();
+    }else{
+      displayRecommendations();
+    }
+  }
+  
+  
 }
