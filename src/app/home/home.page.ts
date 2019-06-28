@@ -6,17 +6,18 @@ import { Component } from '@angular/core';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-
+  Movies: Movie[];
+  Shows: TVshow[];
+  
   constructor(private movieService: MovieService,
               private storageService: StorageService) {}
-
+  
+  
   ngOnInit(){
-    if(this.storageService.length() == 0){
-      displayNoRecommendations();
-    }else{
-      displayRecommendations();
-    }
+    
+    
+    
+    
+    
   }
-  
-  
 }
