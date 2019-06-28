@@ -20,5 +20,15 @@ export class LibraryPage implements OnInit {
   ngOnInit() {
      
   }
+  
+  
+  
+  loadMoviesTab(){
+      
+  }
+  
+  loadTvTab(){
+    
+  }
 
 }
