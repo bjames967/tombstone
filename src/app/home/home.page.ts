@@ -9,4 +9,22 @@ export class HomePage {
 
   constructor() {}
 
+  
+  
+  ngOnInit(){
+    Movies = getTrendingMovies();
+    Shows  = getTrendingShows();
+  }
+  
+  
+  
+  getTrendingMovies(){
+   
+  }
+  
+  
+  
+  getTrendingShows(){\
+    
+  }
 }
