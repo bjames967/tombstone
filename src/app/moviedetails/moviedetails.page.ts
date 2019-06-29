@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MoviesService } from '../service/movies.service';
-import { ActivatedRoute } from '@angular/router';
-import { Movie } from 'src/app/models/Movie'
+import { ActivatedRoute, Router } from '@angular/router';
+import { Movie } from 'src/app/models/Movie';
+
+
 @Component({
   selector: 'app-moviedetails',
   templateUrl: './moviedetails.page.html',
@@ -15,7 +17,8 @@ export class MoviedetailsPage implements OnInit {
 
 
   constructor(private movieService: MoviesService,
-              private activateRoute: ActivatedRoute) { }
+              private activateRoute: ActivatedRoute,
+              private router: Router) { }
 
   ngOnInit() {
     let id = this.activateRoute.snapshot.params['id']
@@ -27,6 +30,10 @@ export class MoviedetailsPage implements OnInit {
     });
     
   }
+  navToDetails(id){
+    this.router.navigate(['search/movie', { id: id }]);
+  }
+
   
   addToWatchList(id){
     //TODO 
