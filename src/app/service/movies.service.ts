@@ -98,6 +98,16 @@ getMovieDetails(id: number) {
     }
     return '?' + str.join('&');
   }
+  
+  getTrendingMovies(){
+    return this.http.get(`${this.baseUrl}/trending/movie/day${this.getParams()}`).pipe(
+       map((result: any) => <Movie[]>result.results));
+  }
+  
+  getTrendingShows(){
+     return this.http.get(`${this.baseUrl}/trending/tv/day${this.getParams()}`).pipe(
+       map((result: any) => <TVshow[]>result.results));
+  }
 
 
 
