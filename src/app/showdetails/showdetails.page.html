@@ -17,15 +17,17 @@
     <ion-button slot="end" onclick="collectTomstone(tv.id)" color="light">Collect Tombstone</ion-button>
   </ion-buttons>
     <p>{{tv.overview}}</p>
-    <h1>similar shows</h1>
-      
+    <h1>Seasons</h1>
+    
+    <div class="movies-flex">
      <div class="movie" * ngFor="let season of season">
-       <div class = poster>
+       <div class="poster">
          <img ngIf="season.poster_path" class="poster" [src]="'https://image.tmdb.org/t/p/w500' + season.poster_path">
          <img *ngIf="season.poster_path" class="poster-effect" [src]="'https://image.tmdb.org/t/p/w500' + season.poster_path">
        </div>
-       <div class="title"></div>
+       <div class="title">{{season.name}}</div>
      </div>
+    </div>
 
 
 
