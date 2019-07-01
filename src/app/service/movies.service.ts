@@ -72,7 +72,7 @@ getMovieDetails(id: number) {
        map((result: any) => <Season[]>result.results));
   }
   
-  getEpisode(id: number, season_number: number, episode_number){
+  getEpisode(id: number, season_number: number, episode_number: number){
     //Add model for Episode and edit season model return this.http.get<Season[episode](`${this.baseUrl}/tv/${id}/season/${season_number}/episode/${episode_number}${this.getParams()}`);
   }
 
