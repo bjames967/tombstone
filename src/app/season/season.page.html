@@ -5,5 +5,15 @@
 </ion-header>
 
 <ion-content>
-
+  <div class="movies-flex">
+      <div class="movie" *ngFor="let season of Seasons">
+        <div class="poster">
+          <img *ngIf="item.poster_path" class="poster" [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path">
+          <img *ngIf="item.poster_path" class="poster-effect" [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path">
+        </div>
+        <div class="title">{{ item.title }}</div>
+        <div class="year">{{ item.release_date | date:'yyyy' }}</div>
+        <div class="vote"><ion-icon name="star"></ion-icon><b>{{ item.vote_average }}</b>/10</div>
+      </div>
+    </div>
 </ion-content>
