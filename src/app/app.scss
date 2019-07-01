@@ -4,9 +4,11 @@
 // styles are for the entire app and not just one component. Additionally, this 
 // file can hold Sass mixins, functions, and placeholder classes to be imported 
 // and used throughout the application.
+
 ion-content{
     --ion-background-color: #22282A;
     --ion-text-color: #F8FCEE;
+    -webkit-transform: translateZ(0);
 }
 
 ion-toolbar{
