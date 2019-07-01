@@ -24,6 +24,7 @@ export class ShowdetailsPage implements OnInit {
     this.movieService.getTvDetails(id).subscribe(result => {
       this.tv = result; console.log(this.tv);
     });
+    this.season = this.tv.seasons
 
     //save for later use
     // this.movieService.getSimilarTvShows(id).subscribe(result => {
