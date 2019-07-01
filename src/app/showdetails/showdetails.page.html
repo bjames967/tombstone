@@ -17,22 +17,11 @@
     <ion-button slot="end" onclick="collectTomstone(tv.id)" color="light">Collect Tombstone</ion-button>
   </ion-buttons>
     <p>{{tv.overview}}</p>
-    <h1>Seasons</h1>
-    
+    <ion-button [RouterLink]=['/', 'search', 'tv', tv.id, 'season']>Seasons</ion-button>
+<!--Add route for viewing all season page-->
+    <h1>Shows like {{tv.name}}</h1>
+  
     <div class="movies-flex">
-     <div class="movie" * ngFor="let season of season">
-       <div class="poster">
-         <img ngIf="season.poster_path" class="poster" [src]="'https://image.tmdb.org/t/p/w500' + season.poster_path">
-         <img *ngIf="season.poster_path" class="poster-effect" [src]="'https://image.tmdb.org/t/p/w500' + season.poster_path">
-       </div>
-       <div class="title">{{season.name}}</div>
-     </div>
-    </div>
-
-
-
-
-      <!-- <div class="movies-flex">
       <div class="movie" *ngFor="let item of similar">
         <div class="poster">
           <img *ngIf="item.poster_path" class="poster" [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path">
@@ -42,5 +31,5 @@
         <div class="First Aired">{{ item.first_air_date | date:'yyyy' }}</div>
         <div class="vote"><ion-icon name="star"></ion-icon>{{ item.vote_average }}/10</div>
       </div>
-    </div> -->
+    </div>
   </ion-content>
