@@ -10,53 +10,68 @@ import { ShowdetailsPage } from '../showdetails/showdetails.page';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-  trendingType: 'Movies' | 'TVshows'
+  trendingType: 'TrendingMovies' | 'TrendingTVshows' | 'Theatres' | 'ComingSoon';
   results: Movie[] | TVshow[];
 
   constructor(private movieService: MoviesService) {}
   
 
-  ngOnInit(){
-    if(this.trendingType === 'Movies'){
-    this.findTrendingMovies().subscribe(res => {
-      this.results = res; console.log(res);
-    });
-  }else{
-    this.findTrendingShows().subscribe(res =>{
-      this.results = res;console.log(res);
-    });
-  }
-  }
+  ngOnInit(){}
 
   onTrendingTypeChange(){
     console.log('hit function')
     this.results = null;
 
-    this.findTrendingAll();
+    this.pageSwap();
     console.log('changed')
-    
-  }
-
-  findTrendingAll(){
-    switch(this.trendingType) {
-      case 'Movies':
-        this.findTrendingMovies().subscribe(res => {
-          this.results = res; console.log(this.results);
-        }); break;
-      case 'TVshows':
-        this.findTrendingShows().subscribe(res => {
-          this.results = res; console.log(this.results); 
-        }); break;
-        default:
-    }
-  }
- 
-  findTrendingMovies(){
-     return this.movieService.getTrendingMovies();
   }
   
-  findTrendingShows(){
-    return this.movieService.getTrendingShows();
+  pageSwap(){
+    switch (this.trendingType) {
+      
+      case 'TrendingMovies':
+        this.findTrendingMovies(); break;
+      
+      case 'TrendingTVshows':
+        this.findTrendingShows(); break;
+        
+      case 'Theatres':
+        this.findMoviesInTheatres(); break;
+        
+      case 'ComingSoon':
+        this.findUpcomingMovies(); break;
+        
+      default:
+    }
+    
   }
+    
+ 
+  private findTrendingMovies(){
+this.movieService.getTrendingMovies().subscribe(res => {
+     this.results = res;
+     console.log(this.results);
+   });  }
+  
+  private findTrendingShows(){
+   this.movieService.getTrendingShows().subscribe(res => {
+     this.results = res;
+     console.log(this.results);
+   });
+  }
+  
+  private findMoviesInTheatres(){
+   this.movieService.findInTheatres().subscribe(res => {
+     this.results = res;
+     console.log(this.results);
+   });
+  }
+  
+  private findUpcomingMovies(){
+   this.movieService.findUpcomingMovies().subscribe(res => {
+     this.results = res;
+     console.log(this.results);
+   });
+  }
+  
 }
-
