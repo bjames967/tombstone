@@ -22,7 +22,7 @@ const routes: Routes = [
   { path: 'search/tv/:id', loadChildren: './showdetails/showdetails.module#ShowdetailsPageModule' },
   { path: 'search/p/:id', loadChildren: './actordetails/actordetails.module#ActordetailsPageModule' },
   { path: 'search/tv/:id/season/:seasonid', loadChildren: './season/season.module#SeasonPageModule' },
-  { path: 'search/tv/:id/season/:seasonid/episode/:episodeid', loadChildren: './episode-details/episode-details.module#EpisodeDetailsPageModule' },
+  { path: 'search/tv/:id/season/:seasonid/episode/:episodeid', loadChildren: './episode-details/episode-details.module#EpisodeDetailsPageModule' }
 ];
 
 @NgModule({

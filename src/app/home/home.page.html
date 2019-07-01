@@ -5,14 +5,37 @@
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
+<ion-segment [(ngModel)]="trendingType" (ionchange)="onTrendingTypeChange()">
+<ion-segment-button value="Movies">Trending Movies</ion-segment-button>
+<ion-segment-button value="TVshows">Trending TV Shows</ion-segment-button>
+</ion-segment>
 <ion-content>
-    <ion-card>
-      <ion-card-header>
-        <ion-card-title>Welcome to Tombstone</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        <p></p>
-      </ion-card-content>
-    </ion-card>
-    
+  <div *ngIf="trendingType ==='Movies'">
+    <div class="movies-flex">
+        <div class="movie" *ngFor="let item of results">
+          <div class="poster">
+            <img *ngIf="item.poster_path" class="poster" [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path">
+            <img *ngIf="item.poster_path" class="poster-effect" [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path">
+          </div>
+          <div class="title">{{ item.title }}</div>
+          <div class="year">{{ item.release_date | date:'yyyy' }}</div>
+          <div class="vote"><ion-icon name="star"></ion-icon><b>{{ item.vote_average }}</b>/10</div>
+        </div>
+    </div>
+  </div>
+
+  <div *ngIf="trendingType ==='TVshows'">
+      <div class="movies-flex">
+          <div class="movie" *ngFor="let item of results">
+            <div class="poster">
+              <img *ngIf="item.poster_path" class="poster" [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path">
+              <img *ngIf="item.poster_path" class="poster-effect" [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path">
+            </div>
+            <div class="title">{{ item.name }}</div>
+            <div class="vote"><ion-icon name="star"></ion-icon><b>{{ item.vote_average }}</b>/10</div>
+          </div>
+      </div>
+    </div>
+
+
 </ion-content>

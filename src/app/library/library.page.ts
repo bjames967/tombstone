@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MovieService } from './../service/movies.service';
-import { StorageService }  from './../service/StorageService';
+import { MoviesService } from './../service/movies.service';
 import { Movie } from './../models/Movie';
 import { TVshow } from './../models/TVshow';
 
@@ -14,8 +13,7 @@ export class LibraryPage implements OnInit {
   TVshow: TVshow[];
   
   
-  constructor(private movieService: MovieService,
-              private storageService: StorageService) { }
+  constructor(private movieService: MoviesService) { }
 
   ngOnInit() {
      
