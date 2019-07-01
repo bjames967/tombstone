@@ -5,12 +5,14 @@
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
-<ion-segment [(ngModel)]="trendingType" (ionchange)="onTrendingTypeChange()" slot="bottom">
-<ion-segment-button value="Movies">Trending Movies</ion-segment-button>
-<ion-segment-button value="TVshows">Trending TV Shows</ion-segment-button>
+<ion-segment [(ngModel)]="trendingType" (ionChange)="onTrendingTypeChange()" slot="bottom" color="dark">
+  <ion-segment-button value="TrendingMovies">Trending Movies</ion-segment-button>
+  <ion-segment-button value="TrendingTVshows">Trending TV Shows</ion-segment-button>
+  <ion-segment-button value="Theatres">In Theatres</ion-segment-button>
+  <ion-segment-button value="ComingSoon">Coming Soon</ion-segment-button>
 </ion-segment>
 <ion-content>
-  <div *ngIf="trendingType ==='Movies'">
+  <div *ngIf="trendingType ==='TrendingMovies'">
     <div class="movies-flex">
         <div class="movie" *ngFor="let item of results">
           <div class="poster">
@@ -24,7 +26,7 @@
     </div>
   </div>
 
-  <div *ngIf="trendingType ==='TVshows'">
+  <div *ngIf="trendingType ==='TrendingTVshows'">
       <div class="movies-flex">
           <div class="movie" *ngFor="let item of results">
             <div class="poster">
@@ -36,6 +38,33 @@
           </div>
       </div>
     </div>
+
+  <div *ngIf="trendingType ==='Theatres'">
+      <div class="movies-flex">
+          <div class="movie" *ngFor="let item of results">
+            <div class="poster">
+              <img *ngIf="item.poster_path" class="poster" [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path">
+              <img *ngIf="item.poster_path" class="poster-effect" [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path">
+            </div>
+            <div class="title">{{ item.name }}</div>
+            <div class="vote"><ion-icon name="star"></ion-icon><b>{{ item.vote_average }}</b>/10</div>
+          </div>
+      </div>
+    </div>
+  
+  <div *ngIf="trendingType ==='ComingSoon'">
+      <div class="movies-flex">
+          <div class="movie" *ngFor="let item of results">
+            <div class="poster">
+              <img *ngIf="item.poster_path" class="poster" [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path">
+              <img *ngIf="item.poster_path" class="poster-effect" [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path">
+            </div>
+            <div class="title">{{ item.name }}</div>
+            <div class="vote"><ion-icon name="star"></ion-icon><b>{{ item.vote_average }}</b>/10</div>
+          </div>
+      </div>
+    </div>
+
 
 
 </ion-content>
