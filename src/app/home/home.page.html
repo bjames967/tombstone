@@ -5,7 +5,7 @@
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
-<ion-segment [(ngModel)]="trendingType" (ionchange)="onTrendingTypeChange()">
+<ion-segment [(ngModel)]="trendingType" (ionchange)="onTrendingTypeChange()" slot="bottom">
 <ion-segment-button value="Movies">Trending Movies</ion-segment-button>
 <ion-segment-button value="TVshows">Trending TV Shows</ion-segment-button>
 </ion-segment>
