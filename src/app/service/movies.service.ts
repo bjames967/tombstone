@@ -4,8 +4,8 @@ import { map, delay } from 'rxjs/operators';
 import { Movie } from './../models/Movie';
 import { TVshow } from './../models/TVshow';
 import { TVdetails } from './../models/TVdetails'
-import { Season } from './../models/Season';
 import { Actor } from './../models/Actor'
+import { SeasonDetails } from './../models/SeasonDetails'
 import {  } from 'q';
 //used this link to help add more functionality https://github.com/okode/movies-app
 
@@ -68,8 +68,7 @@ getMovieDetails(id: number) {
   }
   
   getSeason(id: number, season_number: number) {
-    return this.http.get(`${this.baseUrl}/tv/${id}/season/${season_number}${this.getParams()}`).pipe(
-       map((result: any) => <Season[]>result.results));
+    return this.http.get<SeasonDetails>(`${this.baseUrl}/tv/${id}/season/${season_number}${this.getParams()}`);
   }
   
   getEpisode(id: number, season_number: number, episode_number: number){

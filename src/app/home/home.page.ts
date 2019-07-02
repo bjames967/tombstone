@@ -3,6 +3,7 @@ import { Movie } from './../models/Movie'
 import { TVshow } from './../models/TVshow'
 import { MoviesService} from './../service/movies.service'
 import { ShowdetailsPage } from '../showdetails/showdetails.page';
+import { Router } from '@angular/router'
 
 @Component({
   selector: 'app-home',
@@ -13,10 +14,22 @@ export class HomePage {
   trendingType: 'TrendingMovies' | 'TrendingTVshows' | 'Theatres' | 'ComingSoon';
   results: Movie[] | TVshow[];
 
-  constructor(private movieService: MoviesService) {}
+  constructor(private movieService: MoviesService,
+              private router: Router) {}
   
 
-  ngOnInit(){}
+  ngOnInit(){
+    this.trendingType = 'TrendingMovies';
+    this.onTrendingTypeChange();
+  }
+
+  onMovieClick(id){
+      this.router.navigate(['movie', id])
+  }
+
+  onTvClick(id){
+      this.router.navigate(['tv', id])
+  }
 
   onTrendingTypeChange(){
     console.log('hit function')

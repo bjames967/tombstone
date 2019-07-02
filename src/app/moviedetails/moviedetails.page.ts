@@ -30,11 +30,11 @@ export class MoviedetailsPage implements OnInit {
     });
     
   }
-  navToDetails(id){
-    this.router.navigate(['search/movie', { id: id }]);
-  }
 
-  
+  onMovieClick(id){
+    this.router.navigate(['movie', id])
+}
+
   addToWatchList(id){
     //TODO 
   }

@@ -1,18 +1,18 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Season</ion-title>
+    <ion-title>Season {{season.season_number}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
+
+
 <ion-content>
-  <div class="movies-flex">
-      <div class="movie" *ngFor="let season of Seasons">
-        <div class="poster">
-          <img *ngIf="item.poster_path" class="poster" [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path">
-          <img *ngIf="item.poster_path" class="poster-effect" [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path">
-        </div>
-        <div class="title">{{ item.name }}</div>
-        <div class="year">Season: {{ item.season_number }}</div>
-      </div>
-    </div>
+  <ion-list>
+      <ion-card *ngFor="let item of season.episodes">
+        <img [src]="'https://image.tmdb.org/t/p/w500' + item.still_path">
+        <ion-card-title>{{item.name}}</ion-card-title>
+        <ion-card-subtitle>Episode {{item.episode_number}}</ion-card-subtitle>
+        <ion-card-content>{{item.overview}}</ion-card-content>
+      </ion-card>
+  </ion-list>
 </ion-content>

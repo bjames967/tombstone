@@ -20,8 +20,17 @@ export class SearchPage implements OnInit {
   
   constructor(private movieservice: MoviesService, private router: Router ) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.searchType = 'movies';
+  }
+  
+  onMovieClick(id){
+    this.router.navigate(['movie', id])
+  }
 
+  onTvClick(id){
+    this.router.navigate(['tv', id])
+  }
   onInput(event: any) {
     console.log(this.searchInput)
     this.performSearch(this.searchInput);

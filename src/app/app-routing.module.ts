@@ -18,11 +18,10 @@ const routes: Routes = [
   { path: 'library', loadChildren: './library/library.module#LibraryPageModule' },
   { path: 'about', loadChildren: './about/about.module#AboutPageModule' },
   { path: 'search', loadChildren: './search/search.module#SearchPageModule'},
-  { path: 'search/movie/:id', loadChildren: './moviedetails/moviedetails.module#MoviedetailsPageModule' },
-  { path: 'search/tv/:id', loadChildren: './showdetails/showdetails.module#ShowdetailsPageModule' },
-  { path: 'search/p/:id', loadChildren: './actordetails/actordetails.module#ActordetailsPageModule' },
-  { path: 'search/tv/:id/season/:seasonid', loadChildren: './season/season.module#SeasonPageModule' },
-  { path: 'search/tv/:id/season/:seasonid/episode/:episodeid', loadChildren: './episode-details/episode-details.module#EpisodeDetailsPageModule' }
+  { path: 'movie/:id', loadChildren: './moviedetails/moviedetails.module#MoviedetailsPageModule' },
+  { path: 'tv/:id', loadChildren: './showdetails/showdetails.module#ShowdetailsPageModule' },
+  { path: 'tv/:id/season/:season_number', loadChildren: './season/season.module#SeasonPageModule' },
+  { path: 'tv/:id/season/:season_number/episode/:episodeid', loadChildren: './episode-details/episode-details.module#EpisodeDetailsPageModule' }
 ];
 
 @NgModule({
