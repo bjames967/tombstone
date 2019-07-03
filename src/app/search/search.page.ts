@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MoviesService } from './../service/movies.service'
 import { Movie } from './../models/Movie'
 import { TVshow } from './../models/TVshow'
 import { Actor } from './../models/Actor'
 import { Router } from '@angular/router'
-import { LoadingController, Content } from '@ionic/angular';
+
 @Component({
   selector: 'app-search',
   templateUrl: './search.page.html',
@@ -20,8 +20,7 @@ export class SearchPage implements OnInit {
   results: Movie[] | TVshow[] | Actor[];
   
   constructor(private movieservice: MoviesService, 
-              private router: Router
-              private loadController: LoadingController) { }
+              private router: Router) { }
 
   ngOnInit() {
     this.searchType = 'movies';
@@ -52,27 +51,14 @@ export class SearchPage implements OnInit {
     this.router.navigate(['search-detail', id])
   }
 
-  private performSearch(query: string) {
+  private async performSearch(query: string) {
     let loader;
     if (!query || query.trim().length <= 0) { return; }
       switch (this.searchType) {
         case 'movies': this.performSearchMovies(query); break;   
         case 'tv': this.performSearchTv(query); break;     
       }
-    const loadingView = { translucent: true, spinner: 'dots'};
-    const load = await this.loadController.create(loadingView);
-    load.present();
-    loader.subscribe(res => {
-      if(!this.results){
-         this.results = [];
-      }
-      this.results = this.results.concat(res);
-      load.dismiss();
-    }, err => {
-      this.results = [];
-      load.dismiss();
-    });
-  }
+    }
 
     private performSearchMovies(query: string) {
       this.movieservice.searchMovies(query).subscribe(res => {
