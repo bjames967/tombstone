@@ -7,7 +7,7 @@
          <ion-tab tab="movies">
           <ion-content>
            <div class="movies-flex">
-            <div class="movie" *ngFor="let item of results" (click)="getMovieDetails(id)">
+            <div class="movie" *ngFor="let item of movieList" (click)="onMovieClick(item.id)">
              <div class="poster">
               <img *ngIf="item.poster_path" class="poster" [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path">
               <img *ngIf="item.poster_path" class="poster-effect" [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path">
@@ -22,7 +22,7 @@
         <ion-tab tab="tv">
           <ion-content>
             <div class="movies-flex">
-              <div class="movie" *ngFor="let item of results" (click)="getShowDetails(item.id)">
+              <div class="movie" *ngFor="let item of tvList" (click)="onTvClick(item.id)">
                 <div class="poster">
                   <img *ngIf="item.poster_path" class="poster" [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path">
                   <img *ngIf="item.poster_path" class="poster-effect" [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path">
