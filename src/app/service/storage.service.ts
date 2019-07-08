@@ -13,8 +13,9 @@ export interface StorageUnit {
   overview: string;
   movie: boolean;
   avg_rating: number;
-  
+  genre_ids: number[];
 }
+
 const WATCH_LIST_KEYS = 'watch-list';
 const TOMBSTONE_KEYS = 'tombstones';
 
