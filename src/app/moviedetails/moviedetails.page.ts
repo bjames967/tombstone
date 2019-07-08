@@ -36,11 +36,22 @@ export class MoviedetailsPage implements OnInit {
   onMovieClick(id){
     this.router.navigate(['movie', id])
 }
-
-  addMovieToWatchlist(movie: JSON){
-      this.storageservice.addMovieToWatchlist(movie);
+//probably need to change the paramter type
+  addMovieToWatchlist(movie: Object){
+      let unit = mapToStorageUnit(movie.title, movie.poster_path, movie.id, movie.overview, true, movie.average_rating);
+      addMovieToWatchList(unit);
       console.log('added movie to watch list')
   }
+  
+  collectTombstone(movie: Object){
+     let unit = mapToStorageUnit(movie.title, movie.poster_path, movie.id, movie.overview, true, movie.average_rating);
+      collectTombstone(unit);
+      console.log('added movie to watch list');
+  }
+  
+  
+  
+  
   
   
 
