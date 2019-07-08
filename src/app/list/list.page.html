@@ -1,24 +1,45 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
+  <ion-header>
+    <ion-title>Your WatchList</ion-title>
+  </ion-header>
 
-<ion-content>
-  <ion-list>
-    <ion-item *ngFor="let item of items">
-      <ion-icon [name]="item.icon" slot="start"></ion-icon>
-      {{item.title}}
-      <div class="item-note" slot="end">
-        {{item.note}}
-      </div>
-    </ion-item>
-  </ion-list>
-  <!--
-    <div *ngIf="selectedItem" padding>
-      You navigated here from <b>{{selectedItem.title }}</b>
-    </div>
-  -->
-</ion-content>
+    
+    <ion-tabs>
+         <ion-tab tab="movies">
+          <ion-content>
+           <div class="movies-flex">
+            <div class="movie" *ngFor="let item of results" (click)="getMovieDetails(id)">
+             <div class="poster">
+              <img *ngIf="item.poster_path" class="poster" [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path">
+              <img *ngIf="item.poster_path" class="poster-effect" [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path">
+             </div>
+             <div class="title">{{ item.title }}</div>
+             <div class="vote"><ion-icon name="star"></ion-icon><b>{{ item.avg_rating }}</b>/10</div>
+            </div>
+          </div>
+         </ion-content>
+        </ion-tab>
+    
+        <ion-tab tab="tv">
+          <ion-content>
+            <div class="movies-flex">
+              <div class="movie" *ngFor="let item of results" (click)="getShowDetails(item.id)">
+                <div class="poster">
+                  <img *ngIf="item.poster_path" class="poster" [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path">
+                  <img *ngIf="item.poster_path" class="poster-effect" [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path">
+                </div>
+                <div class="title">{{ item.name }}</div>
+                <div class="vote"><ion-icon name="star"></ion-icon><b>{{ item.avg_rating }}</b>/10</div>
+              </div>
+            </div>
+          </ion-content>
+        </ion-tab>
+    
+      <ion-tab-bar slot="bottom">
+        <ion-tab-button tab="movies">
+          <ion-label>Movies To Watch</ion-label>
+        </ion-tab-button>
+        <ion-tab-button tab="tv">
+          <ion-label>Shows to Watch</ion-label>
+        </ion-tab-button>
+    </ion-tab-bar>     
+   </ion-tabs>
