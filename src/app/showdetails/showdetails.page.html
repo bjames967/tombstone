@@ -13,8 +13,8 @@
       </div>
       <div class="buttons">
           <ion-buttons>
-            <ion-button slot="end" [routerLink]="['/', 'list']">add to watchlist</ion-button>
-            <ion-button slot="end" [routerLink]="['/', 'library']">Collect Tombstone</ion-button>
+            <ion-button slot="end" (click)="addToWatchlist(tv)">add to watchlist</ion-button>
+            <ion-button slot="end" (click)="collectTombstone(tv)">Collect Tombstone</ion-button>
           </ion-buttons>
           </div>
     <div class="overview">
