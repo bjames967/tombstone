@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MoviesService } from './../service/movies.service';
 import { Movie } from './../models/Movie';
 import { TVshow } from './../models/TVshow';
+import { StorageService } from './../service/storage.service';
 
 @Component({
   selector: 'app-library',
@@ -9,24 +10,34 @@ import { TVshow } from './../models/TVshow';
   styleUrls: ['./library.page.scss'],
 })
 export class LibraryPage implements OnInit {
-  Movie: Movie[];
-  TVshow: TVshow[];
   
   
-  constructor(private movieService: MoviesService) { }
+  
+  constructor(private movieService: MoviesService,
+              private storageService: StorageService) { }
 
-  ngOnInit() {
-     
+   ngOnInit() {
+    loadTombstones();
+  }
+
+  loadTombstones(){
+    filterStorage();
   }
   
-  
-  
-  loadMoviesTab(){
-      
+  removeFromWatchList(tv: Object){
+    this.storageService.deleteFromTombstones(tv.id);
+    filterStorage();
   }
   
-  loadTvTab(){
-    
+  filterStorage(){
+    let res = this.storageService.getAllTombstones();
+    for (item in res){
+      if (item.movie = true){
+        this.movieList.push(item);
+      }else{
+        this.tvList.push(item);
+      }
+    } 
   }
 
 }
