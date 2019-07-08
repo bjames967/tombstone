@@ -155,6 +155,7 @@ export class StorageService {
     unit.genre_ids = movie.genre_ids;
     unit.backdrop_path = movie.backdrop_path;
     unit.release_date = movie.release_date;
+    return unit;
   }
       
   
