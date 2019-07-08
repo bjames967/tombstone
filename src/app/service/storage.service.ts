@@ -141,10 +141,6 @@ export class StorageService {
   }
   
   
-  
-  
-  
-  
   mapMovieToStorageUnit(movie: Movie){
     let unit: StorageUnit = {};
     unit.title = movie.title;
@@ -158,6 +154,18 @@ export class StorageService {
     return unit;
   }
       
+  mapTvToStorageUnit(tv: TVShow){
+    let unit: StorageUnit = {};
+    unit.title = tv.name;
+    unit.poster_path = tv.poster_path;
+    unit.id = tv.id;
+    unit.overview = tv.overview
+    unit.avg_rating = tv.vote_average;
+    unit.genre_ids = tv.genre_ids;
+    unit.backdrop_path = "NA";
+    unit.release_date = tv.first_air_date;
+    return unit;
+  }
   
                                                  
   
