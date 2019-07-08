@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { StorageService } from '../service/storage.service';
 import { Movie } from './../models/Movie';
+import { Router } from '@angular/router'
 
 @Component({
   selector: 'app-list',
@@ -12,31 +13,42 @@ export class ListPage implements OnInit {
   movieList: StorageUnit[];
   tvList: StorageUnit[];
   
-  constructor(private storageservice: StorageService) {
+  constructor(private storageservice: StorageService,
+              private router: Router) {
   }
  
   ngOnInit() {
     loadWatchList();
   }
+ 
+  onMovieClick(){
+     this.router.navigate(['movie', id])
+  }
+  
+  onTvClick(){
+     this.router.navigate(['tv', id])
+  }
+  
 
   loadWatchList(){
-    filterStorage();
+   loadMovieWatchList();
+   loadTvWatchList();
+  }
+  loadMovieWatchList(){
+    this.movieList = this.storageService.getMovieWatchList();
   }
   
-  removeFromWatchList(tv: Object){
-    this.storageService.deleteFromWatchList(tv.id);
-    filterStorage();
+  loadTvWatchList(){
+    this.tvList = this.storageService.getTvWatchList(); 
   }
   
-  filterStorage(){
-    let res = this.storageService.getAllWatchList();
-    for (item in res){
-      if (item.movie = true){
-        this.movieList.push(item);
-      }else{
-        this.tvList.push(item);
-      }
-    } 
+  removeShow(id: number){
+    return this.storageService.deleteTvFromWatchList(id);
   }
-    
+  
+  removeMovie(id: number){
+    return this.storageService.deleteMovieFromWatchList(id);
+  }
+  
+      
 }
