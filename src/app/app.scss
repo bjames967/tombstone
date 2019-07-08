@@ -112,6 +112,28 @@ ion-button{
       }
     }
 }
+.buttons{
+  float: right;
+  padding: 25px;
+  margin: 5px;
+}
+
+.overview {
+  padding: 5px;
+  margin: 5px;
+  font-size: 12px;
+  .discrip{
+    margin: 8px;
+  }
+  .runtime{
+    margin: 8px;
+  }
+}
+
+.similar{
+  padding: 5px;
+  margin: 5px;
+}
 
 
 

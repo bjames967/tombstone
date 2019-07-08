@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MoviesService } from '../service/movies.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Movie } from 'src/app/models/Movie';
+import { StorageService } from '../service/storage.service';
 
 
 @Component({
@@ -18,7 +19,8 @@ export class MoviedetailsPage implements OnInit {
 
   constructor(private movieService: MoviesService,
               private activateRoute: ActivatedRoute,
-              private router: Router) { }
+              private router: Router,
+              private storageservice: StorageService) { }
 
   ngOnInit() {
     let id = this.activateRoute.snapshot.params['id']
@@ -35,20 +37,9 @@ export class MoviedetailsPage implements OnInit {
     this.router.navigate(['movie', id])
 }
 
-  addToWatchList(id){
-    //TODO 
-  }
-  
-  removeFromEatchList(id){
-    //TODO add "Help us understand why you no longer want to watch this anymore? Options(I saw it->library, Doesn't interest me anymore)
-    //use above data to help preference movies for that user
-  }
-  collectTombstone(id){
-    //TODO
-  }
-  
-  removieTombstone(id){
-    //TODO
+  addMovieToWatchlist(movie: JSON){
+      this.storageservice.addMovieToWatchlist(movie);
+      console.log('added movie to watch list')
   }
   
   

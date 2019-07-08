@@ -12,16 +12,22 @@
     <div *ngIf="movie.backdrop_path">
         <img *ngIf="movie.backdrop_path" [src]="'https://image.tmdb.org/t/p/original' + movie.backdrop_path">
     </div>
-<span>
+    <div class="buttons">
+      <ion-buttons>
+        <ion-button slot="end" (click)="addMovieToWatchlist(movie)">add to watchlist</ion-button>
+        <ion-button slot="end" (click)="CollectMovieTombstone(movie)">Collect Tombstone</ion-button>
+      </ion-buttons>
+      </div>
+<div class="overview">
   <h1>{{movie.title}}</h1>
-  <ion-buttons>
-  <ion-button slot="end" [routerLink]="['/', 'list']">add to watchlist</ion-button>
-  <ion-button slot="end" [routerLink]="['/', 'library']">Collect Tombstone</ion-button>
-</ion-buttons>
-</span>
-  <h2>{{movie.runtime}}</h2>
-  <p>{{movie.overview}}</p>
-  <h1>similar movies</h1>
+  <h4>Overview</h4>
+  <div class="discrip">{{movie.overview}}</div>
+  <h4>Runtime</h4>
+  <div class="runtime">{{movie.runtime}} minutes</div>
+</div>
+<div class="similar">
+  <h1>Similar Movies</h1>
+</div>
   
   <div class="movies-flex">
       <div class="movie" *ngFor="let item of similar" (click)="onMovieClick(item.id)">

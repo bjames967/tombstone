@@ -11,15 +11,24 @@
       <div *ngIf="tv.backdrop_path">
           <img *ngIf="tv.backdrop_path" [src]="'https://image.tmdb.org/t/p/original' + tv.backdrop_path">
       </div>
-    <h1>{{tv.name}}</h1> 
-    <ion-buttons>
-    <ion-button slot="end" onclick="addToWatchList(tv.id)" color="light">add to watchlist</ion-button>
-    <ion-button slot="end" onclick="collectTomstone(tv.id)" color="light">Collect Tombstone</ion-button>
-  </ion-buttons>
-    <p>{{tv.overview}}</p>
+      <div class="buttons">
+          <ion-buttons>
+            <ion-button slot="end" [routerLink]="['/', 'list']">add to watchlist</ion-button>
+            <ion-button slot="end" [routerLink]="['/', 'library']">Collect Tombstone</ion-button>
+          </ion-buttons>
+          </div>
+    <div class="overview">
+      <h1>{{tv.name}}</h1>
+      <h4>Overview</h4>
+      <div class="discrip">{{tv.overview}}</div>
+      <h4>Episode Runtime</h4>
+      <div class="runtime">{{tv.episode_run_time}} minutes</div>
+    </div>
    
 <!--Add route for viewing all season page-->
-    <h1>Seasons</h1>
+  <div class="Seasons">
+  <h1>Seasons</h1>
+  </div>
   
     <div class="movies-flex">
         <div class="movie" *ngFor="let item of tv.seasons" (click)="onSeasonClick(tv.id, item.season_number)">
@@ -32,10 +41,9 @@
           <div class="vote">{{item.episode_count}} Episodes</div>
         </div>
       </div>
-
-
+    <div class="similar">
       <h2>Similar Shows</h2>
-    
+    </div>
     <div class="movies-flex">
       <div class="movie" *ngFor="let item of similar" (click)="onTvClick(item.id)">
         <div class="poster">
