@@ -3,6 +3,7 @@ import { MoviesService } from './../service/movies.service';
 import { Movie } from './../models/Movie';
 import { TVshow } from './../models/TVshow';
 import { StorageService } from './../service/storage.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-library',
@@ -10,34 +11,55 @@ import { StorageService } from './../service/storage.service';
   styleUrls: ['./library.page.scss'],
 })
 export class LibraryPage implements OnInit {
-  
-  
+  TvStone: StorageUnit[];
+  MovieStone: StorageUnit[];
   
   constructor(private movieService: MoviesService,
-              private storageService: StorageService) { }
+              private storageService: StorageService,
+              private router: Router) { }
 
    ngOnInit() {
-    loadTombstones();
+   
   }
-
+  
   loadTombstones(){
-    filterStorage();
+    loadTvTombstones();
+    loadMovieTombstones();
   }
   
-  removeFromWatchList(tv: Object){
-    this.storageService.deleteFromTombstones(tv.id);
-    filterStorage();
+  onMovieClick(id){
+    this.router.navigate(['movie', id])
   }
   
-  filterStorage(){
-    let res = this.storageService.getAllTombstones();
-    for (item in res){
-      if (item.movie = true){
-        this.movieList.push(item);
-      }else{
-        this.tvList.push(item);
-      }
-    } 
+  onTvClick(id){
+    this.router.navigate(['tv', id]);
   }
+  
+  
+  loadTvTombstones(){
+    this.storageService.getTvTombstones();
+  }
+  
+  loadMovieTombstones(){
+    this.storageService.getMovieTombstones();
+  }
+  
+  removeTvTombstone(id: number){
+    this.storageService.deleteMovieFromTombstones(id);
+  }
+  
+  removeMovieTombstone(id: number){
+    this.storageService.deleteTvFromTombstone(id);
+  }
+    
+    
+    
+    
+    
+    
+    
+    
+
+  
 
 }
