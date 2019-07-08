@@ -5,82 +5,86 @@ import { Storage } from '@ionic/storage'
   providedIn: 'root'
 
 })
+
+export interface StorageUnit {
+  title: string;
+  poster_path: string;
+  id: number;
+  overview: string;
+  movie: boolean;
+  avg_rating: number;
+  
+}
+const WATCH_LIST_KEYS = 'watch-list';
+const TOMBSTONE_KEYS = 'tombstones';
+
 export class StorageService {
 
   constructor(private storage: Storage) { }
 
-  MovieIsTombstone(){
-
+  //Get All movies and shows in watch list
+  getAllWatchList(): Promise<StorageUnit[]> {
+    return this.storage.get(WATCH_LIST_KEYS);
+  }
+ 
+  //Get all movie and show tombstones
+  getAllTombstones(): Promise<StorageUnit[]> {
+    return this.storage.get(TOMBSTONE_KEYS);
   }
   
-  saveMovieToTombstone(){
-    
-  }
-
-  removeMovieFromTombstone(){
-
-  }
-
-  movieisWatchlist(){
-      return false; //for now
-  }
-
-  addMovieToWatchlist(movie: JSON){
-      if (this.movieisWatchlist){
-        this.storage.set('movie', movie);
-        console.log('added movie to watchlist')
+  //add movie to watchList
+  addToWatchList(unit: StorageUnit): Promise<any> {
+    return this.storage.get(WATCH_LIST_KEYS).then((list: StorageUnit[]) => {
+      if(list) {
+        list.push(unit);
+        return this.storage.set(WATCH_LIST_KEYS, list);
       }else{
-        this.modalfailureAdded();
-        console.log('failed adding movie')
+        return this.storage.set(WATCH_LIST_KEYS, [unit]); 
       }
-  }
-
-  removeMovieFromWatchlist(){
-
-  }
-
-  //Tv show saving
-
-  ShowIsTombstone(){
-
+    });
   }
   
-  saveShowToTombstone(){
-    
+  //add new unit to tombstones
+  collectTombstone(unit: StorageUnit): Promise<any> {
+    return this.storage.get(TOMBSTONE_KEYS).then((tombstones: StorageUnit[]) => {
+      if(tombstones){
+         tombstones.push(unit);
+         return this.storage.set(TOMBSTONE_KEYS, tombstones);
+      }else{
+         return this.storage.set(TOMBSTONE_KEYS, [unit]);
+      }
+    });  
   }
-
-  removeShowFromTombstone(){
-
+  
+  //delete a unit from watchlist
+  deleteFromWatchList(id: number): Promise<StorageUnit> {
+    return this.storage.get(WATCH_LIST_KEYS).then((list: StorageUnit[]) => {
+      if(!list || list.length === 0){
+        console.log('nothing to remove with ID: #{id}');
+        return null;
+      } 
+      let newList = list.filter(obj => obj.id !== id);
+      return this.storage.set(WATCH_LIST_KEYS, newList);
+     });
   }
-
-  ShowisWatchlist(){
-
+  
+  deleteFromTombstones(id: number): Promise<StorageUnit> {
+     return this.storage.get(TOMBSTONE_KEYS).then((list: StorageUnit[]) => {
+      if(!list || list.length === 0){
+        console.log('nothing to remove with ID: #{id}');
+        return null;
+      } 
+      let newList = list.filter(obj => obj.id !== id);
+      return this.storage.set(TOMBSTONE_KEYS, newList);
+     });
   }
-
-  addShowToWatchlist(){
-
-  }
-
-  removeShowFromWatchlist(){
-
-  }
-
-  modalMovieAdded(){
-
-  }
-
-  modalfailureAdded(){
-
-  }
-
-
-  getAllWatchList(){
-    this.storage.get('movie');
-  }
+  
+                                                 
+  
+ 
 
 
 
 
 
 
-}
