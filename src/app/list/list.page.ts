@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { StorageService } from '../service/storage.service';
-import { Movie} from './../models/Movie'
+import { Movie } from './../models/Movie';
 
 @Component({
   selector: 'app-list',
@@ -9,17 +9,34 @@ import { Movie} from './../models/Movie'
 })
 export class ListPage implements OnInit {
  
+  movieList: StorageUnit[];
+  tvList: StorageUnit[];
+  
   constructor(private storageservice: StorageService) {
   }
-  Movies: Movie[];
-
+ 
   ngOnInit() {
-    this.loadWatchList();
+    loadWatchList();
   }
-
 
   loadWatchList(){
-      this.storageservice.getAllWatchList();
-      console.log('loaded')
+    filterStorage();
   }
+  
+  removeFromWatchList(tv: Object){
+    this.storageService.deleteFromWatchList(tv.id);
+    filterStorage();
+  }
+  
+  filterStorage(){
+    let res = this.storageService.getAllWatchList();
+    for (item in res){
+      if (item.movie = true){
+        this.movieList.push(item);
+      }else{
+        this.tvList.push(item);
+      }
+    } 
+  }
+    
 }
