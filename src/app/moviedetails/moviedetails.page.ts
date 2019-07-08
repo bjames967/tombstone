@@ -37,15 +37,15 @@ export class MoviedetailsPage implements OnInit {
     this.router.navigate(['movie', id])
 }
 //probably need to change the paramater type
-  addMovieToWatchlist(movie: Object){
-      let unit = mapToStorageUnit(movie.title, movie.poster_path, movie.id, movie.overview, true, movie.average_rating);
+  addMovieToWatchlist(movie: Movie){
+      let unit = mapToStorageUnit(movie);
       this.storageService.addMovieToWatchList(unit);
       console.log('added movie to watch list')
   }
   
-  collectTombstone(movie: Object){
-     let unit = mapToStorageUnit(movie.title, movie.poster_path, movie.id, movie.overview, true, movie.average_rating);
-      this.storageService.collectTombstone(unit);
+  collectTombstone(movie: Movie){
+     let unit = mapToStorageUnit(movie);
+      this.storageService.collectMovieTombstone(unit);
       console.log('added movie to watch list');
   }
   
