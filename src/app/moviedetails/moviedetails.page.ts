@@ -3,6 +3,8 @@ import { MoviesService } from '../service/movies.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Movie } from 'src/app/models/Movie';
 import { StorageService } from '../service/storage.service';
+import { ModalController } from 'ionic-angular';
+
 
 
 @Component({
@@ -20,7 +22,8 @@ export class MoviedetailsPage implements OnInit {
   constructor(private movieService: MoviesService,
               private activateRoute: ActivatedRoute,
               private router: Router,
-              private storageService: StorageService) { }
+              private storageService: StorageService,
+              private modalCtrl: ModalController) { }
 
   ngOnInit() {
     let id = this.activateRoute.snapshot.params['id']
@@ -43,17 +46,20 @@ export class MoviedetailsPage implements OnInit {
       console.log('added movie to watch list')
   }
   
+  openModal(){
+    //generate a modal page
+  }
+  
+  closeModal(){
+    //should call collectTombstone() with their rating 
+  }
+  
   collectTombstone(movie: Movie){
      let unit = mapToStorageUnit(movie);
       this.storageService.collectMovieTombstone(unit);
       console.log('added movie to watch list');
   }
   
-  
-  
-  
-  
-  
-
-
+  toggleRatingModule(){
+    
 }
