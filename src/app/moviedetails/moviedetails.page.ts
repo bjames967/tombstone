@@ -20,7 +20,7 @@ export class MoviedetailsPage implements OnInit {
   constructor(private movieService: MoviesService,
               private activateRoute: ActivatedRoute,
               private router: Router,
-              private storageservice: StorageService) { }
+              private storageService: StorageService) { }
 
   ngOnInit() {
     let id = this.activateRoute.snapshot.params['id']
@@ -36,16 +36,16 @@ export class MoviedetailsPage implements OnInit {
   onMovieClick(id){
     this.router.navigate(['movie', id])
 }
-//probably need to change the paramter type
+//probably need to change the paramater type
   addMovieToWatchlist(movie: Object){
       let unit = mapToStorageUnit(movie.title, movie.poster_path, movie.id, movie.overview, true, movie.average_rating);
-      addMovieToWatchList(unit);
+      this.storageService.addMovieToWatchList(unit);
       console.log('added movie to watch list')
   }
   
   collectTombstone(movie: Object){
      let unit = mapToStorageUnit(movie.title, movie.poster_path, movie.id, movie.overview, true, movie.average_rating);
-      collectTombstone(unit);
+      this.storageService.collectTombstone(unit);
       console.log('added movie to watch list');
   }
   
