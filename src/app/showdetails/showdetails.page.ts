@@ -37,15 +37,15 @@ export class ShowdetailsPage implements OnInit {
   }
 
   
-  addToWatchList(tv: Object){
-    let unit =  mapToStorageUnit(tv.name, tv.poster_path,  tv.id, tv.overview, false, tv.average_rating);
-    this.storageService.addToWatchList(unit);
+  addToWatchList(tv: TVShow){
+    let unit =  mapTvToStorageUnit(tv);
+    this.storageService.addToTvWatchList(unit);
     console.log('added show to watchlist');
   }
 
-  collectTombstone(id){
-    let unit =  mapToStorageUnit(tv.name, tv.poster_path,  tv.id, tv.overview, false, tv.average_rating);
-    this.storageService.collectTombstone(unit);
+  collectTombstone(tv: TVShow){
+    let unit =  mapTvToStorageUnit(tv);
+    this.storageService.collectTvTombstone(unit);
     console.log('collected show tombstone');
   }
 
