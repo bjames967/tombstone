@@ -79,6 +79,17 @@ export class StorageService {
      });
   }
   
+  mapToStorageUnit(title: string, poster_path: string,  id: number, overview: string, movie: boolean, avg_rating: number){
+    let unit: StorageUnit = {};
+    unit.title = title;
+    unit.poster_path = poster_path;
+    unit.id = id;
+    unit.overview = overview;
+    unit.movie = movie;
+    unit.avg_rating = avg_rating;
+  }
+      
+  
                                                  
   
  
