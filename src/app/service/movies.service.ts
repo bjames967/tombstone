@@ -4,7 +4,6 @@ import { map, delay } from 'rxjs/operators';
 import { Movie } from './../models/Movie';
 import { TVshow } from './../models/TVshow';
 import { TVdetails } from './../models/TVdetails'
-import { Actor } from './../models/Actor'
 import { SeasonDetails } from './../models/SeasonDetails'
 import {  } from 'q';
 //used this link to help add more functionality https://github.com/okode/movies-app
@@ -48,8 +47,6 @@ getMovieDetails(id: number) {
      map((result: any) => <Movie[]>result.results));
  }
 
-     
-
   //---------------------------------------------TV Queries---------------------------------------------------------------
   
  searchTv(query: string) {
@@ -73,14 +70,6 @@ getMovieDetails(id: number) {
   
   getEpisode(id: number, season_number: number, episode_number: number){
     //Add model for Episode and edit season model return this.http.get<Season[episode](`${this.baseUrl}/tv/${id}/season/${season_number}/episode/${episode_number}${this.getParams()}`);
-  }
-
-
-  //-----------------------------------------------Person--------------------------------------------------
-  
-  searchPerson(query: string){
-    return this.http.get(`${this.baseUrl}/search/person${this.getParams({ query: query })}`)
-    .pipe(map((result: any) => <Actor[]>result.results));
   }
 
   
@@ -107,8 +96,12 @@ getMovieDetails(id: number) {
      return this.http.get(`${this.baseUrl}/trending/tv/day${this.getParams()}`).pipe(
        map((result: any) => <TVshow[]>result.results));
   }
-
-
-
+//---------------------------------------For BFS algorithm-------------------------------------------------------
+ 
+  
+  
+  
+  
+  
 }
 
