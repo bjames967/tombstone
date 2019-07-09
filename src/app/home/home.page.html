@@ -48,6 +48,7 @@
               <img *ngIf="item.poster_path" class="poster-effect" [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path">
             </div>
             <div class="title">{{ item.name }}</div>
+            <div class="year">{{ item.release_date | date:'yyyy' }}</div>
             <div class="vote"><ion-icon name="star"></ion-icon><b>{{ item.vote_average }}</b>/10</div>
           </div>
       </div>
@@ -61,6 +62,7 @@
               <img *ngIf="item.poster_path" class="poster-effect" [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path">
             </div>
             <div class="title">{{ item.name }}</div>
+            <div class="year">{{ item.first_air_date }} | date:'yyyy' }}</div>
             <div class="vote"><ion-icon name="star"></ion-icon><b>{{ item.vote_average }}</b>/10</div>
           </div>
       </div>
