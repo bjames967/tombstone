@@ -11,8 +11,6 @@ import {StorageUnit } from './../models/StorageUnit';
 })
 export class ListPage implements OnInit {
   listType: 'movies' | 'tv';
-  movieList: StorageUnit[];
-  tvList: StorageUnit[];
   results: StorageUnit[];
   
   constructor(private storageService: StorageService,
@@ -20,23 +18,27 @@ export class ListPage implements OnInit {
   }
  
   ngOnInit() {
+    console.log('on page')
     this.listType = 'movies';
-    this.loadWatchList();
-    console.log(this.listType, this.tvList);
-    this.onlistChanged();
+    console.log(this.listType);
+    this.onListChanged();
     
   }
 
-  onlistChanged(){
-    this.listType = null;
+  onListChanged(){
+    this.results = null;
+    this.pageSwap();
+  }
+
+  pageSwap(){
     switch(this.listType){
       case 'movies':
         console.log('movie');
-        this.results = this.movieList; break;
+        this.loadMovieWatchList(); break;
       case 'tv':
         console.log('tv');
-        this.results = this.tvList; break;
-        default:
+        this.loadTvWatchList(); break;
+      default:
     }
   }
  
@@ -47,21 +49,16 @@ export class ListPage implements OnInit {
   onTvClick(id){
      this.router.navigate(['tv', id])
   }
-  
 
-  loadWatchList(){
-   this.loadMovieWatchList();
-   this.loadTvWatchList();
-  }
   loadMovieWatchList(){
     this.storageService.getMovieWatchList().then((list: StorageUnit[]) => {
-      this.movieList = list; console.log(this.movieList);
+      this.results = list; console.log(this.results);
     });
   }
   
   loadTvWatchList(){
      this.storageService.getTvWatchList().then((list: StorageUnit[]) => {
-       this.tvList = list; console.log(this.tvList);
+       this.results = list; console.log(this.results);
      });
   }
   

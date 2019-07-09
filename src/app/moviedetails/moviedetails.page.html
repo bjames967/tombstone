@@ -3,7 +3,7 @@
       <ion-buttons slot="start">
           <ion-back-button defaultHref="/"></ion-back-button>
         </ion-buttons>
-     <ion-title>{{movie.title}}</ion-title>
+     <ion-title color="dark">{{movie.title}}</ion-title>
    
   </ion-toolbar>
 </ion-header>
@@ -14,8 +14,8 @@
     </div>
     <div class="buttons">
       <ion-buttons>
-        <ion-button slot="end" (click)="addToWatchlist()">add to watchlist</ion-button>
-        <ion-button slot="end" (click)="CollectTombstone()">Collect Tombstone</ion-button>
+        <ion-button slot="end" (click)="addMovieToWatchlist()">add to watchlist</ion-button>
+        <ion-button slot="end" (click)="collectTombstone()">Collect Tombstone</ion-button>
       </ion-buttons>
       </div>
 <div class="overview">

@@ -57,7 +57,7 @@ export class MoviedetailsPage implements OnInit {
   collectTombstone(){
      let unit = this.storageService.mapMovieToStorageUnit(this.movie);
       this.storageService.collectMovieTombstone(unit);
-      console.log('added movie to watch list');
+      console.log('collected tombstone');
   }
   
   toggleRatingModule(){

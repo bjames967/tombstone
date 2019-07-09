@@ -3,9 +3,9 @@
         <ion-buttons slot="start">
             <ion-menu-button></ion-menu-button>
           </ion-buttons>
-          <ion-title>Watchlist</ion-title>
+          <ion-title color="dark">Watchlist</ion-title>
     </ion-toolbar>
-    <ion-segment [(ngModel)]="listType" (ionChange)="onlistChanged()" color="dark" slot="bottom">
+    <ion-segment [(ngModel)]="listType" (ionChange)="onListChanged()" color="dark" slot="bottom">
         <ion-segment-button value="movies">Movies</ion-segment-button>
         <ion-segment-button value="tv">TV</ion-segment-button>
     </ion-segment>
@@ -13,7 +13,7 @@
   <ion-content>
     <div *ngIf="listType === 'movies'">
         <div class="movies-flex">
-            <div class="movie" *ngFor="let item of movieList" (click)="onMovieClick(item.id)">
+            <div class="movie" *ngFor="let item of results" (click)="onMovieClick(item.id)">
               <div class="poster">
                 <img *ngIf="item.poster_path" class="poster" [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path">
                 <img *ngIf="item.poster_path" class="poster-effect" [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path">
@@ -22,10 +22,10 @@
               <div class="vote"><ion-icon name="star"></ion-icon><b>{{ item.avg_rating }}</b>/10</div>
             </div>
         </div>
-      </div>
-    <div *ngIf="listType === 'tv'"></div>
+    </div>
+    <div *ngIf="listType === 'tv'">
     <div class="movies-flex">
-        <div class="movie" *ngFor="let item of tvList" (click)="onTvClick(item.id)">
+        <div class="movie" *ngFor="let item of results" (click)="onTvClick(item.id)">
           <div class="poster">
             <img *ngIf="item.poster_path" class="poster" [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path">
             <img *ngIf="item.poster_path" class="poster-effect" [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path">
@@ -34,6 +34,7 @@
           <div class="vote"><ion-icon name="star"></ion-icon><b>{{ item.avg_rating }}</b>/10</div>
         </div>
     </div>
+  </div>
   </ion-content>
 
   <!-- <ion-footer>

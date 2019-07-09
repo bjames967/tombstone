@@ -12,21 +12,36 @@ import { StorageUnit } from './../models/StorageUnit';
   styleUrls: ['./library.page.scss'],
 })
 export class LibraryPage implements OnInit {
-  TvStone: StorageUnit[];
-  MovieStone: StorageUnit[];
+  stoneType: 'movies' | 'tv';
+  results: StorageUnit[];
   
   constructor(private movieService: MoviesService,
               private storageService: StorageService,
               private router: Router) { }
 
    ngOnInit() {
-   
+    this.stoneType = 'movies';
+    this.onStoneChanged();
+
+  }
+
+  onStoneChanged(){
+    this.results = null;
+    this.pageSwap();
+
+  }
+
+  pageSwap(){
+    switch(this.stoneType){
+      case 'movies':
+        this.loadMovieTombstones(); break;
+      case 'tv':
+        this.loadTvTombstones(); break;
+      default:
+    }
   }
   
-  loadTombstones(){
-    this.loadTvTombstones();
-    this.loadMovieTombstones();
-  }
+
   
   onMovieClick(id){
     this.router.navigate(['movie', id])
@@ -38,12 +53,14 @@ export class LibraryPage implements OnInit {
   
   
   loadTvTombstones(){
-    this.storageService.getTvTombstones();
+    this.storageService.getTvTombstones().then((list: StorageUnit[]) => {
+      this.results = list;
+    });
   }
   
   loadMovieTombstones(){
     this.storageService.getMovieTombstones().then((list: StorageUnit[]) => {
-      this.MovieStone = list;
+      this.results = list;
     });
   }
   

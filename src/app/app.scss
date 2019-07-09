@@ -49,8 +49,9 @@ ion-title{
 ion-button{
   border: #aaa;
   background-color: #9A9D9E;
-  border-radius: 10px;
+  border-radius: 5px;
   text-align: right;
+  float: left;
 }
 
 .movies-flex {
@@ -114,7 +115,7 @@ ion-button{
 }
 .buttons{
   float: right;
-  padding: 25px;
+  padding: 5px;
   margin: 5px;
 }
 
