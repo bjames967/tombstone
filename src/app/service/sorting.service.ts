@@ -39,4 +39,8 @@ export class SortingService {
   sortBySavedDate(savedMovies: StorageUnit[]){
     
   } 
+  //this wil require a data structure of some sort
+  sortByGenre(savedMovies: StorageUnit[]){
+    
+  }
 }
