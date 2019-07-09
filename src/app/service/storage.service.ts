@@ -137,7 +137,7 @@ export class StorageService {
   }
   
   
-  mapMovieToStorageUnit(movie: Movie){
+  mapMovieToStorageUnit(movie: Movie, rating: number){
     let unit: StorageUnit = {
       title: movie.title,
       poster_path: movie.poster_path,
@@ -146,12 +146,13 @@ export class StorageService {
       avg_rating: movie.vote_average,
       genre_ids: null,
       backdrop_path: null,
-      release_date: movie.release_date
+      release_date: movie.release_date,
+      user_rating: rating
     };
     return unit;
   }
       
-  mapTvToStorageUnit(tv: TVdetails){ 
+  mapTvToStorageUnit(tv: TVdetails, rating: number;){ 
     let unit: StorageUnit = {
     title: tv.name,
     poster_path: tv.poster_path,
@@ -160,7 +161,8 @@ export class StorageService {
     avg_rating: tv.vote_average,
     genre_ids: null,
     backdrop_path: null,
-    release_date: tv.first_air_date
+    release_date: tv.first_air_date,
+    user_rating: rating
   };
   return unit;
 }
