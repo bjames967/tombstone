@@ -58,13 +58,13 @@ export class MoviedetailsPage implements OnInit {
 //   }
   
   collectTombstone(){
-     let unit = this.storageService.mapMovieToStorageUnit(this.movie);
+     let unit = this.storageService.mapMovieToStorageUnit(this.movie, 10);
       this.storageService.collectMovieTombstone(unit);
       this.toast.show('collected tombstone for #{unit.title}');
       console.log(toast);
   }
   addMovieToWatchlist(){
-      let unit = this.storageService.mapMovieToStorageUnit(this.movie);
+      let unit = this.storageService.mapMovieToStorageUnit(this.movie, 10);
       this.storageService.addToMovieWatchList(unit);
       this.toast.show('Added #{unit.title} to watch list');
       console.log(toast);
