@@ -44,12 +44,17 @@ export class MoviedetailsPage implements OnInit {
   onMovieClick(id){
     this.router.navigate(['movie', id])
   } 
-  openModal(){
-    //generate a modal page
+  //modal for rating the movie
+  async openModal(){
+    const modal = await this.modalCtrl.create({
+      component: UserRatingModal
+    });
+    return await modal.present();
   }
   
   closeModal(){
-    //should call collectTombstone() with their rating 
+    cosnt { data } = await modal.onWillDismiss();
+    console.log(data);
   }
   
   collectTombstone(){
