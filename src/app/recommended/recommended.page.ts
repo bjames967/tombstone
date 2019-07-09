@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MoviesService } from '../service/movies.service';
 import { StorageService } from '../service/storage.service';
+import { SortingService } from '../service/sorting.service';
 import { StorageUnit } from './../models/StorageUnit';
 
 
@@ -10,6 +11,7 @@ import { StorageUnit } from './../models/StorageUnit';
   styleUrls: ['./recommended.page.scss'],
 })
 export class RecommendedPage implements OnInit {
+  TabType: 'TopGenreMovie' | 'TopGenreTv' | 'BecauseYouLikedMovie | 'BecauseYouLikedShow';
   current_tombstones: StorageUnit[];
   movie_list: StorageUnit[];
 //   genres: [{id: 28, name: "Action"},
@@ -34,9 +36,11 @@ export class RecommendedPage implements OnInit {
     
   
   constructor(private movieService: MoviesService,
-              private storageService: StorageService) { }
+              private storageService: StorageService,
+              private sortingService: SortingService) { }
 
   ngOnInit() {
+    
   }
 
     
