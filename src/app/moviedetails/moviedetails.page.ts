@@ -44,18 +44,18 @@ export class MoviedetailsPage implements OnInit {
   onMovieClick(id){
     this.router.navigate(['movie', id])
   } 
-  //modal for rating the movie
-  async openModal(){
-    const modal = await this.modalCtrl.create({
-      component: UserRatingModal
-    });
-    return await modal.present();
-  }
+//   //modal for rating the movie
+//   async openModal(){
+//     const modal = await this.modalCtrl.create({
+//       component: UserRatingModal
+//     });
+//     return await modal.present();
+//   }
   
-  closeModal(){
-    cosnt { data } = await modal.onWillDismiss();
-    console.log(data);
-  }
+//   closeModal(){
+//     cosnt { data } = await modal.onWillDismiss();
+//     console.log(data);
+//   }
   
   collectTombstone(){
      let unit = this.storageService.mapMovieToStorageUnit(this.movie);
