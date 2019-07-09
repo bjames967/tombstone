@@ -1,45 +1,44 @@
-  <ion-header>
-    <ion-title>Your WatchList</ion-title>
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+          </ion-buttons>
+          <ion-title>Watchlist</ion-title>
+    </ion-toolbar>
+    <ion-segment [(ngModel)]="listType" (ionChange)="onlistChanged()" color="dark" slot="bottom">
+        <ion-segment-button value="movies">Movies</ion-segment-button>
+        <ion-segment-button value="tv">TV</ion-segment-button>
+    </ion-segment>
   </ion-header>
-
-    
-    <ion-tabs>
-         <ion-tab tab="movies">
-          <ion-content>
-           <div class="movies-flex">
+  <ion-content>
+    <div *ngIf="listType === 'movies'">
+        <div class="movies-flex">
             <div class="movie" *ngFor="let item of movieList" (click)="onMovieClick(item.id)">
-             <div class="poster">
-              <img *ngIf="item.poster_path" class="poster" [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path">
-              <img *ngIf="item.poster_path" class="poster-effect" [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path">
-             </div>
-             <div class="title">{{ item.title }}</div>
-             <div class="vote"><ion-icon name="star"></ion-icon><b>{{ item.avg_rating }}</b>/10</div>
-            </div>
-          </div>
-         </ion-content>
-        </ion-tab>
-    
-        <ion-tab tab="tv">
-          <ion-content>
-            <div class="movies-flex">
-              <div class="movie" *ngFor="let item of tvList" (click)="onTvClick(item.id)">
-                <div class="poster">
-                  <img *ngIf="item.poster_path" class="poster" [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path">
-                  <img *ngIf="item.poster_path" class="poster-effect" [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path">
-                </div>
-                <div class="title">{{ item.name }}</div>
-                <div class="vote"><ion-icon name="star"></ion-icon><b>{{ item.avg_rating }}</b>/10</div>
+              <div class="poster">
+                <img *ngIf="item.poster_path" class="poster" [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path">
+                <img *ngIf="item.poster_path" class="poster-effect" [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path">
               </div>
+              <div class="title">{{ item.title }}</div>
+              <div class="vote"><ion-icon name="star"></ion-icon><b>{{ item.avg_rating }}</b>/10</div>
             </div>
-          </ion-content>
-        </ion-tab>
-    
-      <ion-tab-bar slot="bottom">
-        <ion-tab-button tab="movies">
-          <ion-label>Movies To Watch</ion-label>
-        </ion-tab-button>
-        <ion-tab-button tab="tv">
-          <ion-label>Shows to Watch</ion-label>
-        </ion-tab-button>
-    </ion-tab-bar>     
-   </ion-tabs>
+        </div>
+      </div>
+    <div *ngIf="listType === 'tv'"></div>
+    <div class="movies-flex">
+        <div class="movie" *ngFor="let item of tvList" (click)="onTvClick(item.id)">
+          <div class="poster">
+            <img *ngIf="item.poster_path" class="poster" [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path">
+            <img *ngIf="item.poster_path" class="poster-effect" [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path">
+          </div>
+          <div class="title">{{ item.title }}</div>
+          <div class="vote"><ion-icon name="star"></ion-icon><b>{{ item.avg_rating }}</b>/10</div>
+        </div>
+    </div>
+  </ion-content>
+
+  <!-- <ion-footer>
+      <ion-segment [(ngModel)]="listType" (ionChange)="onlistChanged()" color="dark" slot="bottom">
+          <ion-segment-button value="movies">Movies</ion-segment-button>
+          <ion-segment-button value="tv">TV</ion-segment-button>
+      </ion-segment>
+  </ion-footer> -->

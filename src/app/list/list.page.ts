@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { StorageService } from '../service/storage.service';
 import { Movie } from './../models/Movie';
-import { Router } from '@angular/router'
+import { Router } from '@angular/router';
+import {StorageUnit } from './../models/StorageUnit';
 
 @Component({
   selector: 'app-list',
@@ -9,37 +10,59 @@ import { Router } from '@angular/router'
   styleUrls: ['list.page.scss']
 })
 export class ListPage implements OnInit {
- 
+  listType: 'movies' | 'tv';
   movieList: StorageUnit[];
   tvList: StorageUnit[];
+  results: StorageUnit[];
   
-  constructor(private storageservice: StorageService,
+  constructor(private storageService: StorageService,
               private router: Router) {
   }
  
   ngOnInit() {
-    loadWatchList();
+    this.listType = 'movies';
+    this.loadWatchList();
+    console.log(this.listType, this.tvList);
+    this.onlistChanged();
+    
+  }
+
+  onlistChanged(){
+    this.listType = null;
+    switch(this.listType){
+      case 'movies':
+        console.log('movie');
+        this.results = this.movieList; break;
+      case 'tv':
+        console.log('tv');
+        this.results = this.tvList; break;
+        default:
+    }
   }
  
-  onMovieClick(){
+  onMovieClick(id){
      this.router.navigate(['movie', id])
   }
   
-  onTvClick(){
+  onTvClick(id){
      this.router.navigate(['tv', id])
   }
   
 
   loadWatchList(){
-   loadMovieWatchList();
-   loadTvWatchList();
+   this.loadMovieWatchList();
+   this.loadTvWatchList();
   }
   loadMovieWatchList(){
-    this.movieList = this.storageService.getMovieWatchList();
+    this.storageService.getMovieWatchList().then((list: StorageUnit[]) => {
+      this.movieList = list; console.log(this.movieList);
+    });
   }
   
   loadTvWatchList(){
-    this.tvList = this.storageService.getTvWatchList(); 
+     this.storageService.getTvWatchList().then((list: StorageUnit[]) => {
+       this.tvList = list; console.log(this.tvList);
+     });
   }
   
   removeShow(id: number){

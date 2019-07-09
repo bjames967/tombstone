@@ -3,7 +3,7 @@ import { MoviesService } from '../service/movies.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Movie } from 'src/app/models/Movie';
 import { StorageService } from '../service/storage.service';
-import { ModalController } from 'ionic-angular';
+import { ModalController } from '@ionic/angular';
 
 
 
@@ -40,9 +40,9 @@ export class MoviedetailsPage implements OnInit {
     this.router.navigate(['movie', id])
 }
 //probably need to change the paramater type
-  addMovieToWatchlist(movie: Movie){
-      let unit = mapToStorageUnit(movie);
-      this.storageService.addMovieToWatchList(unit);
+  addMovieToWatchlist(){
+      let unit = this.storageService.mapMovieToStorageUnit(this.movie);
+      this.storageService.addToMovieWatchList(unit);
       console.log('added movie to watch list')
   }
   
@@ -54,12 +54,13 @@ export class MoviedetailsPage implements OnInit {
     //should call collectTombstone() with their rating 
   }
   
-  collectTombstone(movie: Movie){
-     let unit = mapToStorageUnit(movie);
+  collectTombstone(){
+     let unit = this.storageService.mapMovieToStorageUnit(this.movie);
       this.storageService.collectMovieTombstone(unit);
       console.log('added movie to watch list');
   }
   
   toggleRatingModule(){
     
+  }
 }

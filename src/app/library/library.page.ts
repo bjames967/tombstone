@@ -4,6 +4,7 @@ import { Movie } from './../models/Movie';
 import { TVshow } from './../models/TVshow';
 import { StorageService } from './../service/storage.service';
 import { Router } from '@angular/router';
+import { StorageUnit } from './../models/StorageUnit';
 
 @Component({
   selector: 'app-library',
@@ -23,8 +24,8 @@ export class LibraryPage implements OnInit {
   }
   
   loadTombstones(){
-    loadTvTombstones();
-    loadMovieTombstones();
+    this.loadTvTombstones();
+    this.loadMovieTombstones();
   }
   
   onMovieClick(id){
@@ -41,7 +42,9 @@ export class LibraryPage implements OnInit {
   }
   
   loadMovieTombstones(){
-    this.storageService.getMovieTombstones();
+    this.storageService.getMovieTombstones().then((list: StorageUnit[]) => {
+      this.MovieStone = list;
+    });
   }
   
   removeTvTombstone(id: number){
@@ -49,7 +52,7 @@ export class LibraryPage implements OnInit {
   }
   
   removeMovieTombstone(id: number){
-    this.storageService.deleteTvFromTombstone(id);
+    this.storageService.deleteTvFromTombstones(id);
   }
     
     

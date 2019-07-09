@@ -1,32 +1,24 @@
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage'
 import { Movie } from './../models/Movie';
+import { TVshow } from './../models/TVshow';
+import { StorageUnit } from './../models/StorageUnit'
+import { TVdetails } from '../models/TVdetails';
+
+const TV_WATCH_LIST_KEYS = 'tv_watch_list';
+const TV_TOMBSTONE_KEYS = 'tv_tombstones';
+
+const MOVIE_WATCH_LIST_KEYS = 'movie_watch_list';
+const MOVIE_TOMBSTONE_KEYS = 'movie_tombstones';
+
 
 @Injectable({
   providedIn: 'root'
-
 })
-
-export interface StorageUnit {
-  title: string;
-  poster_path: string;
-  id: number;
-  overview: string;
-  movie: boolean;
-  avg_rating: number;
-  genre_ids: number[];
-  backdrop_path: string;
-  release_date: string;
-}
-
-const TV_WATCH_LIST_KEYS = 'tv_watch-list';
-const TV_TOMBSTONE_KEYS = 'tv_tombstones';
-
-const MOVIE_WATCH_LIST_KEYS = 'movie_watch-list';
-const MOVIE_TOMBSTONE_KEYS = 'movie_tombstones';
-
 export class StorageService {
 
+
+  
   constructor(private storage: Storage) { }
 
   
@@ -40,11 +32,11 @@ export class StorageService {
   
     
   getMovieWatchList(): Promise<StorageUnit[]> {
-    return this.storage.get(TV_WATCH_LIST_KEYS);
+    return this.storage.get(MOVIE_WATCH_LIST_KEYS);
   }
  
   getMovieTombstones(): Promise<StorageUnit[]> {
-    return this.storage.get(TV_TOMBSTONE_KEYS);
+    return this.storage.get(MOVIE_TOMBSTONE_KEYS);
   }
   
   //add movie to watchList
@@ -52,6 +44,7 @@ export class StorageService {
     return this.storage.get(MOVIE_WATCH_LIST_KEYS).then((list: StorageUnit[]) => {
       if(list) {
         list.push(unit);
+        console.log(list);
         return this.storage.set(MOVIE_WATCH_LIST_KEYS, list);
       }else{
         return this.storage.set(MOVIE_WATCH_LIST_KEYS, [unit]); 
@@ -64,6 +57,7 @@ export class StorageService {
     return this.storage.get(TV_WATCH_LIST_KEYS).then((list: StorageUnit[]) => {
       if(list) {
         list.push(unit);
+        console.log(list);
         return this.storage.set(TV_WATCH_LIST_KEYS, list);
       }else{
         return this.storage.set(TV_WATCH_LIST_KEYS, [unit]); 
@@ -76,6 +70,7 @@ export class StorageService {
     return this.storage.get(MOVIE_TOMBSTONE_KEYS).then((tombstones: StorageUnit[]) => {
       if(tombstones){
          tombstones.push(unit);
+         console.log(tombstones);
          return this.storage.set(MOVIE_TOMBSTONE_KEYS, tombstones);
       }else{
          return this.storage.set(MOVIE_TOMBSTONE_KEYS, [unit]);
@@ -88,6 +83,7 @@ export class StorageService {
     return this.storage.get(TV_TOMBSTONE_KEYS).then((tombstones: StorageUnit[]) => {
       if(tombstones){
          tombstones.push(unit);
+         console.log(tombstones);
          return this.storage.set(TV_TOMBSTONE_KEYS, tombstones);
       }else{
          return this.storage.set(TV_TOMBSTONE_KEYS, [unit]);
@@ -142,30 +138,34 @@ export class StorageService {
   
   
   mapMovieToStorageUnit(movie: Movie){
-    let unit: StorageUnit = {};
-    unit.title = movie.title;
-    unit.poster_path = movie.poster_path;
-    unit.id = movie.id;
-    unit.overview = movie.overview
-    unit.avg_rating = movie.vote_average;
-    unit.genre_ids = movie.genre_ids;
-    unit.backdrop_path = movie.backdrop_path;
-    unit.release_date = movie.release_date;
+    let unit: StorageUnit = {
+      title: movie.title,
+      poster_path: movie.poster_path,
+      id: movie.id,
+      overview: movie.overview,
+      avg_rating: movie.vote_average,
+      genre_ids: null,
+      backdrop_path: null,
+      release_date: movie.release_date
+    };
     return unit;
   }
       
-  mapTvToStorageUnit(tv: TVShow){
-    let unit: StorageUnit = {};
-    unit.title = tv.name;
-    unit.poster_path = tv.poster_path;
-    unit.id = tv.id;
-    unit.overview = tv.overview
-    unit.avg_rating = tv.vote_average;
-    unit.genre_ids = tv.genre_ids;
-    unit.backdrop_path = "NA";
-    unit.release_date = tv.first_air_date;
-    return unit;
-  }
+  mapTvToStorageUnit(tv: TVdetails){ 
+    let unit: StorageUnit = {
+    title: tv.name,
+    poster_path: tv.poster_path,
+    id: tv.id,
+    overview: tv.overview,
+    avg_rating: tv.vote_average,
+    genre_ids: null,
+    backdrop_path: null,
+    release_date: tv.first_air_date
+  };
+  return unit;
+}
+
+}
   
                                                  
   

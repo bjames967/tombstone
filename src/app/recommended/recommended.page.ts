@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MoviesService } from '../service/movies.service';
 import { StorageService } from '../service/storage.service';
+import { StorageUnit } from './../models/StorageUnit';
 
 
 @Component({
@@ -32,21 +33,12 @@ export class RecommendedPage implements OnInit {
 //            {id: 37, name: "Western"}];
     
   
-  constructor(private movieService: MovieService,
-              private stroageService: StorageService) { }
+  constructor(private movieService: MoviesService,
+              private storageService: StorageService) { }
 
   ngOnInit() {
   }
- 
-  
-  
-  gatherStoredData(){
-    this.storageService.getAllTombstones().subscribe(res => {
-      this.current_tombstones = res;
-    });
-  }
+
     
- 
-  
 
 }
