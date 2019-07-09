@@ -10,4 +10,5 @@ export interface StorageUnit {
     }[];
     backdrop_path: string;
     release_date: string;
+    user_rating: number;
   }
