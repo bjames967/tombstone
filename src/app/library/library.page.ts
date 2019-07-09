@@ -28,7 +28,6 @@ export class LibraryPage implements OnInit {
   onStoneChanged(){
     this.results = null;
     this.pageSwap();
-
   }
 
   pageSwap(){
@@ -41,6 +40,9 @@ export class LibraryPage implements OnInit {
     }
   }
   
+  showPopOver(){
+   //TODO implement popover functionality 
+  }
 
   
   onMovieClick(id){
