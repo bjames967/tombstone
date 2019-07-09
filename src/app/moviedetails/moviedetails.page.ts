@@ -4,7 +4,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Movie } from 'src/app/models/Movie';
 import { StorageService } from '../service/storage.service';
 import { ModalController } from '@ionic/angular';
+import { Toast } from '@ionic-native/toast/ngx';
 
+//Do these commands for Toast to work correctly
+// ionic cordova plugin add cordova-plugin-x-toast
+// npm install @ionic-native/toast
 
 
 @Component({
@@ -23,7 +27,8 @@ export class MoviedetailsPage implements OnInit {
               private activateRoute: ActivatedRoute,
               private router: Router,
               private storageService: StorageService,
-              private modalCtrl: ModalController) { }
+              private modalCtrl: ModalController,
+              private toast: Toast) { }
 
   ngOnInit() {
     let id = this.activateRoute.snapshot.params['id']
@@ -38,14 +43,7 @@ export class MoviedetailsPage implements OnInit {
 
   onMovieClick(id){
     this.router.navigate(['movie', id])
-}
-//probably need to change the paramater type
-  addMovieToWatchlist(){
-      let unit = this.storageService.mapMovieToStorageUnit(this.movie);
-      this.storageService.addToMovieWatchList(unit);
-      console.log('added movie to watch list')
-  }
-  
+  } 
   openModal(){
     //generate a modal page
   }
@@ -57,7 +55,14 @@ export class MoviedetailsPage implements OnInit {
   collectTombstone(){
      let unit = this.storageService.mapMovieToStorageUnit(this.movie);
       this.storageService.collectMovieTombstone(unit);
-      console.log('collected tombstone');
+      this.toast.show('collected tombstone for #{unit.title}');
+      console.log(toast);
+  }
+  addMovieToWatchlist(){
+      let unit = this.storageService.mapMovieToStorageUnit(this.movie);
+      this.storageService.addToMovieWatchList(unit);
+      this.toast.show('Added #{unit.title} to watch list');
+      console.log(toast);
   }
   
   toggleRatingModule(){
