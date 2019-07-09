@@ -8,7 +8,7 @@ import { StorageService } from '../storage.service';
 @Injectable({
   providedIn: 'root'
 })
-export class StorageService {
+export class SortingService {
 
 
   
