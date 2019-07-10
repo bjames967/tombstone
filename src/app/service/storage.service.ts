@@ -34,27 +34,31 @@ export class StorageService {
   }
   //assuming it is added to tombstones first
   addTvFavorite(unit: StorageUnit): Promise<any>{
-     return this.storage.get(TV_FAVORITES).then((list: StorageUnit[]) => {
-      if(list) {
-        list.push(unit);
-        console.log(list);
-        return this.storage.set(TV_FAVORITES, list);
-      }else{
-        return this.storage.set(TV_FAVORITES, [unit]); 
-      }
-    });
+     if(isInTable(TV_FAVORITES, unit)){
+      return this.storage.get(TV_FAVORITES).then((list: StorageUnit[]) => {
+        if(list) {
+          list.push(unit);
+          console.log(list);
+          return this.storage.set(TV_FAVORITES, list);
+        }else{
+          return this.storage.set(TV_FAVORITES, [unit]); 
+        }
+      });
+     }else{console.log('unit already in table');}
   }
   //assuming it is added to tombstones first
   addMovieFavorite(unit: StorageUnit): Promise<any>{
-     return this.storage.get(MOVIE_FAVORITES).then((list: StorageUnit[]) => {
-      if(list) {
-        list.push(unit);
-        console.log(list);
-        return this.storage.set(MOVIE_FAVORITES, list);
-      }else{
-        return this.storage.set(MOVIE_FAVORITES, [unit]); 
-      }
-    });
+      if(isInTable(MOVIE_FAVORITES, unit)){
+        return this.storage.get(MOVIE_FAVORITES).then((list: StorageUnit[]) => {
+          if(list) {
+            list.push(unit);
+            console.log(list);
+            return this.storage.set(MOVIE_FAVORITES, list);
+          }else{
+            return this.storage.set(MOVIE_FAVORITES, [unit]); 
+          }
+        });
+      }else{console.log('unit already in table');}
   }
   deleteMovieFromFavorites(unit: StorageUnit): Promise<StorageUnit>{
     return this.storage.get(MOVIE_FAVORITES).then((list: StorageUnit[]) => {
@@ -97,54 +101,62 @@ export class StorageService {
   
   //add movie to watchList
   addToMovieWatchList(unit: StorageUnit): Promise<any> {
-    return this.storage.get(MOVIE_WATCH_LIST_KEYS).then((list: StorageUnit[]) => {
-      if(list) {
-        list.push(unit);
-        console.log(list);
-        return this.storage.set(MOVIE_WATCH_LIST_KEYS, list);
-      }else{
-        return this.storage.set(MOVIE_WATCH_LIST_KEYS, [unit]); 
-      }
-    });
+    if(!isInTable(MOVIE_WATCH_LIST_KEYS, unit)){
+      return this.storage.get(MOVIE_WATCH_LIST_KEYS).then((list: StorageUnit[]) => {
+        if(list) {
+          list.push(unit);
+          console.log(list);
+          return this.storage.set(MOVIE_WATCH_LIST_KEYS, list);
+        }else{
+          return this.storage.set(MOVIE_WATCH_LIST_KEYS, [unit]); 
+        }
+      });
+    }else{ console.log('unit already in storage');}
   }
   
   //add movie to watchList
   addToTvWatchList(unit: StorageUnit): Promise<any> {
-    return this.storage.get(TV_WATCH_LIST_KEYS).then((list: StorageUnit[]) => {
-      if(list) {
-        list.push(unit);
-        console.log(list);
-        return this.storage.set(TV_WATCH_LIST_KEYS, list);
-      }else{
-        return this.storage.set(TV_WATCH_LIST_KEYS, [unit]); 
-      }
-    });
+    if(!isInTable(TV_WATCH_LIST_KEYS, unit)){
+      return this.storage.get(TV_WATCH_LIST_KEYS).then((list: StorageUnit[]) => {
+        if(list) {
+          list.push(unit);
+          console.log(list);
+          return this.storage.set(TV_WATCH_LIST_KEYS, list);
+        }else{
+          return this.storage.set(TV_WATCH_LIST_KEYS, [unit]); 
+        }
+      });
+    }else{ console.log('unit already in storage');}
   }
   
   //add new movie to tombstones
   collectMovieTombstone(unit: StorageUnit): Promise<any> {
-    return this.storage.get(MOVIE_TOMBSTONE_KEYS).then((tombstones: StorageUnit[]) => {
-      if(tombstones){
-         tombstones.push(unit);
-         console.log(tombstones);
-         return this.storage.set(MOVIE_TOMBSTONE_KEYS, tombstones);
-      }else{
-         return this.storage.set(MOVIE_TOMBSTONE_KEYS, [unit]);
-      }
-    });  
+    if(!isInTable(MOVIE_TOMBSTONE_KEYS, unit)){
+      return this.storage.get(MOVIE_TOMBSTONE_KEYS).then((tombstones: StorageUnit[]) => {
+        if(tombstones){
+          tombstones.push(unit);
+          console.log(tombstones);
+          return this.storage.set(MOVIE_TOMBSTONE_KEYS, tombstones);
+        }else{
+          return this.storage.set(MOVIE_TOMBSTONE_KEYS, [unit]);
+        }
+      });  
+    }else{ console.log('unit already in storage')}
   }
   
   //add new show to tombstones
   collectTvTombstone(unit: StorageUnit): Promise<any> {
-    return this.storage.get(TV_TOMBSTONE_KEYS).then((tombstones: StorageUnit[]) => {
-      if(tombstones){
-         tombstones.push(unit);
-         console.log(tombstones);
-         return this.storage.set(TV_TOMBSTONE_KEYS, tombstones);
-      }else{
-         return this.storage.set(TV_TOMBSTONE_KEYS, [unit]);
-      }
-    });  
+     if(!isInTable(TV_TOMBSTONE_KEYS, unit)){
+       return this.storage.get(TV_TOMBSTONE_KEYS).then((tombstones: StorageUnit[]) => {
+        if(tombstones){
+          tombstones.push(unit);
+          console.log(tombstones);
+          return this.storage.set(TV_TOMBSTONE_KEYS, tombstones);
+        }else{
+          return this.storage.set(TV_TOMBSTONE_KEYS, [unit]);
+        }
+      });  
+     }else{ console.log('unit already in storage')}
   }
   
   //delete a unit from watchlist
@@ -224,7 +236,12 @@ export class StorageService {
   };
   return unit;
 }
-
+  
+  isInTable(table: string, item: StorageUnit[]){
+     this.storage.get(table).then((list: StorageUnit[]) => {
+        if(list.indexOf(item) === -1){ return false;}
+        else{ return true;}
+     });
 }
   
                                                  
