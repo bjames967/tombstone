@@ -11,6 +11,9 @@ const TV_TOMBSTONE_KEYS = 'tv_tombstones';
 const MOVIE_WATCH_LIST_KEYS = 'movie_watch_list';
 const MOVIE_TOMBSTONE_KEYS = 'movie_tombstones';
 
+const MOVIE_FAVORITES = 'Favorite_movies';
+const TV_FAVORITES = 'Favorite_shows';
+
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +23,60 @@ export class StorageService {
 
   
   constructor(private storage: Storage) { }
-
+  
+  
+  getTvFavorites(): Promise<StorageUnit>{
+    return this.storage.get(TV_FAVORITES);
+  }
+  
+  getMovieFavorites(): Promise<StorageUnit>{
+    return this.storage.get(MOVIE_FAVORITES);
+  }
+  //assuming it is added to tombstones first
+  addTvFavorite(unit: StorageUnit): Promise<any>{
+     return this.storage.get(TV_FAVORITES).then((list: StorageUnit[]) => {
+      if(list) {
+        list.push(unit);
+        console.log(list);
+        return this.storage.set(TV_FAVORITES, list);
+      }else{
+        return this.storage.set(TV_FAVORITES, [unit]); 
+      }
+    });
+  }
+  //assuming it is added to tombstones first
+  addMovieFavorite(unit: StorageUnit): Promise<any>{
+     return this.storage.get(MOVIE_FAVORITES).then((list: StorageUnit[]) => {
+      if(list) {
+        list.push(unit);
+        console.log(list);
+        return this.storage.set(MOVIE_FAVORITES, list);
+      }else{
+        return this.storage.set(MOVIE_FAVORITES, [unit]); 
+      }
+    });
+  }
+  deleteMovieFromFavorites(unit: StorageUnit): Promise<StorageUnit>{
+    return this.storage.get(MOVIE_FAVORITES).then((list: StorageUnit[]) => {
+      if(!list || list.length === 0){
+        console.log('nothing to remove with ID: #{id}');
+        return null;
+      } 
+      let newList = list.filter(obj => obj.id !== id);
+      return this.storage.set(MOVIE_FAVORITES, newList);
+     });
+  }
+  
+  deleteTvFromFavorites(unit: StorageUnit): Promise<StorageUnit>{
+    return this.storage.get(TV_FAVORITES).then((list: StorageUnit[]) => {
+      if(!list || list.length === 0){
+        console.log('nothing to remove with ID: #{id}');
+        return null;
+      } 
+      let newList = list.filter(obj => obj.id !== id);
+      return this.storage.set(TV_FAVORITES, newList);
+     });
+  }
   
   getTvWatchList(): Promise<StorageUnit[]> {
     return this.storage.get(TV_WATCH_LIST_KEYS);
