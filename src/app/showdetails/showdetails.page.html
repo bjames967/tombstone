@@ -12,18 +12,37 @@
           <img *ngIf="tv.backdrop_path" [src]="'https://image.tmdb.org/t/p/original' + tv.backdrop_path">
       </div>
       <div class="buttons">
-          <ion-buttons>
+        <ion-chip outline color="light" (click)="addMovieToWatchlist()">
+            <ion-label>WatchList</ion-label>
+            <ion-icon name="add"><ion-icon>
+        </ion-chip>
+        <ion-chip outline color="light" (click)="collectTombstone()">
+            <ion-label>Collect Tombstone</ion-label>
+            <ion-icon name="done-all"></ion-icon>
+        </ion-icon>
+          
+          
+          
+          
+          <!--           <ion-buttons>
             <div class="watchlist"><ion-button size="small" (click)="addTvToWatchList()">add to watchlist</ion-button></div>
             <div class="tombstone"><ion-button size="small" (click)="collectTombstone()">Collect Tombstone</ion-button></div>
-          </ion-buttons>
+          </ion-buttons> -->
         </div>
-    <div class="overview">
-      <h1>{{tv.name}}</h1>
-      <h4>Overview</h4>
-      <div class="discrip">{{tv.overview}}</div>
-      <h4>Episode Runtime</h4>
-      <div class="runtime">{{tv.episode_run_time}} minutes</div>
+      <div class="overview">
+        <h1>{{tv.name}}</h1>
+        <h4>Overview</h4>
+        <div class="discrip">{{tv.overview}}</div>
+        <h4>Episode Runtime</h4>
+        <div class="runtime">{{tv.episode_run_time}} minutes</div>
+     </div>
+     <div class="genres">
+        <ion-chip outline color="dark" ngFor="let genre of movie.genres" (click)="navToGenrePage(genre.id)">
+            <ion-label>{{ genre.name }}</ion-label>
+            <ion-icon name="arrow-forward"></ion-icon>
+        </ion-chip>
     </div>
+     
    
 <!--Add route for viewing all season page-->
   <div class="Seasons">
