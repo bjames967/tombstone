@@ -19,8 +19,7 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild(routes)
-  ],
-  declarations: [SortPagePage]
+    RouterModule.forChild(routes),
+  ]
 })
 export class SortPagePageModule {}
