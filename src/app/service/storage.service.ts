@@ -147,12 +147,13 @@ export class StorageService {
       genre_ids: null,
       backdrop_path: null,
       release_date: movie.release_date,
-      user_rating: rating
+      user_rating: rating,
+      runtime: movie.runtime
     };
     return unit;
   }
       
-  mapTvToStorageUnit(tv: TVdetails, rating: number;){ 
+  mapTvToStorageUnit(tv: TVdetails, rating: number){ 
     let unit: StorageUnit = {
     title: tv.name,
     poster_path: tv.poster_path,
@@ -162,7 +163,8 @@ export class StorageService {
     genre_ids: null,
     backdrop_path: null,
     release_date: tv.first_air_date,
-    user_rating: rating
+    user_rating: rating,
+    runtime: tv.episode_run_time[0]
   };
   return unit;
 }

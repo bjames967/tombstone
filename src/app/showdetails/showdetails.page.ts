@@ -39,13 +39,13 @@ export class ShowdetailsPage implements OnInit {
   
   addTvToWatchList(){
     console.log('function hit')
-    let unit =  this.storageService.mapTvToStorageUnit(this.tv);
+    let unit =  this.storageService.mapTvToStorageUnit(this.tv, 10);
     this.storageService.addToTvWatchList(unit);
     console.log('added show to watchlist');
   }
 
   collectTombstone(){
-    let unit =  this.storageService.mapTvToStorageUnit(this.tv);
+    let unit =  this.storageService.mapTvToStorageUnit(this.tv, 10);
     this.storageService.collectTvTombstone(unit);
     console.log('collected show tombstone');
   }

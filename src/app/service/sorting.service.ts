@@ -3,7 +3,7 @@ import { Movie } from './../models/Movie';
 import { TVshow } from './../models/TVshow';
 import { StorageUnit } from './../models/StorageUnit'
 import { TVdetails } from '../models/TVdetails';
-import { StorageService } from '../storage.service';
+import { StorageService } from './storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +26,7 @@ export class SortingService {
   }
   //This rating is from the API, not the rating they made
   sortByRating(savedMovies: StorageUnit[]){
-    savedMovies.sort((a,b) => b.avg.rating-a.avg_rating);
+    savedMovies.sort((a,b) => b.avg_rating - a.avg_rating);
     return savedMovies;
   }
   //for tombstones only as watchlist isn't giving a rating by the user

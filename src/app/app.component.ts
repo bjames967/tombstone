@@ -12,8 +12,28 @@ export class AppComponent {
   public appPages = [
     {
       title: 'Home',
-      url: '/home',
+      url: '/main',
       icon: 'home'
+    },
+    {
+      title: 'Trending Now',
+      url: '/home',
+      icon: 'bulb'
+    },
+    {
+      title: 'Recommended',
+      url: 'recommended',
+      icon: 'thumbs-up',
+      children: [
+        {
+          title: 'Recommended Movies',
+          url: 'recommended-movies'
+        },
+        {
+          title: 'Recommended Shows',
+          url: 'recommended-shows'
+        }
+      ]
     },
     {
       title: 'Watch List',

@@ -3,6 +3,8 @@ import { StorageService } from '../service/storage.service';
 import { Movie } from './../models/Movie';
 import { Router } from '@angular/router';
 import {StorageUnit } from './../models/StorageUnit';
+import { PopoverController } from '@ionic/angular';
+import { SortPagePage } from './../modals/sort-page/sort-page.page'
 
 @Component({
   selector: 'app-list',
@@ -14,7 +16,8 @@ export class ListPage implements OnInit {
   results: StorageUnit[];
   
   constructor(private storageService: StorageService,
-              private router: Router) {
+              private router: Router,
+              private popoverCtrl: PopoverController) {
   }
  
   ngOnInit() {
@@ -23,6 +26,17 @@ export class ListPage implements OnInit {
     console.log(this.listType);
     this.onListChanged();
     
+  }
+
+  async openSortingModal(ev: any) {
+    const popover = await this.popoverCtrl.create({
+      component: SortPagePage,
+      event: ev,
+      translucent: true,
+      showBackdrop: true,
+      animated: true
+    });
+    return await popover.present();
   }
 
   onListChanged(){

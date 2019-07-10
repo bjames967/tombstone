@@ -22,7 +22,11 @@ const routes: Routes = [
   { path: 'tv/:id', loadChildren: './showdetails/showdetails.module#ShowdetailsPageModule' },
   { path: 'tv/:id/season/:season_number', loadChildren: './season/season.module#SeasonPageModule' },
   { path: 'tv/:id/season/:season_number/episode/:episodeid', loadChildren: './episode-details/episode-details.module#EpisodeDetailsPageModule' },
-  { path: 'recommended', loadChildren: './recommended/recommended.module#RecommendedPageModule' }
+  { path: 'recommended', loadChildren: './recommended/recommended.module#RecommendedPageModule' },
+  { path: 'sort-page', loadChildren: './modals/sort-page/sort-page.module#SortPagePageModule' },
+  { path: 'recommended-movies', loadChildren: './recommended-movies/recommended-movies.module#RecommendedMoviesPageModule' },
+  { path: 'recommended-shows', loadChildren: './recommended-shows/recommended-shows.module#RecommendedShowsPageModule' },
+  { path: 'main', loadChildren: './main/main.module#MainPageModule'},
 ];
 
 @NgModule({

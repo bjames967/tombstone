@@ -3,6 +3,8 @@ import { MoviesService } from '../service/movies.service';
 import { StorageService } from '../service/storage.service';
 import { SortingService } from '../service/sorting.service';
 import { StorageUnit } from './../models/StorageUnit';
+import { PopoverController } from '@ionic/angular';
+import { SortPagePage } from './../modals/sort-page/sort-page.page'
 
 
 @Component({
@@ -11,7 +13,7 @@ import { StorageUnit } from './../models/StorageUnit';
   styleUrls: ['./recommended.page.scss'],
 })
 export class RecommendedPage implements OnInit {
-  TabType: 'TopGenreMovie' | 'TopGenreTv' | 'BecauseYouLikedMovie | 'BecauseYouLikedShow';
+  TabType: 'TopGenreMovie' | 'TopGenreTv' | 'BecauseYouLikedMovie' | 'BecauseYouLikedShow';
   current_tombstones: StorageUnit[];
   movie_list: StorageUnit[];
 //   genres: [{id: 28, name: "Action"},
@@ -37,10 +39,22 @@ export class RecommendedPage implements OnInit {
   
   constructor(private movieService: MoviesService,
               private storageService: StorageService,
-              private sortingService: SortingService) { }
+              private sortingService: SortingService,
+              private popoverCtrl: PopoverController) { }
 
   ngOnInit() {
     
+  }
+
+  async openSortingModal(ev: any) {
+    const popover = await this.popoverCtrl.create({
+      component: SortPagePage,
+      event: ev,
+      translucent: true,
+      showBackdrop: true,
+      animated: true
+    });
+    return await popover.present();
   }
 
     

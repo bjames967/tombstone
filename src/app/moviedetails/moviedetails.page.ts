@@ -4,7 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Movie } from 'src/app/models/Movie';
 import { StorageService } from '../service/storage.service';
 import { ModalController } from '@ionic/angular';
-import { Toast } from '@ionic-native/toast/ngx';
+import { PopoverController } from '@ionic/angular';
+import { SortPagePage } from './../modals/sort-page/sort-page.page';
 
 //Do these commands for Toast to work correctly
 // ionic cordova plugin add cordova-plugin-x-toast
@@ -28,7 +29,7 @@ export class MoviedetailsPage implements OnInit {
               private router: Router,
               private storageService: StorageService,
               private modalCtrl: ModalController,
-              private toast: Toast) { }
+              private popoverCtrl: PopoverController) { }
 
   ngOnInit() {
     let id = this.activateRoute.snapshot.params['id']
@@ -60,14 +61,23 @@ export class MoviedetailsPage implements OnInit {
   collectTombstone(){
      let unit = this.storageService.mapMovieToStorageUnit(this.movie, 10);
       this.storageService.collectMovieTombstone(unit);
-      this.toast.show('collected tombstone for #{unit.title}');
-      console.log(toast);
+      
   }
   addMovieToWatchlist(){
       let unit = this.storageService.mapMovieToStorageUnit(this.movie, 10);
       this.storageService.addToMovieWatchList(unit);
-      this.toast.show('Added #{unit.title} to watch list');
-      console.log(toast);
+      
+  }
+
+  async openSortingModal(ev: any) {
+    const popover = await this.popoverCtrl.create({
+      component: SortPagePage,
+      event: ev,
+      translucent: true,
+      showBackdrop: true,
+      animated: true
+    });
+    return await popover.present();
   }
   
   toggleRatingModule(){
