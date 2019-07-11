@@ -56,7 +56,8 @@ getMovieDetails(id: number) {
   }
   
   getTvDetails(id: number){
-    return this.http.get<TVdetails>(`${this.baseUrl}/tv/${id}${this.getParams()}`);
+    const append = '&append_to_response=videos';
+    return this.http.get<TVdetails>(`${this.baseUrl}/tv/${id}${this.getParams()}${append}`);
   }
   
   getSimilarTvShows(id: number){
