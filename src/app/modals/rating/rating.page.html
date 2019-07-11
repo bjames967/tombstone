@@ -1,9 +1,15 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>rating</ion-title>
+    <ion-title></ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <div="ratingInput">
+  <ion-range [(ngModel)]="rating" min="0" man="10" pin snaps step="1" color="light">
+    <ion-icon slot="start" size="small" color="danger" name="thumbs-down"></ion-icon>
+    <ion-icon slot="end" size="small" color="success" name="thumbs-up"></ion-icon>
+  </ion-range>
+ </div>
+             
 </ion-content>
