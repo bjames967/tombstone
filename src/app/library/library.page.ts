@@ -53,6 +53,9 @@ export class LibraryPage implements OnInit {
     });
     return await popover.present();
   }
+  
+  async openTombstoneOptionsModal(ev: any){
+  }
 
   
   onMovieClick(id){
