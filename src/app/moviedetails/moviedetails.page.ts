@@ -7,7 +7,8 @@ import { PopoverController } from '@ionic/angular';
 import { SortPagePage } from './../modals/sort-page/sort-page.page';
 import { RatingPage } from '../modals/rating/rating.page';
 import { ToastController } from '@ionic/angular';
-import { LoadingController } from '@ionic/angular';
+import { Loading, LoadingController } from '@ionic/angular';
+import { SafeResourceUrl, DomSanitizer } from '@angular/platform-browser';
 
 //Do these commands for Toast to work correctly
 // ionic cordova plugin add cordova-plugin-x-toast
@@ -22,7 +23,8 @@ import { LoadingController } from '@ionic/angular';
 export class MoviedetailsPage implements OnInit {
     movie: Movie;
     similar: Movie[];
-  
+    decryptedUrl: SafeResourceUrl;
+    loading: Loading;
 
 
 
@@ -32,7 +34,8 @@ export class MoviedetailsPage implements OnInit {
               private storageService: StorageService,
               private popoverCtrl: PopoverController,
               private toast: ToastController,
-              private loadingCtrl: LoadingController) { }
+              private loadingCtrl: LoadingController,
+              public domSanitizer: DomSanitizer) { }
 
   ngOnInit() {
     let id = this.activateRoute.snapshot.params['id']
@@ -45,6 +48,36 @@ export class MoviedetailsPage implements OnInit {
     });
     
   }
+  
+  loadVideo(){
+    this.decryptedUrl = this.domSanitizer.bypassSecurityTrustResourceUrl(buildUrl(findHighestQualityVideo));
+    this.loading = this.loadingCtrl.create({
+      content: 'Fetching video...'
+    });
+    this.loading.present();
+  }
+  
+  onFinishLoading(): void {
+    this.loading.dismiss();
+  }
+   
+  buildUrl(key: string): string{
+   return `https://www.youtube.com/watch?v=${key}`;
+  }
+      
+      
+  findHighestQualityVideo(): string {
+    let key;
+    for(videos in this.movie.videos.results){
+      if(videos.size === "1080"){
+        key = videos.key;
+        console.log('found 1080px');
+        break;
+      }else{
+        key = this.movie.videos.results[0].key
+    }
+  }
+    
 
   onMovieClick(id){
     this.router.navigate(['movie', id])
