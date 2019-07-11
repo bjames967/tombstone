@@ -32,4 +32,16 @@ export interface Movie {
         character?: string
       }[];
     };
+    videos?: {
+        results?: {
+            id?: string;
+            iso_639_1?: string;
+            iso_3166_1?: string;
+            key?: string;
+            name?: string;
+            site?: youtube;
+            size?: number;
+            type: string;
+        }[];
+    };
   }
