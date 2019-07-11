@@ -16,9 +16,29 @@ export class MainPage implements OnInit {
     private doughnutChart: Chart;
     favoriteMovies: StorageUnit[];
     favoriteShows: StorageUnit[];
+    displayFavoriteMovies: boolean;
+    displayFavoriteShows: boolean;
+    displayMyActivity: boolean;
+    displayMyWatchlistQueue: boolean;
     
     //issue with calling size on database
   ngOnInit() {
+    //check size of all 3 stored elements
+   checkDataSize(); 
+   loadMainPage();
+  
+  
+  
+  
+  loadMainPage(){
+    loadMyActivityGraphs();
+      
+  }
+  
+  
+  
+  
+  loadMyActivityGraphs(){
     this.doughnutChart = new Chart(this.doughnutCanvas.nativeElement, {
       type: "doughnut",
       data: {
@@ -37,10 +57,26 @@ export class MainPage implements OnInit {
       }
     })
   }
-  
-  loadMainPage(){
     
+  loadTopFavoriteMovies(){
+      getFavoriteMovies();
+      if(this.favoriteMovies.length === 0){
+        displayFavoriteMovies = false;
+      } 
   }
+  
+  
+  checkDataSize(){
+    //call size function from service
+  }
+  
+    
+    
+    
+    
+    
+    
+    
   getFavoriteMovies(){
    this.storageService.getMovieFavorites().then((list: StorageUnit[]) => {
       let step;
