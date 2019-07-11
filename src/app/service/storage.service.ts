@@ -25,36 +25,48 @@ export class StorageService {
   constructor(private storage: Storage) { }
   
   
-  getMovieTombstoneSize(){
-    return this.getMovieTombstones().then((list: StorageUnit[]) => {
-      list.length;
+  getMovieTombstoneSize(): number{
+    let size;
+    this.getMovieTombstones().then((list: StorageUnit[]) => {
+      size = list.length();
     });
+    return size;
   }
 
   getTvTombstoneSize(){
-    return this.getTvTombstones().then((list: StorageUnit[]) => {
-      list.length;
+    let size;
+    this.getTvTombstones().then((list: StorageUnit[]) => {
+      size = list.length;
     });
+    return size;
   }
   getMovieFavoriteSize(){
-    return this.getMovieFavorites().then((list: StorageUnit[]) => {
-      list.length;
+    let size;
+    this.getMovieFavorites().then((list: StorageUnit[]) => {
+      size = list.length;
     });
+    return size;
   }
   getTvFavoriteSize(){
-    return this.getTvFavorites().then((list: StorageUnit[]) => {
-      list.length;
+    let size;
+    this.getTvFavorites().then((list: StorageUnit[]) => {
+      size = list.length;
     });
+    return size;
   }
   getMovieWatchlistSize(){
+    let size;
     return this.getMovieWatchList().then((list: StorageUnit[]) => {
-      list.length;
+      size = list.length;
     });
+    return size;
   }
   getTvWatchlistSize(){
+    let size;
     return this.getTvWatchList().then((list: StorageUnit[]) => {
-      list.length;
+      size = list.length;
     });
+    return size;
   }
 
 
