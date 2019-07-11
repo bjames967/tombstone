@@ -6,7 +6,8 @@ import { StorageService } from '../service/storage.service';
 import { PopoverController } from '@ionic/angular';
 import { SortPagePage } from './../modals/sort-page/sort-page.page';
 import { RatingPage } from '../modals/rating/rating.page';
-import { ToastController } from '@ionic/angular'
+import { ToastController } from '@ionic/angular';
+import { LoadingController } from '@ionic/angular';
 
 //Do these commands for Toast to work correctly
 // ionic cordova plugin add cordova-plugin-x-toast
@@ -30,10 +31,12 @@ export class MoviedetailsPage implements OnInit {
               private router: Router,
               private storageService: StorageService,
               private popoverCtrl: PopoverController,
-              private toast: ToastController) { }
+              private toast: ToastController,
+              private loadingCtrl: LoadingController) { }
 
   ngOnInit() {
     let id = this.activateRoute.snapshot.params['id']
+    loadDisplay();
     this.movieService.getMovieDetails(id).subscribe(result => {
         this.movie = result; console.log(this.movie);
     });    
@@ -45,19 +48,14 @@ export class MoviedetailsPage implements OnInit {
 
   onMovieClick(id){
     this.router.navigate(['movie', id])
-  } 
-//   //modal for rating the movie
-//   async openModal(){
-//     const modal = await this.modalCtrl.create({
-//       component: UserRatingModal
-//     });
-//     return await modal.present();
-//   }
+  }
   
-//   closeModal(){
-//     cosnt { data } = await modal.onWillDismiss();
-//     console.log(data);
-//   }
+  loadingDisplay(){
+   let load = await this.loadingCtrl.create({
+      duration: 2000
+   });
+  }
+    
   
   collectTombstone(){
       this.openRatingModal();
