@@ -9,9 +9,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { IonicStorageModule } from '@ionic/storage'
 import { HttpClientModule } from '@angular/common/http';
 import { SortPagePage } from './modals/sort-page/sort-page.page';
+import { RatingPage } from './modals/rating/rating.page'
 @NgModule({
-  declarations: [AppComponent, SortPagePage],
-  entryComponents: [SortPagePage],
+  declarations: [AppComponent, SortPagePage, RatingPage],
+  entryComponents: [SortPagePage, RatingPage],
   imports: [
     BrowserModule,
     IonicModule.forRoot(),

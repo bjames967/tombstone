@@ -5,6 +5,7 @@ import { TVdetails } from '../models/TVdetails';
 import { TVshow } from '../models/TVshow';
 import { Season } from '../models/Season';
 import { StorageService } from '../service/storage.service';
+import { ToastController } from '@ionic/angular'
 
 @Component({
   selector: 'app-showdetails',
@@ -20,7 +21,8 @@ export class ShowdetailsPage implements OnInit {
   constructor(private movieService: MoviesService,
               private activateRoute: ActivatedRoute,
               private router: Router,
-              private storageService: StorageService) { }
+              private storageService: StorageService,
+              private toast: ToastController) { }
 
   ngOnInit() {
     let id = this.activateRoute.snapshot.params['id'];
@@ -36,6 +38,26 @@ export class ShowdetailsPage implements OnInit {
     this.router.navigate(['tv', id])
   }
 
+  async toastSuccess(unit: TVdetails){
+    let showToast = await this.toast.create({
+      message: 'success',
+      duration: 2000,
+      color: 'success',
+      position: 'bottom'
+    });
+    return await showToast.present() 
+  }
+
+  async toastFailure(unit: TVdetails){
+    let showToast = await this.toast.create({
+      message: 'Failure',
+      duration: 2000,
+      color: 'danger',
+      position: 'bottom'
+    });
+    return await showToast.present() 
+  }
+
   
   addTvToWatchList(){
     console.log('function hit')
@@ -47,7 +69,7 @@ export class ShowdetailsPage implements OnInit {
   collectTombstone(){
     let unit =  this.storageService.mapTvToStorageUnit(this.tv, 10);
     this.storageService.collectTvTombstone(unit);
-    console.log('collected show tombstone');
+    this.toastSuccess(this.tv);
   }
 
   onSeasonClick(id, season_number){

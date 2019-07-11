@@ -22,11 +22,15 @@ const routes: Routes = [
   { path: 'tv/:id', loadChildren: './showdetails/showdetails.module#ShowdetailsPageModule' },
   { path: 'tv/:id/season/:season_number', loadChildren: './season/season.module#SeasonPageModule' },
   { path: 'tv/:id/season/:season_number/episode/:episodeid', loadChildren: './episode-details/episode-details.module#EpisodeDetailsPageModule' },
-  { path: 'recommended', loadChildren: './recommended/recommended.module#RecommendedPageModule' },
   { path: 'sort-page', loadChildren: './modals/sort-page/sort-page.module#SortPagePageModule' },
-  { path: 'recommended-movies', loadChildren: './recommended-movies/recommended-movies.module#RecommendedMoviesPageModule' },
-  { path: 'recommended-shows', loadChildren: './recommended-shows/recommended-shows.module#RecommendedShowsPageModule' },
   { path: 'main', loadChildren: './main/main.module#MainPageModule'},
+  { path: 'rating', loadChildren: './modals/rating/rating.module#RatingPageModule' },
+  { path: 'genre', loadChildren: './modals/genre/genre.module#GenrePageModule' },
+  { path: 'movie-rec', loadChildren: './recommendations/movie-rec/movie-rec.module#MovieRecPageModule' },
+  { path: 'show-rec', loadChildren: './recommendations/show-rec/show-rec.module#ShowRecPageModule' },
+  { path: 'favorites', loadChildren: './favorites/favorites.module#FavoritesPageModule' },
+  { path: 'recommendations', loadChildren: './modals/recommendations/recommendations.module#RecommendationsPageModule' },
+  { path: 'tutorial', loadChildren: './tutorial/tutorial.module#TutorialPageModule' },
 ];
 
 @NgModule({

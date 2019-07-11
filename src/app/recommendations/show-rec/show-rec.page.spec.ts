@@ -1,22 +1,22 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RecommendedShowsPage } from './recommended-shows.page';
+import { ShowRecPage } from './show-rec.page';
 
-describe('RecommendedShowsPage', () => {
-  let component: RecommendedShowsPage;
-  let fixture: ComponentFixture<RecommendedShowsPage>;
+describe('ShowRecPage', () => {
+  let component: ShowRecPage;
+  let fixture: ComponentFixture<ShowRecPage>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ RecommendedShowsPage ],
+      declarations: [ ShowRecPage ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(RecommendedShowsPage);
+    fixture = TestBed.createComponent(ShowRecPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

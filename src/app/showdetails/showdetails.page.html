@@ -12,22 +12,11 @@
           <img *ngIf="tv.backdrop_path" [src]="'https://image.tmdb.org/t/p/original' + tv.backdrop_path">
       </div>
       <div class="buttons">
-        <ion-chip outline color="light" (click)="addMovieToWatchlist()">
-            <ion-label>WatchList</ion-label>
-            <ion-icon name="add"><ion-icon>
-        </ion-chip>
-        <ion-chip outline color="light" (click)="collectTombstone()">
-            <ion-label>Collect Tombstone</ion-label>
-            <ion-icon name="done-all"></ion-icon>
-        </ion-icon>
           
-          
-          
-          
-          <!--           <ion-buttons>
+          <ion-buttons>
             <div class="watchlist"><ion-button size="small" (click)="addTvToWatchList()">add to watchlist</ion-button></div>
             <div class="tombstone"><ion-button size="small" (click)="collectTombstone()">Collect Tombstone</ion-button></div>
-          </ion-buttons> -->
+          </ion-buttons>
         </div>
       <div class="overview">
         <h1>{{tv.name}}</h1>
