@@ -15,7 +15,8 @@
               </ion-label>
               <ion-badge ngIf="{{p.title}} === 'Tombstones'" slot="end" color="light">{{tombstoneSize}}</ion-badge>
               <ion-badge ngIf="{{p.title}} === 'Watch List'" slot="end" color="light">{{watchlistSize}}</ion-badge>
-            </ion-item>
+              <ion-badge ngIf="{{p.title}} === 'Favorites'" slot="end" color="light">{{favoritesSize}}</ion-badge>
+            </ion-item> 
           </ion-menu-toggle>
 <!--           
           <ion-item button *ngIf="p.children?.length > 0" (click)="p.open =!p.open" [class.parent-active]="p.open" detail="false">
