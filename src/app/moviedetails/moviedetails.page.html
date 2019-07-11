@@ -10,7 +10,7 @@
 
 <ion-content>
     <div *ngIf="movie.backdrop_path">
-        <img *ngIf="movie.backdrop_path" [src]="'https://image.tmdb.org/t/p/original' + movie.backdrop_path">
+        <img *ngIf="movie.backdrop_path" [src]="backdrop_photo">
     </div>
     <div class="buttons">
       <ion-buttons>
