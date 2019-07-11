@@ -18,6 +18,7 @@ export class ShowdetailsPage implements OnInit {
     similar: TVshow[];
   decryptedUrl: SafeResourceUrl;
   loading: Loading;
+  backdrop_photo: HTMLImageElement;
     
 
 
@@ -32,10 +33,15 @@ export class ShowdetailsPage implements OnInit {
     this.movieService.getTvDetails(id).subscribe(result => {
       this.tv = result; console.log(this.tv);
     });
+    loadImage(this.tv);
     loadVideo();
     this.movieService.getSimilarTvShows(id).subscribe(res => {
       this.similar = res; console.log(this.similar);
     });
+  }
+  
+  loadImages(tv: TVdetails){
+    this.backdrop_photo = `https://image.tmdb.org/t/p/original${tv.backdrop_path}`;
   }
   
    loadVideo(){
