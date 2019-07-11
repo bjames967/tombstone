@@ -28,7 +28,7 @@ searchMovies(query: string) {
       .pipe(map((result: any) => <Movie[]>result.results));
   }
 getMovieDetails(id: number) {
-    const append = '&append_to_response=credits';
+    const append = '&append_to_response=videos';
     return this.http.get<Movie>(`${this.baseUrl}/movie/${id}${this.getParams()}${append}`);
   }
 //fins similiar movies will be below the view of a movie
