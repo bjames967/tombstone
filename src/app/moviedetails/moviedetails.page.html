@@ -13,15 +13,6 @@
         <img *ngIf="movie.backdrop_path" [src]="'https://image.tmdb.org/t/p/original' + movie.backdrop_path">
     </div>
     <div class="buttons">
-      <!-- <ion-chip outline color="light" (click)="addMovieToWatchlist()">
-        <ion-label>WatchList</ion-label>
-        <ion-icon name="add"><ion-icon>
-      </ion-chip>
-      <ion-chip outline color="light" (click)="collectTombstone()">
-        <ion-label>Collect Tombstone</ion-label>
-        <ion-icon name="done-all"></ion-icon>
-      </ion-chip> -->
-    
       <ion-buttons>
         <ion-button slot="end" (click)="addMovieToWatchlist()">add to watchlist</ion-button>
         <ion-button slot="end" (click)="collectTombstone()">Collect Tombstone</ion-button>
@@ -34,6 +25,13 @@
   <h4>Runtime</h4>
   <div class="runtime">{{movie.runtime}} minutes</div>
 </div>
+  <div class="trailer">
+    <iframe width="100%" height="315" [src]="decryptedUrl" frameborder="0" allowfullscreen></iframe>
+  </div>
+                                                                         
+  
+  
+  
   <div class="genres">
    <ion-chip outline color="light" ngFor="let genre of movie.genres" (click)="navToGenrePage(genre.id)">
      <ion-label>{{ genre.name }}</ion-label>
