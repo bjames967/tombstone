@@ -13,6 +13,8 @@
               <ion-label>
                 {{p.title}}
               </ion-label>
+              <ion-badge ngIf="{{p.title}} === 'Tombstones'" slot="end" color="light">{{tombstoneSize}}</ion-badge>
+              <ion-badge ngIf="{{p.title}} === 'Watch List'" slot="end" color="light">{{watchlistSize}}</ion-badge>
             </ion-item>
           </ion-menu-toggle>
 <!--           
