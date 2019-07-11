@@ -43,7 +43,7 @@ export class MoviedetailsPage implements OnInit {
     this.movieService.getMovieDetails(id).subscribe(result => {
         this.movie = result; console.log(this.movie);
     });
-    loadVideo()
+    loadVideo();
     this.movieService.findSimliarMovies(id).subscribe(res => {
         this.similar = res; console.log(this.similar)
     });
@@ -74,7 +74,8 @@ export class MoviedetailsPage implements OnInit {
         console.log('found 1080px');
         break;
       }else{
-        key = this.movie.videos.results[0].key
+        key = this.movie.videos.results[0].key;
+      }
     }
   }
     
