@@ -42,11 +42,11 @@ export class MoviedetailsPage implements OnInit {
     loadDisplay();
     this.movieService.getMovieDetails(id).subscribe(result => {
         this.movie = result; console.log(this.movie);
-    });    
+    });
+    loadVideo()
     this.movieService.findSimliarMovies(id).subscribe(res => {
         this.similar = res; console.log(this.similar)
     });
-    
   }
   
   loadVideo(){
@@ -88,6 +88,10 @@ export class MoviedetailsPage implements OnInit {
       duration: 2000
    });
   }
+  
+    
+    
+   
     
   
   collectTombstone(){
