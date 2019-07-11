@@ -25,6 +25,7 @@ export class MoviedetailsPage implements OnInit {
     similar: Movie[];
     decryptedUrl: SafeResourceUrl;
     loading: Loading;
+    backdrop_photo: HTMLImageElement;
 
 
 
@@ -43,10 +44,15 @@ export class MoviedetailsPage implements OnInit {
     this.movieService.getMovieDetails(id).subscribe(result => {
         this.movie = result; console.log(this.movie);
     });
+    loadImages(this.movie);
     loadVideo();
     this.movieService.findSimliarMovies(id).subscribe(res => {
         this.similar = res; console.log(this.similar)
     });
+  }
+  
+  loadImages(Movie: Movie):{
+    this.backdrop_photo = `https://image.tmdb.org/t/p/original${movie.backdrop_path}`;
   }
   
   loadVideo(){
