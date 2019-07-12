@@ -36,7 +36,7 @@
   
   
   <div class="genres">
-   <ion-chip outline color="light" ngFor="let genre of genres" (click)="navToGenrePage(genre.id)">
+   <ion-chip outline color="light" *ngFor="let genre of movie.genres">
      <ion-label>{{ genre.name }}</ion-label>
      <ion-icon name="arrow-forward"></ion-icon>
    </ion-chip>

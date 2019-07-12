@@ -48,14 +48,14 @@ export class MoviedetailsPage implements OnInit {
     this.movieService.getMovieDetails(id).subscribe(result => {
         this.movie = result; console.log(this.movie);
     });
+    this.genres = this.movie.genres
     this.movieService.findSimliarMovies(id).subscribe(res => {
         this.similar = res; console.log(this.similar)
     });
-    this.genres = this.movie.genres
-    console.log(this.movie.genres)
+  
     // this.buildUrl();
-    console.log(this.decryptedUrl);
   }
+
    buildUrl(){
      console.log('function hit')
     this.decryptedUrl = this.domSanitizer.bypassSecurityTrustResourceUrl("https://www.youtube.com/embed?v=m3haGNyav-s");
