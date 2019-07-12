@@ -13,6 +13,7 @@ const MOVIE_TOMBSTONE_KEYS = 'movie_tombstones';
 
 const MOVIE_FAVORITES = 'Favorite_movies';
 const TV_FAVORITES = 'Favorite_shows';
+const HIGH_GENRES = 'liked_genres';
 
 
 
@@ -118,6 +119,33 @@ export class StorageService {
       } 
       let newList = list.filter(obj => obj.id !== unit.id);
       return this.storage.set(TV_FAVORITES, newList);
+     });
+  }
+  
+  getGenres(): Promise<number[]> {
+    return this.storage.get(HIGH_GENRES);
+  }
+  
+  addGenre(id: number): Promise<any> {
+     return this.storage.get(HIGH_GENRE).then((list: number[]) => {
+        if(list) {
+          list.push(id);
+          console.log(list);
+          return this.storage.set(HIGH_GENRE, list);
+        }else{
+          return this.storage.set(HIGH_GENRE, [id]); 
+        }
+      });
+  }
+  
+  deleteGenre(id: number){
+    return this.storage.get(HIG_GENRE).then((list: number[]) => {
+      if(!list || list.length === 0){
+        console.log('nothing to remove with ID: #{id}');
+        return null;
+      } 
+      let newList = list.filter(obj => obj.id !== unit.id);
+      return this.storage.set(HIGH_GENRE, newList);
      });
   }
   
