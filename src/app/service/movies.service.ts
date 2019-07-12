@@ -97,8 +97,32 @@ getMovieDetails(id: number) {
      return this.http.get(`${this.baseUrl}/trending/tv/day${this.getParams()}`).pipe(
        map((result: any) => <TVshow[]>result.results));
   }
-//---------------------------------------For BFS algorithm-------------------------------------------------------
- 
+  
+  findMovieByGenres(genre_ids: number[]){
+    const str = '&with_genres' + genre_ids.join(',');
+    return this.http.get(`${this.baseUrl}/discover/movie${this.getParams()}${str}`).pipe(
+       map((result: any) => <Movie[]>result.results));
+  }
+  
+  findShowsByGenres(genre_ids: number[]){
+    const str = '&with_genres' + genre_ids.join(',');
+    return this.http.get(`${this.baseUrl}/discover/movie${this.getParams()}${str}`).pipe(
+       map((result: any) => <TVshow[]>result.results));
+  }
+  
+  //---------------------------------Used for Genre ion-chips---------------------------------------------
+  
+  getMovieByGenres(genre_id: number){
+    return this.http.get(`${this.baseUrl}/discover/movie${this.getParams()}&with_genres=${genre_id}`).pipe(
+       map((result: any) => <Movie[]>result.results));
+  }
+  
+  getShowByGenres(genre_id: number){
+    return this.http.get(`${this.baseUrl}/discover/movie${this.getParams()}&with_genres=${genre_id}`).pipe(
+       map((result: any) => <TVshow[]>result.results));
+  }
+  
+   
   
   
   
