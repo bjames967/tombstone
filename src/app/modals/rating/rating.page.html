@@ -2,10 +2,13 @@
 <ion-content>
   <ion-text>Rating</ion-text>
   <div class="ratingInput">
-  <ion-range min="0" man="10" pin snaps step="1" color="light">
-    <ion-icon slot="start" size="small" color="danger" name="thumbs-down"></ion-icon>
-    <ion-icon slot="end" size="small" color="success" name="thumbs-up"></ion-icon>
-  </ion-range>
+    <ion-range min="0" max="10" step="1" pin snaps color="light">
+      <ion-icon slot="start" size="small" color="danger" name="thumbs-down"></ion-icon>
+      <ion-icon slot="end" size="small" color="success" name="thumbs-up"></ion-icon>
+    </ion-range>
+    <ion-chip button color="success">
+      <ion-label>Submit</ion-label>
+    </ion-chip>     
  </div>
              
 </ion-content>
