@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { StorageUnit } from './../models/StorageUnit';
 import { StorageService } from './../service/storage.service';
 import { Chart } from 'chart.js';
+import { LoadingController } from '@ionic/angular';
 
 
 @Component({
@@ -12,8 +13,10 @@ import { Chart } from 'chart.js';
 export class MainPage implements OnInit {
   @ViewChild("doughnutCanvas") doughnutCanvas: ElementRef;
   
-  constructor(private storageService: StorageService) { }
+  constructor(private storageService: StorageService,
+              private loadingCtrl: LoadingController) { }
     private doughnutChart: Chart;
+    watchlistQueue: StorageUnit[];
     favoriteMovies: StorageUnit[];
     favoriteShows: StorageUnit[];
     displayFavoriteMovies: boolean;
@@ -28,17 +31,33 @@ export class MainPage implements OnInit {
    this.loadMainPage();
   }
   
+  loadQueueWatchlist(){
+    //TODO
+    
+  }
   
-  
-  
-  loadMainPage(){
-    this.loadMyActivityGraphs();
-      
+  loadFavoritesList(){
+   //TODO check if list is empty 
   }
   
   
   
   
+  loadMainPage(){
+    this.presentLoading();
+    this.loadMyActivityGraphs();
+    this.loadQueueWatchlist();
+      
+  }
+  
+  async presentLoading(){
+   let loading =  this.loadingCtrl.create({
+     spinner: 'dots',
+     duration: '20000'
+   });
+    return loading.present();
+  }
+
   loadMyActivityGraphs(){
     this.doughnutChart = new Chart(this.doughnutCanvas.nativeElement, {
       type: "doughnut",
@@ -59,10 +78,6 @@ export class MainPage implements OnInit {
     })
   }
   
-  
-  checkDataSize(){
-    //call size function from service
-  }
   
     
     
