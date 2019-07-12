@@ -42,6 +42,14 @@ export class SearchPage implements OnInit {
     this.results = null;
     this.performSearch(this.searchInput);
   }
+  
+  async loadingDisplay(){
+   let load = await this.loadingCtrl.create({
+      spinner: 'dots',
+      duration: 200000
+   });
+    
+  }
 
   onClear(event: any) {
     this.results = null;
@@ -53,6 +61,7 @@ export class SearchPage implements OnInit {
 
   private async performSearch(query: string) {
     let loader;
+    this.loadingDisplay();
     if (!query || query.trim().length <= 0) { return; }
       switch (this.searchType) {
         case 'movies': this.performSearchMovies(query); break;   
