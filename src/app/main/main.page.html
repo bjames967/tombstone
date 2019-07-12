@@ -35,17 +35,85 @@
       </div>
     </div>
 
-      <div class="Favorites">
-        <ion-label>Your Favorites</ion-label>
+        <div class="Favorites">
+      <div *ngIf="displayMyWatchlistQueue">
+        <ion-label>Favorites</ion-label>
+          <ion-slides [options]="sliderOpts">
+              <div class="movie">
+                <ion-slide *ngFor="let item of watchlistQueue" (click)="onMovieClick(item.id)">
+                    <div class="poster">
+                        <img *ngIf="item.poster_path" class="poster" [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path">
+                        <img *ngIf="item.poster_path" class="poster-effect" [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path">
+                    </div>
+                    <div class="title">{{ item.title }}</div>
+                    <div class="year">{{ item.release_date | date:'yyyy' }}</div>
+                    <div class="vote"><ion-icon name="star"></ion-icon><b>{{ item.vote_average }}</b>/10</div>
+                <ion-slide>
+              </div>
+           </ion-slides>
       </div>
+    </div>
+          
+          <div class="recently">
+      <div *ngIf="displayMyWatchlistQueue">
+        <ion-label>Recently Watched</ion-label>
+          <ion-slides [options]="sliderOpts">
+              <div class="movie">
+                <ion-slide *ngFor="let item of watchlistQueue" (click)="onMovieClick(item.id)">
+                    <div class="poster">
+                        <img *ngIf="item.poster_path" class="poster" [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path">
+                        <img *ngIf="item.poster_path" class="poster-effect" [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path">
+                    </div>
+                    <div class="title">{{ item.title }}</div>
+                    <div class="year">{{ item.release_date | date:'yyyy' }}</div>
+                    <div class="vote"><ion-icon name="star"></ion-icon><b>{{ item.vote_average }}</b>/10</div>
+                <ion-slide>
+              </div>
+           </ion-slides>
+      </div>
+    </div>
     
-      <div class="RecommendYou">
-        <ion-label>Recommended for you</ion-label>
+        <div class="recommendations">
+      <div *ngIf="displayMyWatchlistQueue">
+        <ion-label>Top Recommended for you</ion-label>
+          <ion-slides [options]="sliderOpts">
+              <div class="movie">
+                <ion-slide *ngFor="let item of watchlistQueue" (click)="onMovieClick(item.id)">
+                    <div class="poster">
+                        <img *ngIf="item.poster_path" class="poster" [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path">
+                        <img *ngIf="item.poster_path" class="poster-effect" [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path">
+                    </div>
+                    <div class="title">{{ item.title }}</div>
+                    <div class="year">{{ item.release_date | date:'yyyy' }}</div>
+                    <div class="vote"><ion-icon name="star"></ion-icon><b>{{ item.vote_average }}</b>/10</div>
+                <ion-slide>
+              </div>
+           </ion-slides>
       </div>
+    </div>
+          
+          
+          <div class="you Watched">
+      <div *ngIf="displayMyWatchlistQueue">
+        <ion-label>Becuase You watched movie.title</ion-label>
+          <ion-slides [options]="sliderOpts">
+              <div class="movie">
+                <ion-slide *ngFor="let item of watchlistQueue" (click)="onMovieClick(item.id)">
+                    <div class="poster">
+                        <img *ngIf="item.poster_path" class="poster" [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path">
+                        <img *ngIf="item.poster_path" class="poster-effect" [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path">
+                    </div>
+                    <div class="title">{{ item.title }}</div>
+                    <div class="year">{{ item.release_date | date:'yyyy' }}</div>
+                    <div class="vote"><ion-icon name="star"></ion-icon><b>{{ item.vote_average }}</b>/10</div>
+                <ion-slide>
+              </div>
+           </ion-slides>
+      </div>
+    </div>
 
       <div class="tombstoneFooter">
-        <ion-label>Footer disclaimer</ion-label>
-        
+        <ion-label>Footer disclaimer</ion-label>    
       </div>
     </div>
     
