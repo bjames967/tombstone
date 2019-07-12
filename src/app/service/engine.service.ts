@@ -25,6 +25,7 @@ export class EngineService {
   mediumRatedShows: StorageUnit[];
   lowRatedMovies: StorageUnit[];
   lowRatedShows: StorageUnit[];
+  top_genres: number[];
   
   highGrossingGenres:{id: number, name: string}[];
   mediumGrossingGenres:{id: number, name: string}[];
@@ -33,6 +34,8 @@ export class EngineService {
   constructor(private movieService: MoviesService,
               private sortingService: SortingService,
               private storageService: StorageService) { }
+  
+  
   
  
   
@@ -68,18 +71,15 @@ export class EngineService {
    });   
  }
   
-  
-//  CollectMovieGenresFromRatings(){
-//    this.highGrossingGenres = this.findTopGenres(this.highRatedMovies);
-//    this.mediumGrossingGenres = this.findTopGenres(this.mediumRatedMovies);
-//    this.lowGrossingGenres = this.findTopGenres(this.lowRatedMovies);
-//  }
+  moviesYouMayLike
   
   
  
   
- findTopGenres(list: StorageUnit[]){
-     
+ findTopGenresIds(){
+     this.storageService.getMovieGenres().then((ids: number[]) => {
+       this.top_genres = ids;
+     });
  }
   
   
