@@ -8,21 +8,32 @@
 </ion-header>
 <ion-content>
     <div class="MyActivity">
-        <ion-label>My Activity</ion-label>
-        <ion-card>
-            <ion-card-header>
-              Doughnut Chart
-            </ion-card-header>
-            <ion-card-content>
+        <div *ngIf="displayMyActivity">
+            <ion-label>My Activity</ion-label>
+            <div class="chart">
               <canvas #doughnutCanvas></canvas>
-            </ion-card-content>
-          </ion-card>
+            </div>
+        </div>
     </div>
-    <div class="QuicActions">
-      <div class="pendingWatchlist">
+    
+    <div class="QuickActions">
+      <div *ngIf="displayMyWatchlistQueue">
         <ion-label>Quick Action</ion-label>
-        
+          <ion-slides [options]="sliderOpts">
+              <div class="movie">
+                <ion-slide *ngFor="let item of watchlistQueue" (click)="onMovieClick(item.id)">
+                    <div class="poster">
+                        <img *ngIf="item.poster_path" class="poster" [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path">
+                        <img *ngIf="item.poster_path" class="poster-effect" [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path">
+                    </div>
+                    <div class="title">{{ item.title }}</div>
+                    <div class="year">{{ item.release_date | date:'yyyy' }}</div>
+                    <div class="vote"><ion-icon name="star"></ion-icon><b>{{ item.vote_average }}</b>/10</div>
+                <ion-slide>
+              </div>
+           </ion-slides>
       </div>
+    </div>
 
       <div class="Favorites">
         <ion-label>Your Favorites</ion-label>
