@@ -12,6 +12,13 @@ import { LoadingController } from '@ionic/angular';
 })
 export class MainPage implements OnInit {
   @ViewChild("doughnutCanvas") doughnutCanvas: ElementRef;
+  sliderOpts = {
+    zoom: false,
+    slidesPerView: 1.5,
+    spaceBetween: 20,
+    centeredSlides: true
+  };
+    
   
   constructor(private storageService: StorageService,
               private loadingCtrl: LoadingController) { }
@@ -32,7 +39,7 @@ export class MainPage implements OnInit {
   }
   
   loadQueueWatchlist(){
-    //TODO
+   
     
   }
   
