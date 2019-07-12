@@ -3,7 +3,8 @@ import { Movie } from './../models/Movie'
 import { TVshow } from './../models/TVshow'
 import { MoviesService} from './../service/movies.service'
 import { ShowdetailsPage } from '../showdetails/showdetails.page';
-import { Router } from '@angular/router'
+import { Router } from '@angular/router';
+import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -15,12 +16,19 @@ export class HomePage {
   results: Movie[] | TVshow[];
 
   constructor(private movieService: MoviesService,
-              private router: Router) {}
+              private router: Router,
+              private loadingController: LoadingController) {}
   
 
   ngOnInit(){
     this.trendingType = 'TrendingMovies';
     this.onTrendingTypeChange();
+  }
+  
+  async loadingPause(){
+   let load = await this.loadingCtrl.create({
+      duration: 200000
+   });
   }
 
   onMovieClick(id){
@@ -40,6 +48,7 @@ export class HomePage {
   }
   
   pageSwap(){
+    this.loadingPause();
     switch (this.trendingType) {
       
       case 'TrendingMovies':
