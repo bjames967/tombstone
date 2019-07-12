@@ -29,33 +29,32 @@ export class ShowdetailsPage implements OnInit {
               private loadingCtrl: LoadingController) { }
 
   ngOnInit() {
+    this.loadingDisplay();
     let id = this.activateRoute.snapshot.params['id'];
     this.movieService.getTvDetails(id).subscribe(result => {
       this.tv = result; console.log(this.tv);
     });
    
-    this.loadVideo();
     this.movieService.getSimilarTvShows(id).subscribe(res => {
       this.similar = res; console.log(this.similar);
     });
+    this.buildUrl();
   }
-
   
-   async loadVideo(){
-    this.decryptedUrl = this.domSanitizer.bypassSecurityTrustResourceUrl(this.buildUrl());
-    let loading = await this.loadingCtrl.create({
-      spinner: 'circles'
-    });
-    loading.present();
+   buildUrl(){
+     console.log('function hit')
+    this.decryptedUrl = this.domSanitizer.bypassSecurityTrustResourceUrl("https://www.youtube.com/embed?v=m3haGNyav-s");
+  
   }
  
-   
-  buildUrl(): string{
-   return `https://www.youtube.com/watch?v=${this.tv.videos.results[0]}`;
-  }
-
   onTvClick(id){
     this.router.navigate(['tv', id])
+  }
+  
+  async loadingDisplay(){
+   let load = await this.loadingCtrl.create({
+      duration: 200000
+   });
   }
 
   async toastSuccess(unit: TVdetails){
