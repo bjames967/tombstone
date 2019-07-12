@@ -3,7 +3,9 @@ import { Component } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-import { StorageService } from './services/storage.service';
+import { StorageService } from './service/storage.service';
+import { StorageUnit } from './models/StorageUnit';
+
 
 @Component({
   selector: 'app-root',
@@ -19,17 +21,20 @@ export class AppComponent {
     {
       title: 'Home',
       url: '/main',
-      icon: 'home'
+      icon: 'home',
+      badge: false
     },
     {
       title: 'Trending Now',
       url: '/home',
-      icon: 'bulb'
+      icon: 'bulb',
+      badge: false
     },
     {
       title: 'Recommended',
       url: 'recommended',
       icon: 'thumbs-up',
+      badge: false,
       children: [
         {
           title: 'Recommended Movies',
@@ -44,26 +49,30 @@ export class AppComponent {
     {
       title: 'Watch List',
       url: '/list',
-      icon: 'list'
+      icon: 'list',
+      badge: true
     },
     {
       title: 'Tombstones',
       url: '/library',
-      icon: 'book'
+      icon: 'book',
+      badge: true
     },
     {
       title: 'Search',
       url: '/search',
-      icon: 'search'
+      icon: 'search',
+      badge: false
     },
     {
       title: 'about',
       url: '/about',
-      icon: 'information'
+      icon: 'information',
+      badge: false
     }
 
   ];
-
+  
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
@@ -71,10 +80,14 @@ export class AppComponent {
     private storageService: StorageService
   ) {
     this.initializeApp();
-    let tombstoneSize = this.storageService.getMovieTombstoneSize() + this.storageService.getTvTombstoneSize();
-    let watchlistSize = this.storageService.getMovieWatchlistSize() + this.storageService.getTvWatchlistSize();
-    let favoritesSize = this.storageService.getMovieFavoriteSize() + this.storageService.getTvFavoriteSize();
+    
+
+    console.log(this.tombstone)
+    
+    
   }
+  tombstone: number;
+
 
   initializeApp() {
     this.platform.ready().then(() => {

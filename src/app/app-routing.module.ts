@@ -31,6 +31,10 @@ const routes: Routes = [
   { path: 'favorites', loadChildren: './favorites/favorites.module#FavoritesPageModule' },
   { path: 'recommendations', loadChildren: './modals/recommendations/recommendations.module#RecommendationsPageModule' },
   { path: 'tutorial', loadChildren: './tutorial/tutorial.module#TutorialPageModule' },
+  { path: 'internet-conn', loadChildren: './modals/internet-conn/internet-conn.module#InternetConnPageModule' },
+  { path: 'library-quick-action', loadChildren: './modals/library-quick-action/library-quick-action.module#LibraryQuickActionPageModule' },
+  { path: 'watchlist-quick-action', loadChildren: './modals/watchlist-quick-action/watchlist-quick-action.module#WatchlistQuickActionPageModule' },
+  { path: 'favorites-quick-action', loadChildren: './modals/favorites-quick-action/favorites-quick-action.module#FavoritesQuickActionPageModule' },
 ];
 
 @NgModule({

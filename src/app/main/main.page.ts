@@ -24,14 +24,15 @@ export class MainPage implements OnInit {
     //issue with calling size on database
   ngOnInit() {
     //check size of all 3 stored elements
-   checkDataSize(); 
-   loadMainPage();
+   this.checkDataSize(); 
+   this.loadMainPage();
+  }
   
   
   
   
   loadMainPage(){
-    loadMyActivityGraphs();
+    this.loadMyActivityGraphs();
       
   }
   
@@ -56,13 +57,6 @@ export class MainPage implements OnInit {
         ]
       }
     })
-  }
-    
-  loadTopFavoriteMovies(){
-      getFavoriteMovies();
-      if(this.favoriteMovies.length === 0){
-        displayFavoriteMovies = false;
-      } 
   }
   
   

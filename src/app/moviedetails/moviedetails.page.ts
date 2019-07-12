@@ -7,7 +7,7 @@ import { PopoverController } from '@ionic/angular';
 import { SortPagePage } from './../modals/sort-page/sort-page.page';
 import { RatingPage } from '../modals/rating/rating.page';
 import { ToastController } from '@ionic/angular';
-import { Loading, LoadingController } from '@ionic/angular';
+import {LoadingController } from '@ionic/angular';
 import { SafeResourceUrl, DomSanitizer } from '@angular/platform-browser';
 
 //Do these commands for Toast to work correctly
@@ -24,8 +24,11 @@ export class MoviedetailsPage implements OnInit {
     movie: Movie;
     similar: Movie[];
     decryptedUrl: SafeResourceUrl;
-    loading: Loading;
     backdrop_photo: HTMLImageElement;
+    genres: {
+      name: string;
+      id: number;
+    }[];
 
 
 
@@ -39,83 +42,60 @@ export class MoviedetailsPage implements OnInit {
               public domSanitizer: DomSanitizer) { }
 
   ngOnInit() {
+    this.loadingDisplay()
     let id = this.activateRoute.snapshot.params['id']
-    loadDisplay();
+    // this.loadingDisplay();
     this.movieService.getMovieDetails(id).subscribe(result => {
         this.movie = result; console.log(this.movie);
     });
-    loadImages(this.movie);
-    loadVideo();
     this.movieService.findSimliarMovies(id).subscribe(res => {
         this.similar = res; console.log(this.similar)
     });
+    this.genres = this.movie.genres
+    console.log(this.movie.genres)
+    // this.buildUrl();
+    console.log(this.decryptedUrl);
   }
+   buildUrl(){
+     console.log('function hit')
+    this.decryptedUrl = this.domSanitizer.bypassSecurityTrustResourceUrl("https://www.youtube.com/embed?v=m3haGNyav-s");
   
-  loadImages(Movie: Movie):{
-    this.backdrop_photo = `https://image.tmdb.org/t/p/original${movie.backdrop_path}`;
   }
-  
-  loadVideo(){
-    this.decryptedUrl = this.domSanitizer.bypassSecurityTrustResourceUrl(buildUrl(findHighestQualityVideo));
-    this.loading = this.loadingCtrl.create({
-      content: 'Fetching video...'
-    });
-    this.loading.present();
-  }
-  
-  onFinishLoading(): void {
-    this.loading.dismiss();
-  }
-   
-  buildUrl(key: string): string{
-   return `https://www.youtube.com/watch?v=${key}`;
-  }
-      
-      
-  findHighestQualityVideo(): string {
-    let key;
-    for(videos in this.movie.videos.results){
-      if(videos.size === "1080"){
-        key = videos.key;
-        console.log('found 1080px');
-        break;
-      }else{
-        key = this.movie.videos.results[0].key;
-      }
-    }
-  }
+
     
 
   onMovieClick(id){
     this.router.navigate(['movie', id])
   }
   
-  loadingDisplay(){
+  async loadingDisplay(){
    let load = await this.loadingCtrl.create({
-      duration: 2000
+      duration: 200000
    });
   }
-  
-    
-    
-   
-    
-  
+
   collectTombstone(){
       this.openRatingModal();
      let unit = this.storageService.mapMovieToStorageUnit(this.movie, 10);
       this.storageService.collectMovieTombstone(unit);
-      this.toastSuccess(this.movie);
+      this.toastSuccess(this.movie, false);
       
   }
   addMovieToWatchlist(){
       let unit = this.storageService.mapMovieToStorageUnit(this.movie, 10);
       this.storageService.addToMovieWatchList(unit);
+      this.toastSuccess(this.movie, true)
       
   }
-  async toastSuccess(unit: Movie){
+  async toastSuccess(unit: Movie, type: boolean){
+    let loc;
+    if(type){
+      loc = 'to Watchlist'
+    }else{
+      loc = 'to Tombstones'
+    }
     let showToast = await this.toast.create({
-      message: 'success',
+      message: `successfully added ${unit.title} ${loc}`,
       duration: 2000,
       color: 'success',
       position: 'bottom'
@@ -136,7 +116,7 @@ export class MoviedetailsPage implements OnInit {
   async openRatingModal(){
     let UserRatingModal = await this.popoverCtrl.create({
       component: RatingPage,
-      animated: true
+      animated: true, 
     });
    //get data from rating modal
     return await UserRatingModal.present();

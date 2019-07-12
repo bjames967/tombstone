@@ -39,9 +39,8 @@ export interface Movie {
             iso_3166_1?: string;
             key?: string;
             name?: string;
-            site?: youtube;
             size?: number;
-            type: string;
+            type?: string;
         }[];
     };
   }

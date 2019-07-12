@@ -13,9 +13,9 @@
               <ion-label>
                 {{p.title}}
               </ion-label>
-              <ion-badge ngIf="{{p.title}} === 'Tombstones'" slot="end" color="light">{{tombstoneSize}}</ion-badge>
-              <ion-badge ngIf="{{p.title}} === 'Watch List'" slot="end" color="light">{{watchlistSize}}</ion-badge>
-              <ion-badge ngIf="{{p.title}} === 'Favorites'" slot="end" color="light">{{favoritesSize}}</ion-badge>
+              <div *ngIf="p.badge">
+              <ion-badge slot="end" color="light">1</ion-badge>
+              </div>
             </ion-item> 
           </ion-menu-toggle>
 <!--           

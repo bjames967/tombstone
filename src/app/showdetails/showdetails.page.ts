@@ -7,7 +7,7 @@ import { Season } from '../models/Season';
 import { StorageService } from '../service/storage.service';
 import { ToastController } from '@ionic/angular'
 import { SafeResourceUrl, DomSanitizer } from '@angular/platform-browser';
-import { Loading, LoadingController } from '@ionic/angular';
+import { LoadingController } from '@ionic/angular';
 @Component({
   selector: 'app-showdetails',
   templateUrl: './showdetails.page.html',
@@ -17,8 +17,6 @@ export class ShowdetailsPage implements OnInit {
     tv: TVdetails;
     similar: TVshow[];
   decryptedUrl: SafeResourceUrl;
-  loading: Loading;
-  backdrop_photo: HTMLImageElement;
     
 
 
@@ -26,58 +24,35 @@ export class ShowdetailsPage implements OnInit {
               private activateRoute: ActivatedRoute,
               private router: Router,
               private storageService: StorageService,
-              private toast: ToastController) { }
+              private toast: ToastController,
+              private domSanitizer: DomSanitizer,
+              private loadingCtrl: LoadingController) { }
 
   ngOnInit() {
     let id = this.activateRoute.snapshot.params['id'];
     this.movieService.getTvDetails(id).subscribe(result => {
       this.tv = result; console.log(this.tv);
     });
-    loadImage(this.tv);
-    loadVideo();
+   
+    this.loadVideo();
     this.movieService.getSimilarTvShows(id).subscribe(res => {
       this.similar = res; console.log(this.similar);
     });
   }
+
   
-  loadImages(tv: TVdetails){
-    this.backdrop_photo = `https://image.tmdb.org/t/p/original${tv.backdrop_path}`;
-  }
-  
-   loadVideo(){
-    this.decryptedUrl = this.domSanitizer.bypassSecurityTrustResourceUrl(buildUrl(findHighestQualityVideo));
-    this.loading = this.loadingCtrl.create({
-      content: 'Fetching video...'
+   async loadVideo(){
+    this.decryptedUrl = this.domSanitizer.bypassSecurityTrustResourceUrl(this.buildUrl());
+    let loading = await this.loadingCtrl.create({
+      spinner: 'circles'
     });
-    this.loading.present();
+    loading.present();
   }
-  
-  onFinishLoading(): void {
-    this.loading.dismiss();
-  }
+ 
    
-  buildUrl(key: string): string{
-   return `https://www.youtube.com/watch?v=${key}`;
+  buildUrl(): string{
+   return `https://www.youtube.com/watch?v=${this.tv.videos.results[0]}`;
   }
-  
-  findHighestQualityVideo(): string {
-    let key;
-    for(videos in this.tv.videos.results){
-      if(videos.size === "1080"){
-        key = videos.key;
-        console.log('found 1080px');
-        break;
-      }else{
-        key = this.movie.videos.results[0].key;
-      }
-    }
-  }
-  
-  
-  
-  
-  
-  
 
   onTvClick(id){
     this.router.navigate(['tv', id])

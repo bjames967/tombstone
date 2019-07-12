@@ -9,7 +9,7 @@
   
   <ion-content>
       <div *ngIf="tv.backdrop_path">
-          <img *ngIf="tv.backdrop_path" [src]="{{backdrop_photo}}">
+          <img *ngIf="tv.backdrop_path" [src]="'https://image.tmdb.org/t/p/w500' + tv.backdrop_path">
       </div>
       <div class="buttons">
           
@@ -26,16 +26,16 @@
         <div class="runtime">{{tv.episode_run_time}} minutes</div>
      </div>
     <div class="trailer">
-        <iframe width="100%" 
+        <iframe
+            width="100%" 
             height="315" 
-            [src]="decryptedUrl ? decryptedUrl : null"
-            (load)="decryptedUrl ? onFinishLoading() : null"
-            frameborder="0" 
+            [src]="decryptedUrl"
+            frameborder="20" 
             allowfullscreen>
         </iframe>
   </div>
      <div class="genres">
-        <ion-chip outline color="dark" ngFor="let genre of movie.genres" (click)="navToGenrePage(genre.id)">
+        <ion-chip outline color="light" ngFor="let genre of tv.genres">
             <ion-label>{{ genre.name }}</ion-label>
             <ion-icon name="arrow-forward"></ion-icon>
         </ion-chip>
