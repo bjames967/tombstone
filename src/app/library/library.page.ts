@@ -24,10 +24,19 @@ export class LibraryPage implements OnInit {
               private popoverCtrl: PopoverController) { }
 
    ngOnInit() {
-    editMode=true;
     this.stoneType = 'movies';
     this.onStoneChanged();
 
+  }
+  
+  enterEditMode(){
+    this.editMode = true;
+    this.onStoneChanged();
+  }
+  
+  exitEditMode(){
+    this.editMode = false;
+    this.onStoneChanged();
   }
 
   onStoneChanged(){
@@ -83,10 +92,12 @@ export class LibraryPage implements OnInit {
   
   removeTvTombstone(id: number){
     this.storageService.deleteMovieFromTombstones(id);
+    this.loadTvTombstones();
   }
   
   removeMovieTombstone(id: number){
     this.storageService.deleteTvFromTombstones(id);
+    this.loadMovieTombstones();
   }
     
     
