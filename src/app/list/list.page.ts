@@ -14,6 +14,7 @@ import { SortPagePage } from './../modals/sort-page/sort-page.page'
 export class ListPage implements OnInit {
   listType: 'movies' | 'tv';
   results: StorageUnit[];
+  editMode: boolean;
   
   constructor(private storageService: StorageService,
               private router: Router,
@@ -21,12 +22,21 @@ export class ListPage implements OnInit {
   }
  
   ngOnInit() {
-    console.log('on page')
+    
     this.listType = 'movies';
-    console.log(this.listType);
     this.onListChanged();
     
   }
+  enterEditMode(){
+    this.editMode = true;
+    this.onStoneChanged();
+  }
+  
+  exitEditMode(){
+    this.editMode = false;
+    this.onStoneChanged();
+  }
+
 
   async openSortingModal(ev: any) {
     const popover = await this.popoverCtrl.create({
@@ -38,6 +48,8 @@ export class ListPage implements OnInit {
     });
     return await popover.present();
   }
+  
+  
 
   onListChanged(){
     this.results = null;
