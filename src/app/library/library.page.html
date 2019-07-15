@@ -6,13 +6,16 @@
             <div *ngIf="editMode">
                 <ion-fab vertical="top" horizontal="end" slot="fixed"
                     <ion-fab-button (click)="exitEditMode()>
-                        <ion-icon name="add" color="success"></ion-icon>
+                        <ion-icon name="redo" color="danger"></ion-icon>
                     </ion-fab-button>
                 </ion-fab>
-        
-          <button ion-button color="white" slot="end" (click)="openSortingModal($event)">
-          <ion-icon name="list" color="primary"></ion-icon>
-          </button>
+        <div *ngIf="!editMode">
+          <ion-fab vertical="top" horizontal="end" slot="fixed"
+                    <ion-fab-button (click)="openTombstoneOptionsPopOver($event)>
+                        <ion-icon name="create"></ion-icon>
+                    </ion-fab-button>
+                </ion-fab>
+        </div>
           
         <ion-title color="dark">Tombstones</ion-title>
     </ion-toolbar>
