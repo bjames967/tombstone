@@ -1,9 +1,69 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>favorites</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content>
-
-</ion-content>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons> 
+            <div *ngIf="editMode">
+                <ion-fab vertical="top" horizontal="end" slot="fixed"
+                    <ion-fab-button (click)="exitEditMode()>
+                        <ion-icon name="redo" color="danger"></ion-icon>
+                    </ion-fab-button>
+                </ion-fab>
+        <div *ngIf="!editMode">
+          <ion-fab vertical="top" horizontal="end" slot="fixed"
+                    <ion-fab-button (click)="enterEditMode()>
+                        <ion-icon name="create"></ion-icon>
+                    </ion-fab-button>
+                </ion-fab>
+        </div>
+          
+        <ion-title color="dark">Tombstones</ion-title>
+    </ion-toolbar>
+    <ion-segment [(ngModel)]="stoneType" (ionChange)="onStoneChanged()" color="dark" slot="bottom">
+        <ion-segment-button value="movies">Movies</ion-segment-button>
+        <ion-segment-button value="tv">TV</ion-segment-button>
+    </ion-segment>
+  </ion-header>
+  <ion-content>
+    <div *ngIf="stoneType === 'movies'">
+        <div class="movies-flex">
+            <div class="movie" *ngFor="let item of results" (click)="onMovieClick(item.id)">
+                <!--Remove from library button toggled only if in edit mode-->
+              <div *ngIf="editMode">
+                <ion-fab vertical="top" horizontal="end" slot="fixed"
+                    <ion-fab-button (click)="removeMovieFavorite(item.id)>
+                        <ion-icon name="add" color="success"></ion-icon>
+                    </ion-fab-button>
+                </ion-fab>
+              </div>
+              <div class="poster">
+                <img *ngIf="item.poster_path" class="poster" [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path">
+                <img *ngIf="item.poster_path" class="poster-effect" [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path">
+              </div>
+              <div class="title">{{ item.title }}</div>
+              <div class="year">{{ item.release_date | date:'yyyy' }}</div>
+              <div class="vote"><ion-icon name="star"></ion-icon><b>{{ item.user_rating }}</b>/10</div>
+            </div>
+        </div>
+      </div>
+    <div *ngIf="stoneType === 'tv'">
+    <div class="movies-flex">
+        <div class="movie" *ngFor="let item of results" (click)="onTvClick(item.id)">
+          <div *ngIf="editMode">
+                <ion-fab vertical="top" horizontal="end" slot="fixed"
+                    <ion-fab-button (click)="removeTvFavorite(item.id)>
+                        <ion-icon name="add" color="success"></ion-icon>
+                    </ion-fab-button>
+                </ion-fab>
+          </div>
+          <div class="poster">
+            <img *ngIf="item.poster_path" class="poster" [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path">
+            <img *ngIf="item.poster_path" class="poster-effect" [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path">
+          </div>
+          <div class="title">{{ item.title }}</div>
+          <div class="year">{{ item.release_date | date:'yyyy' }}</div>
+          <div class="vote"><ion-icon name="star"></ion-icon><b>{{ item.user_rating }}</b>/10</div>
+        </div>
+    </div>
+  </div>
+  </ion-content>
