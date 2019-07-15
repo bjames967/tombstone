@@ -16,6 +16,7 @@ import { SortPagePage } from './../modals/sort-page/sort-page.page';
 export class LibraryPage implements OnInit {
   stoneType: 'movies' | 'tv';
   results: StorageUnit[];
+  editMode: boolean;
   
   constructor(private movieService: MoviesService,
               private storageService: StorageService,
@@ -23,6 +24,7 @@ export class LibraryPage implements OnInit {
               private popoverCtrl: PopoverController) { }
 
    ngOnInit() {
+    editMode=true;
     this.stoneType = 'movies';
     this.onStoneChanged();
 
