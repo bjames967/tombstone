@@ -108,6 +108,14 @@ export class MainPage implements OnInit {
     //call engine service
   }
   
+  loadGenres(){
+   
+  }
+  
+  navToGenreTopTrending(){
+    
+  }
+  
 
   
   
