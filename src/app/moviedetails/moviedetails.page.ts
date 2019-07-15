@@ -9,6 +9,8 @@ import { RatingPage } from '../modals/rating/rating.page';
 import { ToastController } from '@ionic/angular';
 import {LoadingController } from '@ionic/angular';
 import { SafeResourceUrl, DomSanitizer } from '@angular/platform-browser';
+import { constructDependencies } from '@angular/core/src/di/reflective_provider';
+import { ViewController, OverlayEventDetail } from '@ionic/core';
 
 //Do these commands for Toast to work correctly
 // ionic cordova plugin add cordova-plugin-x-toast
@@ -48,7 +50,6 @@ export class MoviedetailsPage implements OnInit {
     this.movieService.getMovieDetails(id).subscribe(result => {
         this.movie = result; console.log(this.movie);
     });
-    this.genres = this.movie.genres
     this.movieService.findSimliarMovies(id).subscribe(res => {
         this.similar = res; console.log(this.similar)
     });
@@ -76,9 +77,9 @@ export class MoviedetailsPage implements OnInit {
 
   collectTombstone(){
       this.openRatingModal();
-     let unit = this.storageService.mapMovieToStorageUnit(this.movie, 10);
-      this.storageService.collectMovieTombstone(unit);
-      this.toastSuccess(this.movie, false);
+    //  let unit = this.storageService.mapMovieToStorageUnit(this.movie, 10);
+    //   this.storageService.collectMovieTombstone(unit);
+    //   this.toastSuccess(this.movie, false);
       
   }
   addMovieToWatchlist(){
@@ -114,12 +115,16 @@ export class MoviedetailsPage implements OnInit {
   }
 
   async openRatingModal(){
-    let UserRatingModal = await this.popoverCtrl.create({
+    const UserRatingModal:HTMLIonModalElement = await this.popoverCtrl.create({
       component: RatingPage,
       animated: true, 
     });
+      UserRatingModal.onDidDismiss().then((rating: OverlayEventDetail) => {
+        console.log(rating.data)
+      });
+
    //get data from rating modal
-    return await UserRatingModal.present();
+    await UserRatingModal.present();
   }
 
   async openSortingModal(ev: any) {

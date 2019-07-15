@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PopoverController } from '@ionic/angular';
 
 @Component({
   selector: 'app-rating',
@@ -6,10 +7,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./rating.page.scss'],
 })
 export class RatingPage implements OnInit {
+  result: number;
+  constructor(private popoverCtrl: PopoverController) { }
 
-  constructor() { }
 
   ngOnInit() {
+  }
+
+  async dismiss(){
+    await this.popoverCtrl.dismiss(this.result);
   }
 
 }

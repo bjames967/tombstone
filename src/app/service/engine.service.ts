@@ -77,7 +77,7 @@ export class EngineService {
  
   
  findTopGenresIds(){
-     this.storageService.getMovieGenres().then((ids: number[]) => {
+     this.storageService.getGenres().then((ids: number[]) => {
        this.top_genres = ids;
      });
  }

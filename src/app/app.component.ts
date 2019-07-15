@@ -31,6 +31,12 @@ export class AppComponent {
       badge: false
     },
     {
+      title: 'Favorites',
+      url: '/favorites',
+      icon: 'star',
+      badge: true
+    },
+    {
       title: 'Recommended',
       url: 'recommended',
       icon: 'thumbs-up',

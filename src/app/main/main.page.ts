@@ -14,7 +14,7 @@ export class MainPage implements OnInit {
   @ViewChild("doughnutCanvas") doughnutCanvas: ElementRef;
   sliderOpts = {
     zoom: false,
-    slidesPerView: 1.5,
+    slidesPerView: 1.75,
     spaceBetween: 20,
     centeredSlides: true
   };
@@ -33,14 +33,35 @@ export class MainPage implements OnInit {
     
     //issue with calling size on database
   ngOnInit() {
+    this.displayMyActivity = true;
+    this.displayMyWatchlistQueue = true;
+    this.loadQueueWatchlist();
+    this.doughnutChart = new Chart(this.doughnutCanvas.nativeElement, {
+      type: "doughnut",
+      data: {
+        labels: ["Movie Tombstones Collected", "TV Tombstones Collected"],
+        datasets: [
+          {
+            label: "# of votes",
+            data: [4,3],
+            backgroundColor: [
+              "rgba(255, 99, 132, 0.2)",
+              "rgba(54, 162, 235, 0.2)"
+            ],
+            hoverBackgroundColor: ["#FF6384", "#36A2EB"]
+          }
+        ]
+      }
+    });
     //check size of all 3 stored elements
-   this.checkDataSize(); 
-   this.loadMainPage();
+  //  this.checkDataSize(); 
+  //  this.loadMainPage();
   }
   
   loadQueueWatchlist(){
-   
-    
+      this.storageService.getMovieWatchList().then((list: StorageUnit[]) => {
+        this.watchlistQueue = list; console.log(this.watchlistQueue);
+      });
   }
   
   loadFavoritesList(){
@@ -51,16 +72,16 @@ export class MainPage implements OnInit {
   
   
   loadMainPage(){
-    this.presentLoading();
+    // this.presentLoading();
     this.loadMyActivityGraphs();
-    this.loadQueueWatchlist();
+    // this.loadQueueWatchlist();
       
   }
   
   async presentLoading(){
-   let loading =  this.loadingCtrl.create({
+   let loading =  await this.loadingCtrl.create({
      spinner: 'dots',
-     duration: '20000'
+     duration: 20000
    });
     return loading.present();
   }
@@ -82,7 +103,7 @@ export class MainPage implements OnInit {
           }
         ]
       }
-    })
+    });
   }
   
   

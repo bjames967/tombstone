@@ -76,6 +76,8 @@ export class StorageService {
   getMovieFavorites(): Promise<StorageUnit[]>{
     return this.storage.get(MOVIE_FAVORITES);
   }
+
+  
   //assuming it is added to tombstones first
   addTvFavorite(unit: StorageUnit): Promise<any>{
       return this.storage.get(TV_FAVORITES).then((list: StorageUnit[]) => {
@@ -127,25 +129,25 @@ export class StorageService {
   }
   
   addGenre(id: number): Promise<any> {
-     return this.storage.get(HIGH_GENRE).then((list: number[]) => {
+     return this.storage.get(HIGH_GENRES).then((list: number[]) => {
         if(list) {
           list.push(id);
           console.log(list);
-          return this.storage.set(HIGH_GENRE, list);
+          return this.storage.set(HIGH_GENRES, list);
         }else{
-          return this.storage.set(HIGH_GENRE, [id]); 
+          return this.storage.set(HIGH_GENRES, [id]); 
         }
       });
   }
   
   deleteGenre(id: number){
-    return this.storage.get(HIG_GENRE).then((list: number[]) => {
+    return this.storage.get(HIGH_GENRES).then((list: number[]) => {
       if(!list || list.length === 0){
         console.log('nothing to remove with ID: #{id}');
         return null;
       } 
-      let newList = list.filter(obj => obj.id !== unit.id);
-      return this.storage.set(HIGH_GENRE, newList);
+      let newList = list.filter(obj => obj !== id);
+      return this.storage.set(HIGH_GENRES, newList);
      });
   }
   

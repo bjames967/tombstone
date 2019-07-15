@@ -4,6 +4,7 @@ import { Movie } from './../models/Movie'
 import { TVshow } from './../models/TVshow'
 import { Actor } from './../models/Actor'
 import { Router } from '@angular/router'
+import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-search',
@@ -20,7 +21,8 @@ export class SearchPage implements OnInit {
   results: Movie[] | TVshow[] | Actor[];
   
   constructor(private movieservice: MoviesService, 
-              private router: Router) { }
+              private router: Router,
+              private loadingCtrl: LoadingController) { }
 
   ngOnInit() {
     this.searchType = 'movies';

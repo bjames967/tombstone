@@ -17,7 +17,7 @@ export class HomePage {
 
   constructor(private movieService: MoviesService,
               private router: Router,
-              private loadingController: LoadingController) {}
+              private loadingCtrl: LoadingController) {}
   
 
   ngOnInit(){
