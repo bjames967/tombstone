@@ -102,24 +102,24 @@ export class StorageService {
           }
         });
   }
-  deleteMovieFromFavorites(unit: StorageUnit): Promise<StorageUnit>{
+  deleteMovieFromFavorites(id: number): Promise<StorageUnit>{
     return this.storage.get(MOVIE_FAVORITES).then((list: StorageUnit[]) => {
       if(!list || list.length === 0){
         console.log('nothing to remove with ID: #{id}');
         return null;
       } 
-      let newList = list.filter(obj => obj.id !== unit.id);
+      let newList = list.filter(obj => obj.id !== id);
       return this.storage.set(MOVIE_FAVORITES, newList);
      });
   }
   
-  deleteTvFromFavorites(unit: StorageUnit): Promise<StorageUnit>{
+  deleteTvFromFavorites(id: number): Promise<StorageUnit>{
     return this.storage.get(TV_FAVORITES).then((list: StorageUnit[]) => {
       if(!list || list.length === 0){
         console.log('nothing to remove with ID: #{id}');
         return null;
       } 
-      let newList = list.filter(obj => obj.id !== unit.id);
+      let newList = list.filter(obj => obj.id !== id);
       return this.storage.set(TV_FAVORITES, newList);
      });
   }
