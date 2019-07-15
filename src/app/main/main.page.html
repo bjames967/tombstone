@@ -59,6 +59,15 @@
            </ion-slides>
       </div>
     </div>
+    
+    <div class="genres">
+        <div *ngIf="displayGenres">
+            <ion-label>Genres you like</ion-label>
+                <div class="genre" *ngFor="let genre of genres">
+                    <ion-chip color="light" slot="end" (click)="navToGenreTopTrending(genre.id)">{{genre.name}}</ion-chip>
+                </div>
+        </div>
+    </div>
 
       <div class="tombstoneFooter">
         <ion-label>Footer disclaimer</ion-label>    
