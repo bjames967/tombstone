@@ -2,7 +2,20 @@
     <ion-toolbar>
         <ion-buttons slot="start">
             <ion-menu-button></ion-menu-button>
-        </ion-buttons>  
+        </ion-buttons>
+        <div *ngIf="editMode">
+                <ion-fab vertical="top" horizontal="end" slot="fixed"
+                    <ion-fab-button (click)="exitEditMode()>
+                        <ion-icon name="redo" color="danger"></ion-icon>
+                    </ion-fab-button>
+                </ion-fab>
+        <div *ngIf="!editMode">
+          <ion-fab vertical="top" horizontal="end" slot="fixed"
+                <ion-fab-button (click)="enterEditMode()>
+                    <ion-icon name="create"></ion-icon>
+                </ion-fab-button>
+          </ion-fab>
+        </div>
         <ion-title color="dark">Watchlist</ion-title>
     </ion-toolbar>
     <ion-segment [(ngModel)]="listType" (ionChange)="onListChanged()" color="dark" slot="bottom">
@@ -14,6 +27,13 @@
     <div *ngIf="listType === 'movies'">
         <div class="movies-flex">
             <div class="movie" *ngFor="let item of results" (click)="onMovieClick(item.id)">
+                <div *ngIf="editMode">
+                    <ion-fab vertical="top" horizontal="end" slot="fixed"
+                        <ion-fab-button (click)="removeMovie(item.id)>
+                            <ion-icon name="add" color="success"></ion-icon>
+                        </ion-fab-button>
+                    </ion-fab>
+                </div>
               <div class="poster">
                 <img *ngIf="item.poster_path" class="poster" [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path">
                 <img *ngIf="item.poster_path" class="poster-effect" [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path">
@@ -26,6 +46,13 @@
     <div *ngIf="listType === 'tv'">
     <div class="movies-flex">
         <div class="movie" *ngFor="let item of results" (click)="onTvClick(item.id)">
+            <div *ngIf="editMode">
+               <ion-fab vertical="top" horizontal="end" slot="fixed"
+                 <ion-fab-button (click)="removeShow(item.id)>
+                       <ion-icon name="add" color="success"></ion-icon>
+                 </ion-fab-button>
+               </ion-fab>
+            </div>
           <div class="poster">
             <img *ngIf="item.poster_path" class="poster" [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path">
             <img *ngIf="item.poster_path" class="poster-effect" [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path">
