@@ -3,6 +3,13 @@
         <ion-buttons slot="start">
             <ion-menu-button></ion-menu-button>
         </ion-buttons> 
+            <div *ngIf="editMode">
+                <ion-fab vertical="top" horizontal="end" slot="fixed"
+                    <ion-fab-button (click)="exitEditMode()>
+                        <ion-icon name="add" color="success"></ion-icon>
+                    </ion-fab-button>
+                </ion-fab>
+        
           <button ion-button color="white" slot="end" (click)="openSortingModal($event)">
           <ion-icon name="list" color="primary"></ion-icon>
           </button>
@@ -18,6 +25,14 @@
     <div *ngIf="stoneType === 'movies'">
         <div class="movies-flex">
             <div class="movie" *ngFor="let item of results" (click)="onMovieClick(item.id)">
+                <!--Remove from library button toggled only if in edit mode-->
+              <div *ngIf="editMode">
+                <ion-fab vertical="top" horizontal="end" slot="fixed"
+                    <ion-fab-button (click)="removeMovieTombstone(item.id)>
+                        <ion-icon name="add" color="success"></ion-icon>
+                    </ion-fab-button>
+                </ion-fab>
+              </div>
               <div class="poster">
                 <img *ngIf="item.poster_path" class="poster" [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path">
                 <img *ngIf="item.poster_path" class="poster-effect" [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path">
@@ -31,6 +46,13 @@
     <div *ngIf="stoneType === 'tv'">
     <div class="movies-flex">
         <div class="movie" *ngFor="let item of results" (click)="onTvClick(item.id)">
+          <div *ngIf="editMode">
+                <ion-fab vertical="top" horizontal="end" slot="fixed"
+                    <ion-fab-button (click)="removeTvTombstone(item.id)>
+                        <ion-icon name="add" color="success"></ion-icon>
+                    </ion-fab-button>
+                </ion-fab>
+          </div>
           <div class="poster">
             <img *ngIf="item.poster_path" class="poster" [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path">
             <img *ngIf="item.poster_path" class="poster-effect" [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path">
