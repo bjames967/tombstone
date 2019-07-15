@@ -22,20 +22,32 @@ export class MainPage implements OnInit {
   
   constructor(private storageService: StorageService,
               private loadingCtrl: LoadingController) { }
-    private doughnutChart: Chart;
-    watchlistQueue: StorageUnit[];
-    favoriteMovies: StorageUnit[];
-    favoriteShows: StorageUnit[];
-    displayFavoriteMovies: boolean;
-    displayFavoriteShows: boolean;
+    
     displayMyActivity: boolean;
+    private doughnutChart: Chart;
+  
     displayMyWatchlistQueue: boolean;
+    watchlistQueue: StorageUnit[];
+  
+    displayMyRecents: boolean;
+    recentlyWatchedQueue: StorageUnit[]
+  
+    displayMyFavorites: boolean;
+    favoritesQueue: StorageUnit[];
+  
+    displayRecommended: boolean;
+    recommendedQueue: StorageUnit[];
+    
+    
     
     //issue with calling size on database
   ngOnInit() {
     this.displayMyActivity = true;
     this.displayMyWatchlistQueue = true;
-    this.loadQueueWatchlist();
+    this.displayRecentlyWatchedQueue = true;
+    this.loadWatchlistQueue();
+    this.loadFavoritesQueue();
+    this.loadRecentlyWatchedQueue();
     this.doughnutChart = new Chart(this.doughnutCanvas.nativeElement, {
       type: "doughnut",
       data: {
@@ -53,29 +65,7 @@ export class MainPage implements OnInit {
         ]
       }
     });
-    //check size of all 3 stored elements
-  //  this.checkDataSize(); 
-  //  this.loadMainPage();
-  }
-  
-  loadQueueWatchlist(){
-      this.storageService.getMovieWatchList().then((list: StorageUnit[]) => {
-        this.watchlistQueue = list; console.log(this.watchlistQueue);
-      });
-  }
-  
-  loadFavoritesList(){
-   //TODO check if list is empty 
-  }
-  
-  
-  
-  
-  loadMainPage(){
-    // this.presentLoading();
-    this.loadMyActivityGraphs();
-    // this.loadQueueWatchlist();
-      
+   
   }
   
   async presentLoading(){
@@ -85,53 +75,40 @@ export class MainPage implements OnInit {
    });
     return loading.present();
   }
-
-  loadMyActivityGraphs(){
-    this.doughnutChart = new Chart(this.doughnutCanvas.nativeElement, {
-      type: "doughnut",
-      data: {
-        labels: ["Movie Tombstones Collected", "TV Tombstones Collected"],
-        datasets: [
-          {
-            label: "# of votes",
-            data: [4,3],
-            backgroundColor: [
-              "rgba(255, 99, 132, 0.2)",
-              "rgba(54, 162, 235, 0.2)"
-            ],
-            hoverBackgroundColor: ["#FF6384", "#36A2EB"]
-          }
-        ]
-      }
-    });
+  
+  
+  loadWatchlistQueue(){
+      this.storageService.getMovieWatchList().then((list: StorageUnit[]) => {
+        let step;
+        for(step = 0; step < 5; step++){
+          this.watchlistQueue.unshift(list.pop());
+        }
+      });
   }
   
-  
-    
-    
-    
-    
-    
-    
-    
-  getFavoriteMovies(){
+  loadFavoritesQueue(){
    this.storageService.getMovieFavorites().then((list: StorageUnit[]) => {
       let step;
       for(step = 0; step < 5; step++){
         this.favoriteMovies.unshift(list.pop());
       }
-      return this.favoriteMovies;
     });
   }
-  
-  getFavoriteShows(){
-     return this.storageService.getTvFavorites().then((list: StorageUnit[]) => {
+    
+  loadRecentlyWatchedQueue(){
+   this.storageService.getMovieTombstones().then((list: StorageUnit[]) => {
       let step;
       for(step = 0; step < 5; step++){
-        this.favoriteShows.unshift(list.pop());
+        this.recentlyWatchedQueue.unshift(list.pop());
       }
     });
   }
+    
+  loadRecommendedQueue(){
+    //call engine service
+  }
+  
+
   
   
   
