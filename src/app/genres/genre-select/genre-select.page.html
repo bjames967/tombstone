@@ -5,5 +5,18 @@
 </ion-header>
 
 <ion-content>
+  <div class="movie-section">
+    <ion-chip outline color="light" *ngFor="let genre of MovieGenres">
+      <ion-label>{{genre.name}}</ion-label>
+      <ion-icon name="arrow-forward"></ion-icon>
+     </ion-chip>
+  </div>
+  <hr>
+  <div class="show-section">
+    <ion-chip outline color="light" *ngFor="let genre of ShowGenres">
+      <ion-label>{{genre.name}}</ion-label>
+      <ion-icon name="arrow-forward"></ion-icon>
+     </ion-chip>
+  </div>
 
 </ion-content>
