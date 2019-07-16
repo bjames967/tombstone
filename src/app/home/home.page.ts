@@ -5,6 +5,7 @@ import { MoviesService} from './../service/movies.service'
 import { ShowdetailsPage } from '../showdetails/showdetails.page';
 import { Router } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
+import { Genres } from './../models/Genres';
 
 @Component({
   selector: 'app-home',
@@ -94,6 +95,20 @@ this.movieService.getTrendingMovies().subscribe(res => {
      this.results = res;
      console.log(this.results);
    });
+  }
+  
+  private SearchMovieByGenre(id: number){
+    this.movieService.getMovieByGenres(id).subscribe(res => {
+      this.results = res;
+      console.log(this.results);
+    });
+  }
+  
+  private SearchTvByGenre(id: number){
+    this.movieService.getShowByGenres(id).subscribe(res => {
+      this.results = res;
+      console.log(this.results);
+    });
   }
   
 }
