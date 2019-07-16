@@ -5,6 +5,7 @@
 </ion-header>
 
 <ion-content>
+  <div *ngIf="type ==='m'">
    <div class="movies-flex">
             <div class="movie" *ngFor="let item of results">
               <div class="poster">
@@ -13,8 +14,23 @@
               </div>
               <div class="title">{{ item.title }}</div>
               <div class="year">{{ item.release_date | date:'yyyy' }}</div>
-              <div class="vote"><ion-icon name="star"></ion-icon><b>{{ item.user_rating }}</b>/10</div>
-            </div>
-        </div>
+              <div class="vote"><ion-icon name="star"></ion-icon><b>{{ item.vote_average }}</b>/10</div>
+           </div>
+    </div>
+  </div>
+  
+  <div *ngIf="type ==='t'">
+   <div class="movies-flex">
+            <div class="movie" *ngFor="let item of results">
+              <div class="poster">
+                <img *ngIf="item.poster_path" class="poster" (click)="onTvClick(item.id)" [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path">
+                <img *ngIf="item.poster_path" class="poster-effect" [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path">
+              </div>
+              <div class="title">{{ item.name }}</div>
+              <div class="year">{{ item.first_air_date | date:'yyyy' }}</div>
+              <div class="vote"><ion-icon name="star"></ion-icon><b>{{ item.vote_average }}</b>/10</div>
+           </div>
+    </div>
+  </div>
 
 </ion-content>
