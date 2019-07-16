@@ -1,10 +1,12 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { StorageUnit } from './../models/StorageUnit';
 import { StorageService } from './../service/storage.service';
-import { Chart } from 'chart.js';
+import * as HighCharts from 'higcharts';
 import { LoadingController } from '@ionic/angular';
 import { Router } from '@angular/router';
 
+//https://www.highcharts.com/demo/network-graph
+//npm install highcharts --save
 
 @Component({
   selector: 'app-main',
@@ -19,8 +21,7 @@ export class MainPage implements OnInit {
     spaceBetween: 20,
     centeredSlides: true
   };
-    
-  
+
   constructor(private storageService: StorageService,
               private loadingCtrl: LoadingController,
               private router: Router) { }
@@ -56,25 +57,62 @@ export class MainPage implements OnInit {
     this.loadWatchlistQueue();
     this.loadFavoritesQueue();
     this.loadRecentlyWatchedQueue();
-    // this.doughnutChart = new Chart(this.doughnutCanvas.nativeElement, {
-    //   type: "doughnut",
-    //   data: {
-    //     labels: ["Movie Tombstones Collected", "TV Tombstones Collected"],
-    //     datasets: [
-    //       {
-    //         label: "# of votes",
-    //         data: [4,3],
-    //         backgroundColor: [
-    //           "rgba(255, 99, 132, 0.2)",
-    //           "rgba(54, 162, 235, 0.2)"
-    //         ],
-    //         hoverBackgroundColor: ["#FF6384", "#36A2EB"]
-    //       }
-    //     ]
-    //   }
-    // });
-   
   }
+  
+ionViewDidLoad(){  
+ var chart = Highcharts.chart('container', {
+    chart: {
+        plotBackgroundColor: null,
+        plotBorderWidth: 0,
+        plotShadow: false
+    },
+    title: {
+        text: 'Browser<br>shares<br>2017',
+        align: 'center',
+        verticalAlign: 'middle',
+        y: 40
+    },
+    tooltip: {
+        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+    },
+    plotOptions: {
+        pie: {
+            dataLabels: {
+                enabled: true,
+                distance: -50,
+                style: {
+                    fontWeight: 'bold',
+                    color: 'white'
+                }
+            },
+            startAngle: -90,
+            endAngle: 90,
+            center: ['50%', '75%'],
+            size: '110%'
+        }
+    },
+    series: [{
+        type: 'pie',
+        name: 'Browser share',
+        innerSize: '50%',
+        data: [
+            ['My Movie Tombstones', 58.9],
+            ['My Movie Watchlist', 13.29],
+            ['My Movie Favorites', 3],
+            ['My TV Tombstones', 13],
+            ['My TV Watchlist', 3.78],
+            ['MY TV Favorites', 3.42],
+        ]
+    }]
+ });
+}
+    
+       
+    
+          
+        
+      
+     
 
   onMovieClick(id){
     this.router.navigate(['movie', id])
