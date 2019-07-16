@@ -233,17 +233,20 @@ export class StorageService {
   }
   
   deleteMovieFromTombstones(id: number): Promise<StorageUnit> {
+    console.log('deleting Movie')
      return this.storage.get(MOVIE_TOMBSTONE_KEYS).then((list: StorageUnit[]) => {
       if(!list || list.length === 0){
         console.log('nothing to remove with ID: #{id}');
         return null;
       } 
       let newList = list.filter(obj => obj.id !== id);
+      console.log(newList)
       return this.storage.set(MOVIE_TOMBSTONE_KEYS, newList);
      });
   }
   
    deleteTvFromWatchList(id: number): Promise<StorageUnit> {
+     
     return this.storage.get(TV_WATCH_LIST_KEYS).then((list: StorageUnit[]) => {
       if(!list || list.length === 0){
         console.log('nothing to remove with ID: #{id}');
@@ -255,12 +258,14 @@ export class StorageService {
   }
   
   deleteTvFromTombstones(id: number): Promise<StorageUnit> {
+    console.log('deleting tv tombstone')
      return this.storage.get(TV_TOMBSTONE_KEYS).then((list: StorageUnit[]) => {
       if(!list || list.length === 0){
         console.log('nothing to remove with ID: #{id}');
         return null;
       } 
       let newList = list.filter(obj => obj.id !== id);
+      console.log(newList);
       return this.storage.set(TV_TOMBSTONE_KEYS, newList);
      });
   }

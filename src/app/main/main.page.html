@@ -7,7 +7,7 @@
     <ion-title>Main Page</ion-title>
 </ion-header>
 <ion-content>
-    <div class="MyActivity">
+    <div class="QuickAction">
         <div *ngIf="displayMyActivity">
             <ion-label>My Activity</ion-label>
             <div class="chart">
@@ -16,45 +16,49 @@
         </div>
     </div>
     
-    <div class="CarousalQueue">
+    <div class="QuickAction">
       <div *ngIf="displayMyWatchlistQueue">
         <ion-label>Quick Action</ion-label>
           <ion-slides [options]="sliderOpts">
               <ion-slide *ngFor="let item of watchlistQueue" (click)="onMovieClick(item.id)">
                         <img *ngIf="item.poster_path" class="poster" [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path">
+
                   </ion-slide>
            </ion-slides>
       </div>
     </div>
 
-    <div class="CarousalQueue">
-      <div *ngIf="displayMyRecents">
-        <ion-label>Quick Action</ion-label>
+    <div class="QuickAction">
+      <div *ngIf="displayRecentlyWatchedQueue">
+        <ion-label>Recently Watched</ion-label>
           <ion-slides [options]="sliderOpts">
-              <ion-slide *ngFor="let item of RecentWatchedQueue" (click)="onMovieClick(item.id)">
+              <ion-slide *ngFor="let item of recentlyWatchedQueue" (click)="onMovieClick(item.id)">
                         <img *ngIf="item.poster_path" class="poster" [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path">
+
                   </ion-slide>
            </ion-slides>
       </div>
     </div>
     
-    <div class="CarousalQueue">
+    <div class="QuickAction">
       <div *ngIf="displayMyFavorites">
         <ion-label>Quick Action</ion-label>
           <ion-slides [options]="sliderOpts">
               <ion-slide *ngFor="let item of favoritesQueue" (click)="onMovieClick(item.id)">
                         <img *ngIf="item.poster_path" class="poster" [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path">
+
                   </ion-slide>
            </ion-slides>
       </div>
     </div>
     
-    <div class="QuickActions">
+    <div class="QuickAction">
       <div *ngIf="displayRecommended">
         <ion-label>Quick Action</ion-label>
           <ion-slides [options]="sliderOpts">
               <ion-slide *ngFor="let item of recommendedQueue" (click)="onMovieClick(item.id)">
                         <img *ngIf="item.poster_path" class="poster" [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path">
+
                   </ion-slide>
            </ion-slides>
       </div>

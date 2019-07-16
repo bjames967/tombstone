@@ -91,13 +91,13 @@ export class LibraryPage implements OnInit {
   }
   
   removeTvTombstone(id: number){
-    this.storageService.deleteMovieFromTombstones(id);
-    this.loadTvTombstones();
+    this.storageService.deleteTvFromTombstones(id);
+    
   }
   
   removeMovieTombstone(id: number){
-    this.storageService.deleteTvFromTombstones(id);
-    this.loadMovieTombstones();
+    this.storageService.deleteMovieFromTombstones(id);
+    
   }
     
     

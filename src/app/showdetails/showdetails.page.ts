@@ -43,7 +43,7 @@ export class ShowdetailsPage implements OnInit {
   
    buildUrl(){
      console.log('function hit')
-    this.decryptedUrl = this.domSanitizer.bypassSecurityTrustResourceUrl("https://www.youtube.com/embed?v=m3haGNyav-s");
+    this.decryptedUrl = this.domSanitizer.bypassSecurityTrustResourceUrl("https://www.youtube.com/embed?v=mkGT1c98soU");
   
   }
  
@@ -57,9 +57,15 @@ export class ShowdetailsPage implements OnInit {
    });
   }
 
-  async toastSuccess(unit: TVdetails){
+  async toastSuccess(unit: TVdetails, type: boolean){
+    let loc;
+    if(type){
+      loc = 'to Watchlist'
+    }else{
+      loc = 'to Tombstones'
+    }
     let showToast = await this.toast.create({
-      message: 'success',
+      message: `successfully added ${unit.name} ${loc}`,
       duration: 2000,
       color: 'success',
       position: 'bottom'
@@ -69,7 +75,7 @@ export class ShowdetailsPage implements OnInit {
 
   async toastFailure(unit: TVdetails){
     let showToast = await this.toast.create({
-      message: 'Failure',
+      message: 'failure',
       duration: 2000,
       color: 'danger',
       position: 'bottom'
@@ -77,18 +83,21 @@ export class ShowdetailsPage implements OnInit {
     return await showToast.present() 
   }
 
+
   
   addTvToWatchList(){
     console.log('function hit')
     let unit =  this.storageService.mapTvToStorageUnit(this.tv, 10);
     this.storageService.addToTvWatchList(unit);
     console.log('added show to watchlist');
+    this.toastSuccess(this.tv, true)
+
   }
 
   collectTombstone(){
     let unit =  this.storageService.mapTvToStorageUnit(this.tv, 10);
     this.storageService.collectTvTombstone(unit);
-    this.toastSuccess(this.tv);
+    this.toastSuccess(this.tv, false);
   }
 
   onSeasonClick(id, season_number){

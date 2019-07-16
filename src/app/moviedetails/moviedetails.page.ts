@@ -9,7 +9,6 @@ import { RatingPage } from '../modals/rating/rating.page';
 import { ToastController } from '@ionic/angular';
 import {LoadingController } from '@ionic/angular';
 import { SafeResourceUrl, DomSanitizer } from '@angular/platform-browser';
-import { constructDependencies } from '@angular/core/src/di/reflective_provider';
 import { ViewController, OverlayEventDetail } from '@ionic/core';
 
 //Do these commands for Toast to work correctly
@@ -76,10 +75,10 @@ export class MoviedetailsPage implements OnInit {
   }
 
   collectTombstone(){
-      this.openRatingModal();
-    //  let unit = this.storageService.mapMovieToStorageUnit(this.movie, 10);
-    //   this.storageService.collectMovieTombstone(unit);
-    //   this.toastSuccess(this.movie, false);
+      // this.openRatingModal();
+     let unit = this.storageService.mapMovieToStorageUnit(this.movie, 10);
+      this.storageService.collectMovieTombstone(unit);
+      this.toastSuccess(this.movie, false);
       
   }
   addMovieToWatchlist(){

@@ -3,6 +3,7 @@ import { StorageUnit } from './../models/StorageUnit';
 import { StorageService } from './../service/storage.service';
 import { Chart } from 'chart.js';
 import { LoadingController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -21,22 +22,29 @@ export class MainPage implements OnInit {
     
   
   constructor(private storageService: StorageService,
-              private loadingCtrl: LoadingController) { }
+              private loadingCtrl: LoadingController,
+              private router: Router) { }
     
     displayMyActivity: boolean;
     private doughnutChart: Chart;
   
     displayMyWatchlistQueue: boolean;
-    watchlistQueue: StorageUnit[];
+    watchlistQueue: StorageUnit[]=[];
   
-    displayMyRecents: boolean;
-    recentlyWatchedQueue: StorageUnit[]
+    displayRecentlyWatchedQueue: boolean;
+    recentlyWatchedQueue: StorageUnit[]=[];
   
     displayMyFavorites: boolean;
-    favoritesQueue: StorageUnit[];
+    favoritesQueue: StorageUnit[] = [];
   
     displayRecommended: boolean;
-    recommendedQueue: StorageUnit[];
+    recommendedQueue: StorageUnit[]=[];
+
+    displayGenres: boolean;
+    genres: {
+      id: number,
+      name: string
+    }[];
     
     
     
@@ -48,25 +56,34 @@ export class MainPage implements OnInit {
     this.loadWatchlistQueue();
     this.loadFavoritesQueue();
     this.loadRecentlyWatchedQueue();
-    this.doughnutChart = new Chart(this.doughnutCanvas.nativeElement, {
-      type: "doughnut",
-      data: {
-        labels: ["Movie Tombstones Collected", "TV Tombstones Collected"],
-        datasets: [
-          {
-            label: "# of votes",
-            data: [4,3],
-            backgroundColor: [
-              "rgba(255, 99, 132, 0.2)",
-              "rgba(54, 162, 235, 0.2)"
-            ],
-            hoverBackgroundColor: ["#FF6384", "#36A2EB"]
-          }
-        ]
-      }
-    });
+    // this.doughnutChart = new Chart(this.doughnutCanvas.nativeElement, {
+    //   type: "doughnut",
+    //   data: {
+    //     labels: ["Movie Tombstones Collected", "TV Tombstones Collected"],
+    //     datasets: [
+    //       {
+    //         label: "# of votes",
+    //         data: [4,3],
+    //         backgroundColor: [
+    //           "rgba(255, 99, 132, 0.2)",
+    //           "rgba(54, 162, 235, 0.2)"
+    //         ],
+    //         hoverBackgroundColor: ["#FF6384", "#36A2EB"]
+    //       }
+    //     ]
+    //   }
+    // });
    
   }
+
+  onMovieClick(id){
+    this.router.navigate(['movie', id])
+ }
+ 
+ onTvClick(id){
+    this.router.navigate(['tv', id])
+ }
+
   
   async presentLoading(){
    let loading =  await this.loadingCtrl.create({
@@ -81,16 +98,18 @@ export class MainPage implements OnInit {
       this.storageService.getMovieWatchList().then((list: StorageUnit[]) => {
         let step;
         for(step = 0; step < 5; step++){
-          this.watchlistQueue.unshift(list.pop());
+          this.watchlistQueue.unshift(list.shift());
         }
+        console.log(this.watchlistQueue);
       });
   }
   
   loadFavoritesQueue(){
+    let list = this.storageService.getMovieFavorites
    this.storageService.getMovieFavorites().then((list: StorageUnit[]) => {
       let step;
       for(step = 0; step < 5; step++){
-        this.favoriteMovies.unshift(list.pop());
+        this.favoritesQueue.unshift(list.shift());
       }
     });
   }
@@ -99,7 +118,7 @@ export class MainPage implements OnInit {
    this.storageService.getMovieTombstones().then((list: StorageUnit[]) => {
       let step;
       for(step = 0; step < 5; step++){
-        this.recentlyWatchedQueue.unshift(list.pop());
+        this.recentlyWatchedQueue.unshift(list.shift());
       }
     });
   }
@@ -109,7 +128,7 @@ export class MainPage implements OnInit {
   }
   
   loadGenres(){
-   
+    //TODO load all genres into an array to output as ion tags
   }
   
   navToGenreTopTrending(){

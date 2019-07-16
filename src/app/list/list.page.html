@@ -3,21 +3,21 @@
         <ion-buttons slot="start">
             <ion-menu-button></ion-menu-button>
         </ion-buttons>
-        <div *ngIf="editMode">
-                <ion-fab vertical="top" horizontal="end" slot="fixed"
-                    <ion-fab-button (click)="exitEditMode()>
-                        <ion-icon name="redo" color="danger"></ion-icon>
-                    </ion-fab-button>
-                </ion-fab>
-        <div *ngIf="!editMode">
-          <ion-fab vertical="top" horizontal="end" slot="fixed"
-                <ion-fab-button (click)="enterEditMode()>
+        <ion-buttons slot="end">
+            <div *ngIf="editMode">
+                <ion-button (click)="exitEditMode()">
+                    <ion-icon name="redo" color="danger"></ion-icon>
+                </ion-button>
+            </div>
+            <div *ngIf="!editMode">
+                <ion-button (click)="enterEditMode()">
                     <ion-icon name="create"></ion-icon>
-                </ion-fab-button>
-          </ion-fab>
-        </div>
+                </ion-button>
+            </div>
+        </ion-buttons>
         <ion-title color="dark">Watchlist</ion-title>
     </ion-toolbar>
+
     <ion-segment [(ngModel)]="listType" (ionChange)="onListChanged()" color="dark" slot="bottom">
         <ion-segment-button value="movies">Movies</ion-segment-button>
         <ion-segment-button value="tv">TV</ion-segment-button>
@@ -26,16 +26,14 @@
   <ion-content>
     <div *ngIf="listType === 'movies'">
         <div class="movies-flex">
-            <div class="movie" *ngFor="let item of results" (click)="onMovieClick(item.id)">
+            <div class="movie" *ngFor="let item of results">
                 <div *ngIf="editMode">
-                    <ion-fab vertical="top" horizontal="end" slot="fixed"
-                        <ion-fab-button (click)="removeMovie(item.id)>
-                            <ion-icon name="add" color="success"></ion-icon>
-                        </ion-fab-button>
-                    </ion-fab>
+                    <ion-button (click)="removeMovie(item.id)">
+                        <ion-icon name="remove-circle"></ion-icon>
+                    </ion-button>
                 </div>
               <div class="poster">
-                <img *ngIf="item.poster_path" class="poster" [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path">
+                <img *ngIf="item.poster_path" class="poster" (click)="onMovieClick(item.id)" [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path">
                 <img *ngIf="item.poster_path" class="poster-effect" [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path">
               </div>
               <div class="title">{{ item.title }}</div>
@@ -45,16 +43,14 @@
     </div>
     <div *ngIf="listType === 'tv'">
     <div class="movies-flex">
-        <div class="movie" *ngFor="let item of results" (click)="onTvClick(item.id)">
+        <div class="movie" *ngFor="let item of results">
             <div *ngIf="editMode">
-               <ion-fab vertical="top" horizontal="end" slot="fixed"
-                 <ion-fab-button (click)="removeShow(item.id)>
-                       <ion-icon name="add" color="success"></ion-icon>
-                 </ion-fab-button>
-               </ion-fab>
+                <ion-button (click)="removeShow(item.id)">
+                    <ion-icon name="remove-circle"></ion-icon>
+                </ion-button>
             </div>
           <div class="poster">
-            <img *ngIf="item.poster_path" class="poster" [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path">
+            <img *ngIf="item.poster_path" class="poster" (click)="onTvClick(item.id)" [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path">
             <img *ngIf="item.poster_path" class="poster-effect" [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path">
           </div>
           <div class="title">{{ item.title }}</div>

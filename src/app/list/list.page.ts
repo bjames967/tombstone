@@ -22,19 +22,19 @@ export class ListPage implements OnInit {
   }
  
   ngOnInit() {
-    
+    this.editMode = false;
     this.listType = 'movies';
     this.onListChanged();
     
   }
   enterEditMode(){
     this.editMode = true;
-    this.onStoneChanged();
+    this.onListChanged();
   }
   
   exitEditMode(){
     this.editMode = false;
-    this.onStoneChanged();
+    this.onListChanged();
   }
 
 
@@ -89,11 +89,13 @@ export class ListPage implements OnInit {
   }
   
   removeShow(id: number){
-    return this.storageService.deleteTvFromWatchList(id);
+    this.storageService.deleteTvFromWatchList(id);
+    this.onListChanged();
   }
   
   removeMovie(id: number){
-    return this.storageService.deleteMovieFromWatchList(id);
+    this.storageService.deleteMovieFromWatchList(id);
+    this.onListChanged();
   }
   
       

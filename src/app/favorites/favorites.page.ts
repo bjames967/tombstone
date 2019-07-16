@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { StorageUnit } from './../models/StorageUnit'
+import { MoviesService } from './../service/movies.service'
+import { StorageService } from './../service/storage.service'
+import { ActivatedRoute, Router } from '@angular/router';
+import { PopoverController } from '@ionic/angular'
 
 @Component({
   selector: 'app-favorites',
@@ -17,7 +22,7 @@ export class FavoritesPage implements OnInit {
               private popoverCtrl: PopoverController) { }
 
    ngOnInit() {
-    this.stoneType = 'movies';
+    this.favoriteType = 'movies';
     this.onStoneChanged();
 
   }
@@ -38,7 +43,7 @@ export class FavoritesPage implements OnInit {
   }
 
   pageSwap(){
-    switch(this.stoneType){
+    switch(this.favoriteType){
       case 'movies':
         this.loadMovieFavorites(); break;
       case 'tv':
@@ -46,17 +51,7 @@ export class FavoritesPage implements OnInit {
       default:
     }
   }
-  
-  async openSortingModal(ev: any) {
-    const popover = await this.popoverCtrl.create({
-      component: SortPagePage,
-      event: ev,
-      translucent: true,
-      showBackdrop: true,
-      animated: true
-    });
-    return await popover.present();
-  }
+
   
   async openTombstoneOptionsModal(ev: any){
   }
@@ -72,7 +67,7 @@ export class FavoritesPage implements OnInit {
   
   
   loadTvFavorites(){
-    this.storageService.getFavorites().then((list: StorageUnit[]) => {
+    this.storageService.getTvFavorites().then((list: StorageUnit[]) => {
       this.results = list;
     });
   }
@@ -92,3 +87,4 @@ export class FavoritesPage implements OnInit {
     this.storageService.deleteTvFromFavorites(id);
     this.loadTvFavorites();
   }
+}
