@@ -9,6 +9,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./genre-movie.page.scss'],
 })
 export class GenreMoviePage implements OnInit {
+  PageTitle = "";
   genreType: 'Movie' | 'TV';
   results: Movie[] | TVshow[];
   
@@ -19,6 +20,7 @@ export class GenreMoviePage implements OnInit {
   ngOnInit() {
       let type = this.activateRoute.snapshot.params['type'];
       let id = this.activateRoute.snapshot.params['id'];
+      this.pageTitle = this.activateRoute.snapshot.params['name'];
       if(type === 'm'){
         this.movieService.getMovieByGenres(id).subscribe(res => {
           this.results = res; console.log(this.results);
