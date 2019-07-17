@@ -6,7 +6,7 @@
         <ion-buttons slot="end">
             <div *ngIf="editMode">
                 <ion-button (click)="exitEditMode()">
-                    <ion-icon name="redo" color="danger"></ion-icon>
+                    <ion-icon name="trash" color="danger"></ion-icon>
                 </ion-button>
             </div>
             <div *ngIf="!editMode">
@@ -28,9 +28,11 @@
         <div class="movies-flex">
             <div class="movie" *ngFor="let item of results">
                 <div *ngIf="editMode">
-                    <ion-button (click)="removeMovie(item.id)">
-                        <ion-icon name="remove-circle"></ion-icon>
-                    </ion-button>
+                    <div class="deleteButton">
+                        <ion-button (click)="removeMovie(item.id)">
+                            <ion-icon name="remove-circle"></ion-icon>
+                        </ion-button>
+                    </div>
                 </div>
               <div class="poster">
                 <img *ngIf="item.poster_path" class="poster" (click)="onMovieClick(item.id)" [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path">
@@ -45,9 +47,11 @@
     <div class="movies-flex">
         <div class="movie" *ngFor="let item of results">
             <div *ngIf="editMode">
-                <ion-button (click)="removeShow(item.id)">
-                    <ion-icon name="remove-circle"></ion-icon>
-                </ion-button>
+                <div class="deleteButton">
+                    <ion-button (click)="removeShow(item.id)">
+                        <ion-icon name="remove-circle"></ion-icon>
+                    </ion-button>
+                </div>
             </div>
           <div class="poster">
             <img *ngIf="item.poster_path" class="poster" (click)="onTvClick(item.id)" [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path">
