@@ -36,7 +36,7 @@ const routes: Routes = [
   { path: 'watchlist-quick-action', loadChildren: './modals/watchlist-quick-action/watchlist-quick-action.module#WatchlistQuickActionPageModule' },
   { path: 'favorites-quick-action', loadChildren: './modals/favorites-quick-action/favorites-quick-action.module#FavoritesQuickActionPageModule' },
   { path: 'genreselect', loadChildren: './genres/genre-select/genre-select.module#GenreSelectPageModule' },
-  { path: ':type/:id/:name', loadChildren: './genres/genre-movie/genre-movie.module#GenreMoviePageModule' },
+  { path: 'genre/:type/:name/:id', loadChildren: './genres/genre-movie/genre-movie.module#GenreMoviePageModule' },
 ];
 
 @NgModule({
