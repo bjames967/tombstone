@@ -28,9 +28,11 @@
             <div class="movie" *ngFor="let item of results">
                 <!--Remove from library button toggled only if in edit mode-->
                 <div *ngIf="editMode">
-                    <ion-button (click)="removeMovieTombstone(item.id)">
-                        <ion-icon name="remove-circle"></ion-icon>
-                    </ion-button>
+                    <div class="deleteButton">
+                        <ion-button (click)="removeMovieTombstone(item.id)">
+                            <ion-icon name="remove-circle"></ion-icon>
+                        </ion-button>
+                    </div>
                 </div>
               <div class="poster">
                 <img *ngIf="item.poster_path" class="poster" (click)="onMovieClick(item.id)" [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path">
@@ -46,9 +48,11 @@
     <div class="movies-flex">
         <div class="movie" *ngFor="let item of results">
             <div *ngIf="editMode">
-                <ion-button (click)="removeTvTombstone(item.id)">
-                    <ion-icon name="remove-circle"></ion-icon>
-                </ion-button>
+                <div class="deleteButton">
+                    <ion-button (click)="removeTvTombstone(item.id)">
+                        <ion-icon name="remove-circle"></ion-icon>
+                    </ion-button>
+                </div>
             </div>
           <div class="poster">
             <img *ngIf="item.poster_path" class="poster" (click)="onTvClick(item.id)" [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path">
