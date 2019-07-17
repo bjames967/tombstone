@@ -67,6 +67,18 @@ ion-title{
       align-items: flex-start;
       align-content: flex-start;
       cursor: pointer;
+      .deleteButton{
+          ion-button{
+            display: block;
+            width: 25px;
+            height: 25px;
+            position: absolute;
+            top: 0px;
+            right: 0px;
+            border-radius: 100%;
+            overflow: hidden;
+          }
+      }    
       div.poster {
         position: relative;
         width: 100%;
