@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { StorageUnit } from './../models/StorageUnit';
 import { StorageService } from './../service/storage.service';
-import * as HighCharts from 'higcharts';
+import * as HighCharts from 'highcharts';
 import { LoadingController } from '@ionic/angular';
 import { Router } from '@angular/router';
 
@@ -17,9 +17,8 @@ export class MainPage implements OnInit {
   @ViewChild("doughnutCanvas") doughnutCanvas: ElementRef;
   sliderOpts = {
     zoom: false,
-    slidesPerView: 1.75,
-    spaceBetween: 20,
-    centeredSlides: true
+    slidesPerView: 1,
+    centeredSlides: true,
   };
 
   constructor(private storageService: StorageService,
@@ -27,7 +26,6 @@ export class MainPage implements OnInit {
               private router: Router) { }
     
     displayMyActivity: boolean;
-    private doughnutChart: Chart;
   
     displayMyWatchlistQueue: boolean;
     watchlistQueue: StorageUnit[]=[];
@@ -47,10 +45,10 @@ export class MainPage implements OnInit {
       name: string
     }[];
     
-    
-    
     //issue with calling size on database
   ngOnInit() {
+
+
     this.displayMyActivity = true;
     this.displayMyWatchlistQueue = true;
     this.displayRecentlyWatchedQueue = true;
@@ -58,54 +56,6 @@ export class MainPage implements OnInit {
     this.loadFavoritesQueue();
     this.loadRecentlyWatchedQueue();
   }
-  
-ionViewDidLoad(){  
- var chart = Highcharts.chart('container', {
-    chart: {
-        plotBackgroundColor: null,
-        plotBorderWidth: 0,
-        plotShadow: false
-    },
-    title: {
-        text: 'Browser<br>shares<br>2017',
-        align: 'center',
-        verticalAlign: 'middle',
-        y: 40
-    },
-    tooltip: {
-        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-    },
-    plotOptions: {
-        pie: {
-            dataLabels: {
-                enabled: true,
-                distance: -50,
-                style: {
-                    fontWeight: 'bold',
-                    color: 'white'
-                }
-            },
-            startAngle: -90,
-            endAngle: 90,
-            center: ['50%', '75%'],
-            size: '110%'
-        }
-    },
-    series: [{
-        type: 'pie',
-        name: 'Browser share',
-        innerSize: '50%',
-        data: [
-            ['My Movie Tombstones', 58.9],
-            ['My Movie Watchlist', 13.29],
-            ['My Movie Favorites', 3],
-            ['My TV Tombstones', 13],
-            ['My TV Watchlist', 3.78],
-            ['MY TV Favorites', 3.42],
-        ]
-    }]
- });
-}
     
        
     

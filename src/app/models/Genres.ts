@@ -1,4 +1,4 @@
-export interface Genres: {
+export interface Genres {
   movie: [
     {
       id: 28,
@@ -144,3 +144,4 @@ export interface Genres: {
       name: "Western"
     }
   ];
+}

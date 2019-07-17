@@ -13,16 +13,14 @@ import { StorageUnit } from './models/StorageUnit';
 })
 export class AppComponent {
   
-  
-  
-  
-  
+
   public appPages = [
     {
       title: 'Home',
       url: '/main',
       icon: 'home',
-      badge: false
+      badge: false,
+      size: null
     },
     {
       title: 'Trending Now',
@@ -31,10 +29,16 @@ export class AppComponent {
       badge: false
     },
     {
+      title: 'Genres',
+      url: '/genreselect',
+      icon: 'book',
+      badge: false
+    },
+    {
       title: 'Favorites',
       url: '/favorites',
       icon: 'star',
-      badge: true
+      badge: true,
     },
     {
       title: 'Recommended',
@@ -56,7 +60,7 @@ export class AppComponent {
       title: 'Watch List',
       url: '/list',
       icon: 'list',
-      badge: true
+      badge: true,
     },
     {
       title: 'Tombstones',
@@ -78,7 +82,7 @@ export class AppComponent {
     }
 
   ];
-  
+
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
@@ -87,12 +91,9 @@ export class AppComponent {
   ) {
     this.initializeApp();
     
-
-    console.log(this.tombstone)
     
     
   }
-  tombstone: number;
 
 
   initializeApp() {

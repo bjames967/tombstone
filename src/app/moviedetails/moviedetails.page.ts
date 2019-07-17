@@ -62,6 +62,10 @@ export class MoviedetailsPage implements OnInit {
   
   }
 
+  onMovieGenreClick(name, id){
+    this.router.navigate(['genre', 'm', name, id]);
+  }
+
     
 
   onMovieClick(id){

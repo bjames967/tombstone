@@ -1,11 +1,14 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>{{pageTitle}}</ion-title>
+      <ion-buttons slot="start">
+          <ion-back-button defaultHref="/"></ion-back-button>
+        </ion-buttons>
+    <ion-title color="dark">{{pageTitle}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <div *ngIf="type ==='m'">
+  <div *ngIf="GenreType === 'Movie'">
    <div class="movies-flex">
             <div class="movie" *ngFor="let item of results">
               <div class="poster">
@@ -19,7 +22,7 @@
     </div>
   </div>
   
-  <div *ngIf="type ==='t'">
+  <div *ngIf="GenreType === 'TV'">
    <div class="movies-flex">
             <div class="movie" *ngFor="let item of results">
               <div class="poster">

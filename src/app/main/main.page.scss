@@ -1,0 +1,51 @@
+.QuickAction{
+        ion-label{
+
+        }
+        ion-slides{
+            border-top: 1px;
+            height: 250px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            ion-slide{
+                flex: 0 170px;
+                width: 154px;
+                height: 230px;
+                padding: 15px;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: flex-start;
+                align-items: flex-start;
+                align-content: flex-start;
+                cursor: pointer;
+                div.poster{
+                    position: relative;
+                    width: 154px;
+                    height: 230px;
+                    background: #eee;
+                    border-radius: 6px;
+                    img.poster, img.poster-effect {
+                        width: 154px;
+                        height: 230px;
+                        object-fit: cover;
+                        border-radius: 6px;
+                        z-index: 9999;
+                        position: relative;
+                        margin-bottom: -215px;
+                        -webkit-transform: translateZ(0);
+                        -webkit-perspective: 1000;
+                        -webkit-backface-visibility: hidden;
+                        &.poster-effect{
+                            z-index: 9999;
+                            opacity: 0.4;
+                            transform: scale(0.95) translateZ(0);
+                            filter: blur(4px);
+                        }
+
+                    }
+                }
+                
+            }
+        }
+}

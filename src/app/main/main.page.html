@@ -7,12 +7,7 @@
     <ion-title>Main Page</ion-title>
 </ion-header>
 <ion-content>
-    <div class="QuickAction">
-        <div *ngIf="displayMyActivity">
             <ion-label>My Activity</ion-label>
-            <div id="container" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
-        </div>
-    </div>
     
     <hr>
     
@@ -21,7 +16,10 @@
         <ion-label>Quick Action</ion-label>
           <ion-slides [options]="sliderOpts">
               <ion-slide *ngFor="let item of watchlistQueue" (click)="onMovieClick(item.id)">
+                    <div class="poster">    
                         <img *ngIf="item.poster_path" class="poster" [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path">
+                        <img *ngIf="item.poster_path" class="poster-effect" [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path">
+                    </div>
 
                   </ion-slide>
            </ion-slides>
@@ -35,8 +33,10 @@
         <ion-label>Recently Watched</ion-label>
           <ion-slides [options]="sliderOpts">
               <ion-slide *ngFor="let item of recentlyWatchedQueue" (click)="onMovieClick(item.id)">
-                        <img *ngIf="item.poster_path" class="poster" [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path">
-
+                <div class="poster">     
+                  <img *ngIf="item.poster_path" class="poster" [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path">
+                  <img *ngIf="item.poster_path" class="poster-effect" [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path">
+                </div>
                   </ion-slide>
            </ion-slides>
       </div>

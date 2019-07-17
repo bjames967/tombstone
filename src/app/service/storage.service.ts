@@ -26,47 +26,6 @@ export class StorageService {
   
   constructor(private storage: Storage) { }
   
-  
-  getMovieTombstoneSize(): number{
-    return this.getMovieTombstones.length;
-  }
-
-  getTvTombstoneSize(){
-    let size;
-    this.getTvTombstones().then((list: StorageUnit[]) => {
-      size = list.length; console.log(size);
-    });
-    return size;
-  }
-  getMovieFavoriteSize(){
-    let size;
-    this.getMovieFavorites().then((list: StorageUnit[]) => {
-      size = list.length; console.log(size);
-    });
-    return size;
-  }
-  getTvFavoriteSize(){
-    let size;
-    this.getTvFavorites().then((list: StorageUnit[]) => {
-      size = list.length; console.log(size);
-    });
-    return size;
-  }
-  getMovieWatchlistSize(){
-    let size;
-    return this.getMovieWatchList().then((list: StorageUnit[]) => {
-      size = list.length; console.log(size);
-    });
-    return size;
-  }
-  getTvWatchlistSize(){
-    let size;
-    return this.getTvWatchList().then((list: StorageUnit[]) => {
-      size = list.length; console.log(size);
-    });
-    return size;
-  }
-
 
 
   getTvFavorites(): Promise<StorageUnit[]>{

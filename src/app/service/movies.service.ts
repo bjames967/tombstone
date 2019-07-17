@@ -118,7 +118,7 @@ getMovieDetails(id: number) {
   }
   
   getShowByGenres(genre_id: number){
-    return this.http.get(`${this.baseUrl}/discover/movie${this.getParams()}&with_genres=${genre_id}`).pipe(
+    return this.http.get(`${this.baseUrl}/discover/tv${this.getParams()}&with_genres=${genre_id}`).pipe(
        map((result: any) => <TVshow[]>result.results));
   }
   

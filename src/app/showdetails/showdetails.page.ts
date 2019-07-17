@@ -46,6 +46,9 @@ export class ShowdetailsPage implements OnInit {
     this.decryptedUrl = this.domSanitizer.bypassSecurityTrustResourceUrl("https://www.youtube.com/embed?v=mkGT1c98soU");
   
   }
+  onTvGenreClick(name, id){
+    this.router.navigate(['genre', 't', name, id]);
+  }
  
   onTvClick(id){
     this.router.navigate(['tv', id])

@@ -1,13 +1,16 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Genres</ion-title>
+      <ion-buttons slot="start">
+          <ion-back-button defaultHref="/"></ion-back-button>
+        </ion-buttons>
+    <ion-title color="dark">Genres</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <div class="movie-section">
     <ion-label>Movie Genres</ion-label>
-    <ion-chip outline color="light" *ngFor="let genre of MovieGenres" (click)="onMovieGenreClick('m',genre.id)">
+    <ion-chip outline color="light" *ngFor="let genre of MovieGenres" (click)="onMovieGenreClick(genre.name ,genre.id)">
       <ion-label>{{genre.name}}</ion-label>
       <ion-icon name="arrow-forward"></ion-icon>
      </ion-chip>
@@ -15,7 +18,7 @@
   <hr>
   <div class="show-section">
     <ion-label>Tv Show Genres</ion-label>
-    <ion-chip outline color="light" *ngFor="let genre of ShowGenres" (click)="onShowGenreClick('t',genre.id)">
+    <ion-chip outline color="light" *ngFor="let genre of ShowGenres" (click)="onShowGenreClick(genre.name ,genre.id)">
       <ion-label>{{genre.name}}</ion-label>
       <ion-icon name="arrow-forward"></ion-icon>
      </ion-chip>

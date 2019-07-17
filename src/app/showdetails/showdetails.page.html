@@ -32,7 +32,7 @@
         </iframe>
   </div>
      <div class="genres">
-        <ion-chip outline color="light" *ngFor="let genre of tv.genres">
+        <ion-chip outline color="light" *ngFor="let genre of tv.genres" (click)="onTvGenreClick(genre.name, genre.id)">
             <ion-label>{{ genre.name }}</ion-label>
             <!-- <ion-icon name="arrow-forward"></ion-icon> -->
         </ion-chip>
