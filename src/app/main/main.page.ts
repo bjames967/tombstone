@@ -4,6 +4,7 @@ import { StorageService } from './../service/storage.service';
 import * as HighCharts from 'highcharts';
 import { LoadingController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { NavController, Slides } from '@ionic/angular';
 
 //https://www.highcharts.com/demo/network-graph
 //npm install highcharts --save
@@ -14,16 +15,15 @@ import { Router } from '@angular/router';
   styleUrls: ['./main.page.scss'],
 })
 export class MainPage implements OnInit {
-  @ViewChild("doughnutCanvas") doughnutCanvas: ElementRef;
-  sliderOpts = {
-    zoom: false,
-    slidesPerView: 1,
-    centeredSlides: true,
-  };
+ 
+  @ViewChild(Slides) private WatchlistSlides: Slides;
+  @ViewChild(Slides) private TombstoneSlides: Slides;
+ 
 
   constructor(private storageService: StorageService,
               private loadingCtrl: LoadingController,
-              private router: Router) { }
+              private router: Router,
+              private navController: NavController) { }
     
     displayMyActivity: boolean;
   
@@ -47,8 +47,31 @@ export class MainPage implements OnInit {
     
     //issue with calling size on database
   ngOnInit() {
-
-
+    this.WatchlistSlides.effect = 'coverflow';
+    this.WatchlistSlides.centerSlides = true;
+    this.WatchlistSlides.slidesPerView = 2;
+    this.WatchlistSlides.spaceBetween = 15;
+    
+    this.WatchlistSlides.coverflow = {
+      rotate: 0,
+      stretch: 0,
+      depth: 50,
+      modifer: 1,
+      slideShoadows: true,
+    }
+    
+    this.TombstoneSlides.effect = 'coverflow';
+    this.TombstoneSlides.centerSlides = true;
+    this.TombstoneSlides.slidesPerView = 2;
+    this.TombstoneSlides.spaceBetween = 15;
+    
+    this.TombstoneSlides.coverflow = {
+      rotate: 0,
+      stretch: 0,
+      depth: 50,
+      modifer: 1,
+      slideShoadows: true,
+    }
     this.displayMyActivity = true;
     this.displayMyWatchlistQueue = true;
     this.displayRecentlyWatchedQueue = true;
