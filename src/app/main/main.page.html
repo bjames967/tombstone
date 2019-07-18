@@ -13,7 +13,7 @@
     <div class="QuickAction">
       <div *ngIf="displayMyWatchlistQueue">
         <ion-label>Quick Action</ion-label>
-          <ion-slides>
+          <ion-slides [options]="slidesOpts">
               <ion-slide *ngFor="let item of watchlistQueue" (click)="onMovieClick(item.id)">
                     <div class="poster">    
                         <img *ngIf="item.poster_path" class="poster" [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path">
@@ -30,7 +30,7 @@
     <div class="QuickAction">
       <div *ngIf="displayRecentlyWatchedQueue">
         <ion-label>Recently Watched</ion-label>
-          <ion-slides>
+          <ion-slides [options]="slidesOpts">
               <ion-slide *ngFor="let item of recentlyWatchedQueue" (click)="onMovieClick(item.id)">
                 <div class="poster">     
                   <img *ngIf="item.poster_path" class="poster" [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path">
